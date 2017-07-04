@@ -1,0 +1,20 @@
+notifications:
+  email: false
+language: node_js
+node_js:
+- '8'
+- '7'
+- '6'
+script:
+- npm run build
+- npm test
+cache:
+  directories:
+  - $(pwd)/node_modules
+deploy:
+  provider: npm
+  email: guillaume.lunik@gmail.com
+  on:
+    tags: true
+  api_key:
+    secure: AWJKNg4K1Fs7dERXaczPd1qMCAMJuxyGLwLFe6ANQZ3EjFPC3hQpCV9VhJGi2K1bEwCAaWc7jrXby41krDVtTWduN7ecM/DLCmnxGeL9QUAe72Tj4qxN5H7u1AAz5c0UY/bAEucd8zpSDBA4532WEpIOjGsGAvLk2cbEw/Ny3bQgUc4clRZBzXF3rC2swuomRb6+Fdjbyr15yfti8woh9/ZHcIVHCyPAItNdeXYGbqL4vt2eRsI+RSZpm2LhJ9xwNpT+VCgHZfTwZl2IqjUBVkXnYFL7VK+EOGtAL/tpBCj+ndS7q3JKSp1LWErWHHAqtICtmyX54saGCwr2hf5DVh9FpFMkgF/NuI94i38CCvEdlikdMjPl8WSbestO/pQHbTmwK/4WoSJE9tzwsD7wQexFA2ToQXT+rX3SAu90KHbXW2m9GWAhl1c4czFQdbwfcHpBpPvmhBY+pf4miXtMBsjGrjn9CDzxzHYRBil1EPYdSwxc7XwmiyF06kpoeShpiLesTYBBXriNq1/J7cIvSKVdvgGmeXkiPW7Z6VVFvgv863cR3Exm2usSUdS1p2wGe0icAJzuABHw5g+cyziv/VKDmxxsSgpbcQNlr23ejINA5UsYhiuLedkLHScvTvXvIO5GGeIL/zUOzBmvFXrz4nu15jmABwBqHhRR5YQF7dY=
