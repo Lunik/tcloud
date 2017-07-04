@@ -7,10 +7,6 @@ import Delogger from 'delogger'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
-import React from 'react'
-import {renderToString} from 'react-dom/server'
-
-import StaticHtml from '../public/static'
 
 export default class Server {
   constructor () {
@@ -21,9 +17,7 @@ export default class Server {
     this.app.use(bodyParser.urlencoded({
       extended: true
     }))
-    this.app.get('/', function (req, res) {
-      res.end(renderToString(<StaticHtml />))
-    })
+    this.app.use(Express.static(__dirname + '/static/'))
 
     this.log = new Delogger('Server')
   }

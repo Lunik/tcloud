@@ -4,7 +4,7 @@
 const webpack = require('webpack')
 var nodeExternals = require('webpack-node-externals')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const BUILD_DIR = __dirname + '/build'
 module.exports = [
@@ -24,6 +24,10 @@ module.exports = [
       }]
     },
     target: 'node',
+    node: {
+      __dirname: false,
+      __filename: false,
+    },
     externals: [nodeExternals()],
     plugins: [
       new UglifyJsPlugin({
@@ -52,6 +56,9 @@ module.exports = [
       }]
     },
     plugins: [
+      new CopyWebpackPlugin([
+        { from: 'src/public/static/', to: 'static'},
+      ]),
       new UglifyJsPlugin({
         compress: {
           warnings: false
