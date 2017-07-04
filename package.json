@@ -1,0 +1,48 @@
+{
+  "name": "tcloud",
+  "version": "0.0.1",
+  "description": "Filesharing and torrent downloading",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "node build/server.js",
+    "dev": "npm run build && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lunik/tcloud.git"
+  },
+  "author": "Guillaume Lunik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lunik/tcloud/issues"
+  },
+  "homepage": "https://github.com/Lunik/tcloud#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.1.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-jsx": "^4.0.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.0.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "html-webpack-plugin": "^2.29.0",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "^3.0.0",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.6.2",
+    "cookie-parser": "^1.4.3",
+    "delogger": "^0.9.5",
+    "express": "^4.15.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}
