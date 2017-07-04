@@ -2,8 +2,13 @@
  * Created by lunik on 04/07/2017.
  */
 
-import Server from './server'
+import Server from './routes/main'
+import Config from './modules/config'
 
-var server = new Server()
+var config = new Config()
 
-server.listen(8080)
+config.on('ready', () => {
+  var server = new Server()
+
+  server.listen(config.server.port)
+})

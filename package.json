@@ -7,7 +7,8 @@
     "build": "webpack -p",
     "prestart": "webpack -p --display none",
     "start": "node build/server.js",
-    "dev": "concurrently \"webpack --config webpack.config.js\" \"webpack --watch --config dev/webpack.server.config.js\""
+    "dev": "concurrently \"webpack --config webpack.config.js\" \"webpack --watch --config dev/webpack.server.config.js\"",
+    "clean": "rm -r build"
   },
   "repository": {
     "type": "git",
@@ -43,10 +44,12 @@
   },
   "dependencies": {
     "body-parser": "^1.17.2",
+    "chai": "^4.0.2",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
     "delogger": "^0.9.5",
     "express": "^4.15.3",
+    "nedb": "^1.8.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   }
