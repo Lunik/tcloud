@@ -43,7 +43,7 @@ module.exports = [
   {
     entry: './src/public/index.js',
     output: {
-      path: BUILD_DIR,
+      path: BUILD_DIR + '/public',
       filename: 'app.js'
     },
     module: {
@@ -57,7 +57,7 @@ module.exports = [
     },
     plugins: [
       new CopyWebpackPlugin([
-        { from: 'src/public/static/', to: 'static'},
+        { from: 'src/public/static/'},
       ]),
       new UglifyJsPlugin({
         compress: {

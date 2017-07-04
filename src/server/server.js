@@ -17,7 +17,7 @@ export default class Server {
     this.app.use(bodyParser.urlencoded({
       extended: true
     }))
-    this.app.use(Express.static(__dirname + '/static/'))
+    this.app.use(Express.static(__dirname + '/public'))
 
     this.log = new Delogger('Server')
   }
