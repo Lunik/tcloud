@@ -6,4 +6,8 @@ node_modules/
 
 build/
 
+database/
+
 .DS_Store
+
+config.json

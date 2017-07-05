@@ -3,7 +3,7 @@
  */
 
 import Server from './routes/main'
-import Config from './modules/config'
+import Config from './model/config'
 
 var config = new Config()
 
