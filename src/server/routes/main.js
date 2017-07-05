@@ -19,6 +19,8 @@ export default class Server {
     }))
     this.app.use(Express.static(__dirname + '/public'))
 
+    require('./routes/login')(this.app)
+
     this.log = new Delogger('Server')
   }
   listen (port, host) {
