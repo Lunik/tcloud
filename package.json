@@ -7,8 +7,9 @@
     "build": "webpack -p",
     "prestart": "webpack -p --display none",
     "start": "node build/server.js",
-    "dev": "concurrently \"webpack --config webpack.config.js\" \"webpack --watch --config dev/webpack.server.config.js\"",
-    "clean": "rm -r build"
+    "dev": "webpack --watch --devtool source-map --config dev/webpack.server.config.js",
+    "clean": "rm -r build",
+    "debug": "babel-node src/server/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "concurrently": "^3.5.0",

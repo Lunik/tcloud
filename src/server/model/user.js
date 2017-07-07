@@ -27,7 +27,25 @@ export default class User extends EventEmitter {
     })
 
     this.on('update', () => this.save())
-    this.emit('update')
+
+    DB.findOne({
+      username: this.username
+    }, (err, data) => {
+      if (err) this.log.error(err)
+      if (data) {
+        Object.assign(this, data)
+      }
+      this.emit('ready')
+    })
+  }
+
+  exist (cb) {
+    DB.findOne({
+      username: this.username
+    }, (err, data) => {
+      if (err) this.log.error(err)
+      cb(data !== null)
+    })
   }
 
   save () {
@@ -53,8 +71,6 @@ export default class User extends EventEmitter {
       id: Crypto.SHA256(seed).toString(),
       expirationDate: new Date(Date.now() + expire)
     }
-    this.tokens.push(token)
-    this.emit('update')
     return token
   }
 
@@ -69,6 +85,9 @@ export default class User extends EventEmitter {
   login (ip, stayLogged) {
     let expire = stayLogged ? 31536000000 : 86400000 // OneYear / OneDay
     var token = this.generateToken(expire)
+
+    this.tokens.push(token)
+    this.emit('update')
 
     this.log.info(`${this.username} login from ${ip}`)
     return token
