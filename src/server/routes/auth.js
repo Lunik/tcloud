@@ -28,25 +28,23 @@ module.exports = (app) => {
       !config.authentification) {
       next()
     } else {
-      user.on('ready', () => {
-        const validToken = user.isTokenValid(req.cookie.token)
-        // Is the uer on login page
-        if (req.url === loginPage) {
-          // Is the user logged in
-          if (validToken) {
-            res.redirect('/')
-          } else {
-            next()
-          }
+      const validToken = user.isTokenValid(req.cookies.token)
+      // Is the user on login page
+      if (req.url === loginPage) {
+        // Is the user logged in
+        if (validToken) {
+          res.redirect('/')
         } else {
-          // Is the user logged in
-          if (validToken) {
-            next()
-          } else {
-            res.redirect(loginPage)
-          }
+          next()
         }
-      })
+      } else {
+        // Is the user logged in
+        if (validToken) {
+          next()
+        } else {
+          res.redirect(loginPage)
+        }
+      }
     }
   })
 
