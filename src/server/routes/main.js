@@ -17,9 +17,12 @@ export default class Server {
     this.app.use(bodyParser.urlencoded({
       extended: true
     }))
-    this.app.use(Express.static(__dirname + '/public'))
 
     require('./auth')(this.app)
+    this.baseFolder = require('./folder')(this.app)
+    require('./file')(this.app, this.baseFolder)
+
+    this.app.use(Express.static(__dirname + '/public'))
 
     this.log = new Delogger('Server')
   }

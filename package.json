@@ -54,6 +54,7 @@
     "crypto-rand": "0.0.2",
     "delogger": "^0.9.5",
     "express": "^4.15.3",
+    "fs-extra": "^3.0.1",
     "nedb": "^1.8.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
