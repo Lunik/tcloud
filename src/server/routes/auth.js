@@ -88,6 +88,8 @@ module.exports = (app) => {
     }
     if (formData.username && formData.token) {
       user.logout(formData.token)
+      res.clearCookie('token')
+      res.clearCookie('username')
       res.json({
         err: false
       })
