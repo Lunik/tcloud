@@ -21,6 +21,7 @@ export default class Server {
     require('./auth')(this.app)
     this.baseFolder = require('./folder')(this.app)
     require('./file')(this.app, this.baseFolder)
+    require('./torrent')(this.app, this.baseFolder)
 
     this.app.use(Express.static(__dirname + '/public'))
 

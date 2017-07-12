@@ -19,14 +19,46 @@ module.exports = [
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015']
+          presets: ['es2015']
         }
       }]
     },
     target: 'node',
     node: {
       __dirname: false,
-      __filename: false,
+      __filename: false
+    },
+    externals: [nodeExternals()],
+    plugins: [
+      new UglifyJsPlugin({
+        compress: {
+          warnings: false
+        },
+        output: {
+          comments: false
+        }
+      })
+    ]
+  },
+  {
+    entry: './src/server/model/module/torrentWorker.js',
+    output: {
+      path: BUILD_DIR + '/module',
+      filename: 'torrentWorker.js'
+    },
+    module: {
+      loaders: [{
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015']
+        }
+      }]
+    },
+    target: 'node',
+    node: {
+      __dirname: false,
+      __filename: false
     },
     externals: [nodeExternals()],
     plugins: [
@@ -57,7 +89,7 @@ module.exports = [
     },
     plugins: [
       new CopyWebpackPlugin([
-        { from: 'src/public/static/'},
+        { from: 'src/public/static/'}
       ]),
       new UglifyJsPlugin({
         compress: {
