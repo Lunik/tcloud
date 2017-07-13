@@ -4,7 +4,7 @@
   "description": "Filesharing and torrent downloading",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -p",
+    "build": "NODE_ENV=production webpack -p",
     "prestart": "webpack -p --display none",
     "start": "node build/server.js",
     "dev": "webpack --watch --config dev/webpack.server.config.js",
@@ -27,7 +27,6 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "concurrency": "^0.1.4",
     "copy-webpack-plugin": "^4.0.1",
     "eslint": "^4.1.1",
     "eslint-config-standard": "^10.2.1",
@@ -58,6 +57,7 @@
     "nedb": "^1.8.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.1",
     "webtorrent": "^0.98.19"
   }
 }

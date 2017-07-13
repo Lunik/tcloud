@@ -76,7 +76,7 @@ module.exports = [
     entry: './src/public/index.js',
     output: {
       path: BUILD_DIR + '/public',
-      filename: 'app.js'
+      filename: 'src/app.js'
     },
     module: {
       loaders: [{
