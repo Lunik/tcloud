@@ -71,6 +71,8 @@ export default class Folder extends File {
     this.log.info(`Creating ${this.fullPath()}`)
 
     fs.mkdirSync(this.fullPath())
+
+    this.initWatch()
   }
 
   addChild (child) {

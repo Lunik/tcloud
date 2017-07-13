@@ -18,10 +18,14 @@ export default class File extends EventEmitter {
     this.downloadCount = 0
 
     this.initMetadata()
+    this.initWatch()
 
     this.log = new Delogger('File')
-
-    fs.watch(this.fullPath(), (eventType, filename) => this.watchChange(eventType, filename))
+  }
+  initWatch () {
+    if (this.exist) {
+      fs.watch(this.fullPath(), (eventType, filename) => this.watchChange(eventType, filename))
+    }
   }
   initMetadata () {
     try {
@@ -92,6 +96,7 @@ export default class File extends EventEmitter {
     this.log.info(`Creating ${this.fullPath()}`)
 
     fs.writeFileSync(this.fullPath(), '')
+    this.initWatch()
   }
 
   toJSON () {
