@@ -2,6 +2,8 @@
  * Created by lunik on 04/07/2017.
  */
 
+import Crypto from 'crypto-js'
+
 import Config from '../model/config'
 import User from '../model/user'
 
@@ -58,7 +60,7 @@ module.exports = (app) => {
 
     if (formData.username && formData.password) {
       var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-      if (user.password === formData.password) {
+      if (user.isPasswordValid(formData.password)) {
         const token = user.login(ip, formData.staylogged)
         res.cookie('token', token.id, { expires: token.expirationDate, httpOnly: true, encode: String })
         res.cookie('username', user.username, { expires: token.expirationDate, httpOnly: true, encode: String })
@@ -111,7 +113,7 @@ module.exports = (app) => {
       var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
       user.exist((exist) => {
         if (!exist) {
-          user.set({password: formData.password, username: formData.username})
+          user.set({password: Crypto.SHA256(formData.password).toString(), username: formData.username})
           var token = user.login(ip, false)
           res.cookie('token', token.id, {expires: token.expirationDate, httpOnly: true, encode: String})
           res.cookie('username', user.username, {expires: token.expirationDate, httpOnly: true, encode: String})
@@ -143,8 +145,11 @@ module.exports = (app) => {
     }
 
     if (formData.username && formData.oldPassword && formData.newPassorwd) {
-      if (formData.oldPassword === user.password) {
-        user.set({ password: formData.newPassorwd })
+      if (user.isPasswordValid(formData.oldPassword)) {
+        user.set({ password: Crypto.SHA256(formData.newPassorwd).toString() })
+        res.json({
+          err: false
+        })
       } else {
         res.status(403)
         res.json({

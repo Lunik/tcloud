@@ -3,24 +3,32 @@
  */
 
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
 
+import NotificationContainer from './notification/container'
 import Main from './main'
 import Login from './login'
 
 export default class App extends React.Component {
   constructor (props) {
     super(props)
-
   }
   render () {
+    var Route
+    switch (window.location.pathname) {
+      default:
+      case '/index.html':
+        Route = null//(<Main />)
+        break
+      case '/login.html':
+        Route = (<Login />)
+        break
+    }
+
     return (
-      <Router>
-        <div>
-          <Route path="/index.html" component={Main}/>
-          <Route path="/login.html" component={Login}/>
-        </div>
-      </Router>
+      <div className="app">
+        {Route}
+        <NotificationContainer position='topRight'></NotificationContainer>
+      </div>
     )
   }
 }

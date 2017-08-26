@@ -1,0 +1,12 @@
+
+body{
+    background-color: var(--black);
+}
+
+* {
+    color: var(--white);
+}
+
+a {
+    color: var(--orange);
+}

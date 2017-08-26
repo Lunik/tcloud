@@ -17,7 +17,7 @@ export default class User extends EventEmitter {
     super()
     props = props || {}
     this.username = props.username || ''
-    this.password = props.password || ''
+    this.password = Crypto.SHA256(props.password || '')
     this.tokens = props.tokens || []
 
     this.log = new Delogger(`User(${this.username})`)
@@ -112,5 +112,9 @@ export default class User extends EventEmitter {
       }
     }
     return false
+  }
+
+  isPasswordValid (password) {
+    return Crypto.SHA256(password).toString() === this.password
   }
 }
