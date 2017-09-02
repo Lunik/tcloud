@@ -3,7 +3,6 @@
  */
 
 import React from 'react'
-import Loading from './loading'
 
 import Logo from './image/logo'
 import LoginForm from './form/login'
@@ -51,7 +50,6 @@ export default class Login extends React.Component {
 
     return (
       <div style={style.div} className="Login">
-        <Loading hidden={true}/>
         <Logo style={style.logo} />
         <h1>Login to Tcloud</h1>
         {Route}
@@ -74,6 +72,6 @@ const style = {
   logo: {
     width: '20%',
     minWidth: '150px',
-    margin: '20px'
+    margin: '30px'
   }
 }

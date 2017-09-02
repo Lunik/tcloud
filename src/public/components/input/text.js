@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classname'
 
-import Color from '../color'
+import Color from '../../color'
 import Textfield from '@react-mdc/textfield'
 
 export default class TextInput extends React.Component {
@@ -10,8 +10,15 @@ export default class TextInput extends React.Component {
   }
   render () {
     return (
-      <Textfield style={style.div} className={classNames('input', this.props.className, this.props.valid ? '' : 'invalid')} >
-        <Textfield.Input style={style.input} type={this.props.type} id={this.props.id} onChange={ (e) => this.props.onChange(e) }/>
+      <Textfield
+        style={Object.assign(style.div, this.props.style.div)}
+        className={classNames('input', this.props.className, this.props.valid ? '' : 'invalid')} >
+        <Textfield.Input
+          value={this.props.value}
+          style={Object.assign(style.input, this.props.style.input)}
+          type={this.props.type} id={this.props.id}
+          onChange={ (e) => this.props.onChange(e) }
+        />
         <Textfield.Label htmlFor={this.props.id}>
           {this.props.placeholder}
         </Textfield.Label>
@@ -26,7 +33,11 @@ TextInput.defaultProps = {
   id: '',
   placeholder: '',
   onChange: () => {},
-  valid: true
+  valid: true,
+  style: {
+    div: {},
+    input: {}
+  }
 }
 
 const style = {

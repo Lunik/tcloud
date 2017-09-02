@@ -23,6 +23,7 @@ export default class Torrent {
     this.peers[peer.uid] = peer
 
     this.peers[peer.uid].on('done', (peer) => this.handlePeerDone(peer))
+    this.peers[peer.uid].on('stop', (peer) => delete this.peers[peer.uid])
     return this.peers[peer.uid]
   }
   handlePeerDone (peer) {

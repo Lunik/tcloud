@@ -42,9 +42,9 @@ class Worker {
         process.send(JSON.stringify({
           type: 'done',
           metadata: this.getMetadata(this.torrent)
-        }))
-
-        process.exit(0)
+        }), () => {
+          process.exit(0)
+        })
       })
 
       this.torrent.on('noPeers', () => {
@@ -60,9 +60,9 @@ class Worker {
         process.send(JSON.stringify({
           type: 'error',
           metadata: this.getMetadata(this.torrent)
-        }))
-
-        process.exit(1)
+        }), () => {
+          process.exit(1)
+        })
       })
     })
 
@@ -86,13 +86,18 @@ class Worker {
 
   stop () {
     this.client.destroy((err) => {
-      if (err) {
-        this.log.error(err)
-        process.exit(1)
-      } else {
-        this.log.info('Exit properly.')
-        process.exit(0)
-      }
+      process.send(JSON.stringify({
+        type: 'stop',
+        metadata: this.getMetadata(this.torrent)
+      }), () => {
+        if (err) {
+          this.log.error(err)
+          process.exit(1)
+        } else {
+          this.log.info('Exit properly.')
+          process.exit(0)
+        }
+      })
     })
   }
   getMetadata (torrent) {

@@ -3,13 +3,17 @@
     --red: #f75353;
     --green: #27AE60;
     --blue: #5264AE;
-    --grey: #675f5f;
+    --lightBlue: #7082C2;
+    --grey: #5f5f5f;
     --black: #1C1C1C;
     --transparentGrey: rgba(103, 95, 95, 0.5);
     --lightGrey: #BBBBBB;
+    --darkGrey: #3C3C3C;
     --white: #FFFFFF;
     --mdc-theme-primary: var(--orange) !important;
     --mdc-theme-accent: var(--red) !important;
     --mdc-theme-text-primary-on-light: var(--lightGrey) !important;
     --mdc-theme-text-hint-on-light: var(--lightGrey) !important;
+    --mdc-theme-text-primary-on-background: var(--white) !important;
+    --mdc-theme-background: var(--grey) !important;
 }

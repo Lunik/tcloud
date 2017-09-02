@@ -3,9 +3,11 @@ import React from 'react'
 import $ from 'jquery'
 import Notify from '../notification'
 
+import Loading from '../loading'
 import TextInput from '../input/text'
 import SubmitButton from '../button/submit'
-import Form from '../form'
+import CheckboxInput from '../checkbox/default'
+import Form from './default'
 
 export default class LoginForm extends React.Component {
   constructor (props) {
@@ -13,20 +15,28 @@ export default class LoginForm extends React.Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      loading: false,
+      staylogged: false
     }
   }
   submit (e) {
     e.preventDefault()
-
+    this.setState({
+      loading: true
+    })
     $.ajax({
       url: '/auth/login',
       method: 'POST',
       data: this.state,
       success: (response) => {
+        this.setState({
+          loading: false
+        })
+
         Notify({
           type: 'info',
-          title: 'Sucess to connect'
+          title: 'Success to connect'
         })
 
         window.location.pathname = ''
@@ -34,6 +44,10 @@ export default class LoginForm extends React.Component {
       }
     }).fail((response) => {
       let text = response.responseJSON.err
+
+      this.setState({
+        loading: false
+      })
 
       Notify({
         type: 'error',
@@ -48,6 +62,7 @@ export default class LoginForm extends React.Component {
   render () {
     return (
       <Form onSubmit={(e) => this.submit(e)} className="login">
+        <Loading hidden={!this.state.loading}/>
         <TextInput name="username" type="text" id="login-username" placeholder="Username"
           value={this.state.username}
           valid={this.state.username.length > 0}
@@ -56,6 +71,8 @@ export default class LoginForm extends React.Component {
           value={this.state.password}
           valid={this.state.password.length > 0}
           onChange={(e) => { this.setState({password: e.target.value }) }}/>
+        <CheckboxInput
+          onChange={(e) => { this.setState({staylogged: e.target.checked}) }}/>
         <SubmitButton name="submit" text="Login"
           disabled={this.state.password.length <= 0 || this.state.username.length <= 0}/>
       </Form>

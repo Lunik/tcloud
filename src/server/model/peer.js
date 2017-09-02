@@ -27,9 +27,9 @@ export default class Peer extends EventEmitter {
   }
   stop () {
     if (this.child) {
-      this.child.send({
+      this.child.send(JSON.stringify({
         type: 'stop'
-      })
+      }))
     }
   }
   handleMessage (message) {
@@ -43,6 +43,9 @@ export default class Peer extends EventEmitter {
         break
       case 'done':
         this.emit('done', this)
+        break
+      case 'stop':
+        this.emit('stop', this)
         break
       case 'noPeers':
         this.emit('noPeers', this)

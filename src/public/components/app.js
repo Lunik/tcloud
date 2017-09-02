@@ -17,7 +17,7 @@ export default class App extends React.Component {
     switch (window.location.pathname) {
       default:
       case '/index.html':
-        Route = null//(<Main />)
+        Route = (<Main />)
         break
       case '/login.html':
         Route = (<Login />)
@@ -25,10 +25,16 @@ export default class App extends React.Component {
     }
 
     return (
-      <div className="app">
+      <div style={style.app} className="app">
         {Route}
         <NotificationContainer position='topRight'></NotificationContainer>
       </div>
     )
+  }
+}
+
+const style = {
+  app: {
+    minWidth: '200px'
   }
 }

@@ -5,8 +5,10 @@ import Config from '../model/config'
 import Folder, { follow } from '../model/folder'
 import File, { parsePath } from '../model/file'
 import Torrent from '../model/torrent'
+import TorrentSearch from '../model/search/torrent'
 
 const config = new Config({sync: true})
+const searchEngine = new TorrentSearch()
 
 module.exports = (app, baseFolder) => {
   var torrent = new Torrent({
@@ -17,10 +19,35 @@ module.exports = (app, baseFolder) => {
     res.json(torrent.peers)
   })
 
+  app.post('/search/torrent', (req, res) => {
+    var query = req.body.query
+
+    if (query) {
+      searchEngine.search(query).then((torrents) => {
+        console.log(torrents)
+        res.json(torrents)
+      }).catch(() => {})
+    } else {
+      res.status(400)
+      res.json({
+        err: 'Missing query.'
+      })
+    }
+  })
+
   app.put('/torrent', (req, res) => {
     var magnet = req.body.magnet
 
-    if (magnet) {
+    const specialMagnet = /tcloud:.*/
+
+    if (specialMagnet.test(magnet)) {
+      magnet = magnet.replace(/tcloud:/, '')
+      searchEngine.getTorrent({ magnet }).then((response) => {
+        console.log(response.magnet)
+        var peer = torrent.download(response.magnet)
+        res.json(peer)
+      }).catch(() => {})
+    } else if (magnet) {
       var peer = torrent.download(magnet)
       res.json(peer)
     } else {

@@ -29,7 +29,7 @@ module.exports = (app, baseFolder) => {
 
     if (element) {
       if (element instanceof File) {
-        element.download(res, (err) => {
+        element.download(res).then((err) => {
           if (err) {
             res.status(500)
           }

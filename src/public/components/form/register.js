@@ -5,7 +5,7 @@ import Notify from '../notification'
 
 import TextInput from '../input/text'
 import SubmitButton from '../button/submit'
-import Form from '../form'
+import Form from './default'
 
 export default class RegisterForm extends React.Component {
   constructor (props) {
@@ -53,7 +53,7 @@ export default class RegisterForm extends React.Component {
       success: (response) => {
         Notify({
           type: 'info',
-          title: 'Sucess to register'
+          title: 'Success to register'
         })
 
         window.location.pathname = ''

@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classname'
 
-import Color from '../color'
+import Color from '../../color'
 import Button from '@react-mdc/button'
 
 export default class SubmitButton extends React.Component {
@@ -13,7 +13,7 @@ export default class SubmitButton extends React.Component {
       <Button accent={this.props.accent}
         raised={this.props.raised}
         disabled={this.props.disabled}
-        style={style.button}
+        style={Object.assign(style.button, this.props.style)}
         className={classNames('input', this.props.className)} >
         {this.props.text}
       </Button>

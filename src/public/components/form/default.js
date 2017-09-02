@@ -1,13 +1,13 @@
 import React from 'react'
 import classNames from 'classname'
 
-export default class Form extends React.Component{
-  constructor (props){
+export default class Form extends React.Component {
+  constructor (props) {
     super(props)
   }
-  render(){
+  render () {
     return (
-      <form onSubmit={ (e) => this.props.onSubmit(e) } className={classNames('form', this.props.className)}>
+      <form style={this.props.style} onSubmit={ (e) => this.props.onSubmit(e) } className={classNames('form', this.props.className)}>
         {this.props.children}
       </form>
     )

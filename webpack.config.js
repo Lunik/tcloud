@@ -90,6 +90,9 @@ module.exports = [
       }, {
         test: /\.css$/,
         loader: ['style-loader', 'css-loader']
+      }, {
+        test: /\.svg$/,
+        loader: 'svg-react-loader'
       }]
     },
     plugins: [

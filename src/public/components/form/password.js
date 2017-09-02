@@ -4,7 +4,7 @@ import $ from 'jquery'
 import Notify from '../notification'
 
 import TextInput from '../input/text'
-import Form from '../form'
+import Form from './default'
 import SubmitButton from '../button/submit'
 
 export default class PasswordForm extends React.Component {
@@ -52,7 +52,7 @@ export default class PasswordForm extends React.Component {
       success: (response) => {
         Notify({
           type: 'info',
-          title: 'Sucess to change password'
+          title: 'Success to change password'
         })
 
         window.location.hash = '#login'

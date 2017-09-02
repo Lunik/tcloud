@@ -3,15 +3,28 @@
  */
 
 import React from 'react'
-import './color.css'
-import 'material-components-web/dist/material-components-web.css'
+
+import Bar from './bar'
+import List from './list'
 
 export default class Main extends React.Component {
   constructor (props) {
     super(props)
-    console.log('main')
   }
-  render(){
-    return null
+  render () {
+    return (
+      <div style={style.div} className="viewer">
+        <div className="bars">
+          <Bar />
+          <List />
+        </div>
+      </div>
+    )
+  }
+}
+
+const style = {
+  div: {
+    height: '2000px'
   }
 }
