@@ -85,10 +85,10 @@ const style = {
       textAlign: 'right'
     },
     seeds: {
-      flex: '2'
+      flex: '3'
     },
     leechs: {
-      flex: '2'
+      flex: '3'
     }
   },
   arrow: {

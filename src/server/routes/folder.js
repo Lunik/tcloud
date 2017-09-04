@@ -8,7 +8,7 @@ import File, { parsePath } from '../model/file'
 
 const config = new Config({sync: true})
 
-var baseFolder = new Folder(`/${__dirname}/${config.files.path}`)
+var baseFolder = new Folder(`/${__dirname}/${config.files.path}`, '')
 
 if (!baseFolder.exist) {
   baseFolder.create()
@@ -16,7 +16,7 @@ if (!baseFolder.exist) {
 
 module.exports = (app) => {
   app.get('/folder', (req, res) => {
-    res.json(baseFolder.childs)
+    res.json(baseFolder)
   })
 
   app.get('/folder/:path((\\w*)/?*)', (req, res) => {
@@ -47,11 +47,11 @@ module.exports = (app) => {
           var newElement
           switch (req.body.type) {
             case 'file':
-              newElement = new File(`${baseFolder.fullPath()}/${parsedPath.path}/${parsedPath.fileName}`)
+              newElement = new File(`${baseFolder.fullPath()}/${parsedPath.path}/${parsedPath.fileName}`, parsedPath.path)
               break
             case 'folder':
             default:
-              newElement = new Folder(`${baseFolder.fullPath()}/${parsedPath.path}/${parsedPath.fileName}`)
+              newElement = new Folder(`${baseFolder.fullPath()}/${parsedPath.path}/${parsedPath.fileName}`, parsedPath.path)
               break
           }
           newElement.create()

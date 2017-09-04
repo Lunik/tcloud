@@ -25,16 +25,20 @@ export default class Login extends React.Component {
   render () {
     const routes = ['#login', '#register', '#password']
     var Route
+    var title
     switch (window.location.hash) {
       default:
       case routes[0]:
         Route = (<LoginForm />)
+        title = 'Login to Tcloud'
         break
       case routes[1]:
         Route = (<RegisterForm />)
+        title = 'Register to Tcloud'
         break
       case routes[2]:
         Route = (<PasswordForm />)
+        title = 'Change your password for Tcloud'
         break
     }
 
@@ -51,7 +55,7 @@ export default class Login extends React.Component {
     return (
       <div style={style.div} className="Login">
         <Logo style={style.logo} />
-        <h1>Login to Tcloud</h1>
+        <h1>{title}</h1>
         {Route}
         <div className="links">
           {links}

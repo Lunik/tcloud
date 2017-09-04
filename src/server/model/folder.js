@@ -5,8 +5,8 @@ import File, { removeBlank } from './file'
 import fs from 'fs-extra'
 
 export default class Folder extends File {
-  constructor (path) {
-    super(path)
+  constructor (path, base) {
+    super(path, base)
     this.type = 'folder'
     this.childs = []
     if (this.exist) {
@@ -26,9 +26,9 @@ export default class Folder extends File {
       let stats = fs.statSync(`${this.fullPath()}/${childs[i]}`)
       let child
       if (stats.isFile()) {
-        child = new File(`${this.fullPath()}/${childs[i]}`)
+        child = new File(`${this.fullPath()}/${childs[i]}`, `${this.base}/${this.name}`)
       } else if (stats.isDirectory()) {
-        child = new Folder(`${this.fullPath()}/${childs[i]}`)
+        child = new Folder(`${this.fullPath()}/${childs[i]}`, `${this.base}/${this.name}`)
       } else {
         continue
       }

@@ -56,12 +56,13 @@ DialogWindow.defaultProps = {
 
 const style = {
   surface: {
-    backgroundColor: Color.grey,
+    backgroundColor: Color.darkGrey,
     maxHeight: '90vh',
-    overflow: 'scroll'
+    overflow: 'auto',
+    borderRadius: '2px'
   },
   backdrop: {
-    opacity: '.7'
+    opacity: '.6'
   },
   title: {
     fontSize: '20px',

@@ -39,8 +39,8 @@ export default class LoginForm extends React.Component {
           title: 'Success to connect'
         })
 
-        window.location.pathname = ''
         window.location.hash = ''
+        window.location.pathname = ''
       }
     }).fail((response) => {
       let text = response.responseJSON.err

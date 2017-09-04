@@ -56,8 +56,8 @@ export default class RegisterForm extends React.Component {
           title: 'Success to register'
         })
 
-        window.location.pathname = ''
         window.location.hash = ''
+        window.location.pathname = ''
       }
     }).fail((response) => {
       let text = response.responseJSON.err

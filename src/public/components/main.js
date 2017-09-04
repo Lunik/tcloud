@@ -24,7 +24,5 @@ export default class Main extends React.Component {
 }
 
 const style = {
-  div: {
-    height: '2000px'
-  }
+  div: {}
 }

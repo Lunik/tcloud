@@ -12,7 +12,7 @@ const config = new Config({sync: true})
 export default class Torrent {
   constructor (props) {
     props = props || {}
-    this.baseFolder = props.baseFolder || new Folder(`/${__dirname}/${config.files.path}`)
+    this.baseFolder = props.baseFolder || new Folder(`/${__dirname}/${config.files.path}`, '')
     this.peers = {}
   }
   download (magnet) {

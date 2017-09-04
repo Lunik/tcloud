@@ -5,12 +5,14 @@
 import fs from 'fs'
 import EventEmitter from 'events'
 import Delogger from 'delogger'
+import Folder from './folder'
 
 export default class File extends EventEmitter {
-  constructor (path) {
+  constructor (path, base) {
     super()
 
     let parsedPath = parsePath(path)
+    this.base = base
     this._path = parsedPath.path
     this.type = 'file'
     this.name = parsedPath.fileName
@@ -100,13 +102,20 @@ export default class File extends EventEmitter {
   }
 
   toJSON () {
+    let cleanBase = this.base.split('/').slice(2).join('/')
+    let url = '/' + removeBlank(`/folder/${cleanBase}/${this.name}`.split('/')).join('/')
+    let download = '/' + removeBlank(`/file/${cleanBase}/${this.name}`.split('/')).join('/')
+    let path = removeBlank(`${cleanBase}/${this.name}`.split('/')).join('/')
     return {
       name: this.name,
       type: this.type,
       locked: this.locked,
-      download: this.download,
-      _size: this.size(),
-      childs: this.childs
+      downloadCount: this.downloadCount,
+      size: this.size(),
+      childs: this.childs,
+      url,
+      download: this instanceof Folder ? null : download,
+      path: this instanceof Folder ? path : null
     }
   }
 
