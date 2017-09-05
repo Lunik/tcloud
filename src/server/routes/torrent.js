@@ -16,7 +16,7 @@ module.exports = (app, baseFolder) => {
   })
 
   app.get('/torrent', (req, res) => {
-    res.json(torrent.peers)
+    res.json(Object.keys(torrent.peers).map((key) => torrent.peers[key]))
   })
 
   app.post('/search/torrent', (req, res) => {
