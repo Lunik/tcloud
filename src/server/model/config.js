@@ -65,13 +65,12 @@ export default class Config extends EventEmitter {
 
     Object.assign(this, config)
 
-    fs.writeFile(this.location, JSON.stringify(config, undefined, 2), (err) => {
+    fs.writeFile(this.location, JSON.stringify(config, 'undefined', 2), (err) => {
       if (err) {
         this.log.error(err)
       }
+      this.emit('ready')
     })
-
-    this.emit('ready')
   }
 
   parseConfig (string) {
