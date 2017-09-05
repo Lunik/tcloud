@@ -69,15 +69,13 @@ export default class FileListItem extends React.Component {
             onRename={(newName) => { this.props.file.name = newName }}
             file={this.props.file}/>
         </List.Item.EndDetail>
-        <div className="children">
-          {this.props.children}
-        </div>
       </List.Item>
     )
   }
 }
 
 FileListItem.defaultProps = {
+  color: 1,
   file: {
     name: 'file',
     type: 'file',
@@ -122,14 +120,15 @@ const style = {
   },
   downloadCount: {
     flex: '1',
-    textAlign: 'center'
+    textAlign: 'right'
   },
   downloadCountIcon: {
     marginLeft: '5px',
-    fill: Color.lightBlue
+    fill: Color.lightBlue,
+    verticalAlign: 'top'
   },
   size: {
     flex: '1',
-    textAlign: 'center'
+    textAlign: 'right'
   }
 }

@@ -12,17 +12,25 @@ export default class FileList extends React.Component {
 
     this.state = {
       files: [],
-      location: window.location.hash.substring(1)
+      location: window.location.hash.substring(1),
+      updateInterval: null
     }
   }
 
   componentWillMount () {
     window.onhashchange = () => this.changeDir(window.location.hash.substring(1))
     this.update()
+    this.setState({
+      updateInterval: setInterval(() => this.update(), 30000)
+    })
   }
 
   componentWillUnmount () {
     window.onhashchange = () => {}
+    clearInterval(this.state.updateInterval)
+    this.setState({
+      updateInterval: null
+    })
   }
 
   update () {
@@ -36,10 +44,6 @@ export default class FileList extends React.Component {
       }
     }).fail((response) => {
       let text = response.responseJSON.err
-
-      this.setState({
-        loading: false
-      })
 
       Notify({
         type: 'error',
