@@ -17,6 +17,15 @@ export default class FileListItem extends React.Component {
     }
   }
 
+  componentWillReceiveProps (props) {
+    let ext = props.file.type === 'file' ? props.file.name.split('.').slice(-1)[0] : 'folder'
+
+    this.setState({
+      extension: ext,
+      fileIcon: FileIcon.getFromExtension(ext)
+    })
+  }
+
   getNameItem () {
     if (this.props.file.type === 'file') {
       return this.props.file.name
@@ -55,7 +64,10 @@ export default class FileListItem extends React.Component {
           <LockIcon style={style.lockIcon}/>
         </span>
         <List.Item.EndDetail>
-          <FileToolbox file={this.props.file}/>
+          <FileToolbox
+            onRemove={ () => this.props.onRemove() }
+            onRename={(newName) => { this.props.file.name = newName }}
+            file={this.props.file}/>
         </List.Item.EndDetail>
         <div className="children">
           {this.props.children}
@@ -75,7 +87,8 @@ FileListItem.defaultProps = {
     childs: [],
     url: '/folder',
     download: null
-  }
+  },
+  onRemove: () => {}
 }
 
 const style = {
