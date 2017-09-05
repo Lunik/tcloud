@@ -15,6 +15,7 @@ export default class FileToolbox extends React.Component {
     return (
       <Toolbox id="file">
         <FileItem.Download file={this.props.file} />
+        <FileItem.Copy file={this.props.file} />
         <FileItem.Rename file={this.props.file} />
         <FileItem.Remove file={this.props.file} />
       </Toolbox>

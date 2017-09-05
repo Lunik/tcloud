@@ -1,8 +1,9 @@
 import React from 'react'
 import ListItem from '../default'
-import { DownloadIcon } from '../../../image/svg'
+import copy from 'copy-to-clipboard'
+import { CopyIcon } from '../../../image/svg'
 
-export default class DownloadToolboxItem extends React.Component {
+export default class CopyToolboxItem extends React.Component {
   constructor (props) {
     super(props)
 
@@ -12,21 +13,21 @@ export default class DownloadToolboxItem extends React.Component {
   }
 
   handleClick () {
-    window.open(this.props.file.download)
+    copy(window.location.origin + this.props.file.download)
   }
 
   render () {
     return (
       <ListItem
         disabled={this.state.disabled}
-        id="download" text="Download"
-        icon={DownloadIcon}
+        id="copy" text="Copy link"
+        icon={CopyIcon}
         onClick={() => this.handleClick()}/>
     )
   }
 }
 
-DownloadToolboxItem.defaultProps = {
+CopyToolboxItem.defaultProps = {
   file: {
     name: 'file',
     type: 'file',

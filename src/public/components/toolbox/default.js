@@ -28,6 +28,11 @@ export default class Toolbox extends React.Component {
     })
   }
 
+  switch () {
+    this.setState({
+      hidden: !this.state.hidden
+    })
+  }
   render () {
     const divStyle = Object.assign({}, style.div, this.state.hover ? style.divHover : {})
     const listStyle = Object.assign({}, style.list, this.state.hidden ? style.listHidden : {})
@@ -35,7 +40,7 @@ export default class Toolbox extends React.Component {
       <div className="toolbox" id="file" style={divStyle}
         onMouseEnter={() => this.setState({ hover: true })}
         onMouseLeave={() => this.setState({ hover: false })}
-        onClick={() => this.open()}>
+        onClick={() => this.switch()}>
         <ThreeDotsIcon style={style.dots} />
         <List
           className={classnames('toolbox-list', this.props.className)}
