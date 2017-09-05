@@ -43,6 +43,7 @@ export default class ToolboxItem extends React.Component {
         onMouseLeave={() => this.handleMouseLeave()}>
         <p style={style.text}>{this.props.text}</p>
         <this.props.icon style={style.icon} />
+        {this.props.children}
       </List.Item>
     )
   }

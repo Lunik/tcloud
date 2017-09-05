@@ -84,8 +84,8 @@ module.exports = (app) => {
     var element = follow(path, baseFolder)
 
     if (element) {
-      res.json(element)
       element.remove()
+      res.json(element)
     } else {
       res.status(404)
       res.json({
