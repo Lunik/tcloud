@@ -24,7 +24,6 @@ module.exports = (app, baseFolder) => {
 
     if (query) {
       searchEngine.search(query).then((torrents) => {
-        console.log(torrents)
         res.json(torrents)
       }).catch(() => {})
     } else {
@@ -43,7 +42,6 @@ module.exports = (app, baseFolder) => {
     if (specialMagnet.test(magnet)) {
       magnet = magnet.replace(/tcloud:/, '')
       searchEngine.getTorrent({ magnet }).then((response) => {
-        console.log(response.magnet)
         var peer = torrent.download(response.magnet)
         res.json(peer)
       }).catch(() => {})
