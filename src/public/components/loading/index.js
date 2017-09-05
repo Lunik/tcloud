@@ -1,6 +1,6 @@
 import React from 'react'
 import Spinner from 'react-spinkit'
-import Color from '../color'
+import Color from '../../color'
 
 export default class Loading extends React.Component {
   constructor (props) {
@@ -27,7 +27,8 @@ const style = {
   height: '100vh',
   backgroundColor: Color.transparentGrey,
   position: 'fixed',
-  zIndex: 10000
+  zIndex: 10000,
+  visibility: 'visible'
 }
 
 const spinnerStyle = {

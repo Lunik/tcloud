@@ -11,22 +11,38 @@ export default class DialogWindow extends React.Component {
       open: this.props.open
     }
   }
+
   componentWillReceiveProps (props) {
     this.setState({open: props.open})
   }
+
   close () {
     this.setState({
       open: false
     })
     this.props.onClose()
   }
+
   open () {
     this.setState({
       open: true
     })
     this.props.onOpen()
   }
+
+  accept () {
+    this.close()
+    this.props.onAccept()
+  }
+
+  cancel () {
+    this.close()
+    this.props.onCancel()
+  }
+
   render () {
+    const footerStyle = Object.assign({}, style.footer, this.props.footer ? {} : style.footerDisabled)
+
     return (
       <Dialog
         open={this.state.open}
@@ -35,12 +51,26 @@ export default class DialogWindow extends React.Component {
         <Dialog.Surface style={style.surface}>
           <Dialog.Header>
             <Dialog.Header.Title>
-                {this.props.title}
+              {this.props.title}
             </Dialog.Header.Title>
           </Dialog.Header>
-          <Dialog.Body>
+          <Dialog.Body style={style.body}>
             {this.props.children}
           </Dialog.Body>
+          <Dialog.Footer style={footerStyle}>
+            <Dialog.Footer.Button
+              type="cancel"
+              style={style.cancelButton}
+              onClick={(e) => this.cancel()}>
+              {this.props.footerText.cancel}
+            </Dialog.Footer.Button>
+            <Dialog.Footer.Button
+              type="accept"
+              style={style.acceptButton}
+              onClick={(e) => this.accept()}>
+              {this.props.footerText.accept}
+            </Dialog.Footer.Button>
+          </Dialog.Footer>
         </Dialog.Surface>
         <Dialog.Backdrop style={style.backdrop}/>
       </Dialog>
@@ -51,15 +81,32 @@ export default class DialogWindow extends React.Component {
 DialogWindow.defaultProps = {
   open: false,
   onOpen: () => {},
-  onClose: () => {}
+  onClose: () => {},
+  onAccept: () => {},
+  onCancel: () => {},
+  footer: false,
+  footerText: {
+    cancel: 'Cancel',
+    accept: 'Accept'
+  }
 }
 
 const style = {
+  footer: {
+
+  },
+  footerDisabled: {
+    display: 'none'
+  },
   surface: {
-    backgroundColor: Color.darkGrey,
+    backgroundColor: Color.grey,
     maxHeight: '90vh',
+    maxWidth: '100%',
     overflow: 'auto',
     borderRadius: '2px'
+  },
+  body: {
+    wordWrap: 'break-word'
   },
   backdrop: {
     opacity: '.6'
@@ -67,5 +114,13 @@ const style = {
   title: {
     fontSize: '20px',
     fontWeight: 'bold'
+  },
+  acceptButton: {
+    backgroundColor: Color.green,
+    color: Color.white
+  },
+  cancelButton: {
+    backgroundColor: Color.red,
+    color: Color.white
   }
 }
