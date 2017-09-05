@@ -99,7 +99,7 @@ const style = {
     display: 'none'
   },
   surface: {
-    backgroundColor: Color.grey,
+    backgroundColor: Color.darkGrey,
     maxHeight: '90vh',
     maxWidth: '100%',
     overflow: 'auto',
