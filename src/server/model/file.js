@@ -18,6 +18,7 @@ export default class File extends EventEmitter {
     this.name = parsedPath.fileName
     this.locked = false
     this.downloadCount = 0
+    this.downloading = 0
 
     this.initMetadata()
     this.initWatch()
@@ -78,13 +79,14 @@ export default class File extends EventEmitter {
 
   addDownloader () {
     this.downloadCount++
+    this.downloading++
     this.lock()
   }
 
   removeDownloader () {
-    this.downloadCount--
-    if (this.downloadCount <= 0) {
-      this.downloadCount = 0
+    this.downloading--
+    if (this.downloading <= 0) {
+      this.downloading = 0
       this.unlock()
     }
   }
@@ -127,6 +129,7 @@ export default class File extends EventEmitter {
   download (res) {
     return new Promise((resolve, reject) => {
       this.addDownloader()
+      console.log(this.toJSON())
       res.download(this.fullPath(), (err) => {
         if (err) this.log.error(err)
 
