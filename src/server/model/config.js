@@ -77,28 +77,32 @@ export default class Config extends EventEmitter {
     let config = JSON.parse(string)
 
     expect(config).to.have.property('log').to.be.a('object')
-    expect(config.log).to.have.property('path').to.be.a('string')
+    expect(config.log).to.have.property('path').to.be.a('string').not.empty
 
     expect(config).to.have.property('server')
     expect(config.server).to.have.property('port').to.be.a('number').within(0, 65535)
     expect(config.server).to.have.property('masterKey').to.be.a('string').to.have.lengthOf.above(5)
-    expect(config.server).to.have.property('https').to.be.a('boolean')
+    expect(config.server).to.have.property('https')
+
     if (config.server.https) {
-      expect(config.server).to.have.property('hostname').to.be.a('string')
+      expect(config.server.https).to.be.a('number')
+      expect(config.server).to.have.property('hostname').to.be.a('string').not.empty
 
       expect(config.server).to.have.property('certs').to.be.a('object')
-      expect(config.server.certs).to.have.property('privatekey').to.be.a('string')
-      expect(config.server.certs).to.have.property('certificate').to.be.a('string')
-      expect(config.server.certs).to.have.property('chain').to.be.a('string')
+      expect(config.server.certs).to.have.property('privatekey').to.be.a('string').not.empty
+      expect(config.server.certs).to.have.property('certificate').to.be.a('string').not.empty
+      expect(config.server.certs).to.have.property('chain').to.be.a('string').not.empty
+    } else {
+      expect(config.server.https).to.be.a('boolean')
     }
 
     expect(config).to.have.property('database').to.be.a('object')
-    expect(config.database).to.have.property('path').to.be.a('string')
+    expect(config.database).to.have.property('path').to.be.a('string').not.empty
 
     expect(config).to.have.property('authentification').to.be.a('boolean')
 
     expect(config).to.have.property('files').to.be.a('object')
-    expect(config.files).to.have.property('path').to.be.a('string')
+    expect(config.files).to.have.property('path').to.be.a('string').not.empty
 
     Object.assign(this, config)
 

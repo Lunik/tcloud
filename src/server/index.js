@@ -10,5 +10,5 @@ var config = new Config()
 config.on('ready', () => {
   var server = new Server()
 
-  server.listen(config.server.port)
+  server.listen()
 })

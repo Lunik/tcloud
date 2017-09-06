@@ -60,6 +60,7 @@
     "crypto-rand": "0.0.2",
     "delogger": "^0.9.5",
     "express": "^4.15.4",
+    "express-sslify": "^1.2.0",
     "fs-extra": "^3.0.1",
     "jquery": "^3.2.1",
     "material-components-web": "^0.15.0",
