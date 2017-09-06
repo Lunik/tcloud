@@ -64,6 +64,7 @@ export default class RemoveToolboxItem extends React.Component {
   render () {
     return (
       <ListItem
+        disabled={this.state.disabled}
         id="remove" text="Remove"
         icon={CrossIcon}
         onClick={() => this.handleClick()} >

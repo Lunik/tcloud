@@ -19,6 +19,7 @@ export default class RenameToolboxItem extends React.Component {
   render () {
     return (
       <ListItem
+        disabled={this.state.disabled}
         id="rename" text="Rename"
         icon={PencilIcon}
         onClick={() => this.handleClick()}/>
