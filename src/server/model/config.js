@@ -79,7 +79,7 @@ export default class Config extends EventEmitter {
     expect(config).to.have.property('log').to.be.a('object')
     expect(config.log).to.have.property('path').to.be.a('string').not.empty
 
-    expect(config).to.have.property('server')
+    expect(config).to.have.property('server').to.be.a('object')
     expect(config.server).to.have.property('port').to.be.a('number').within(0, 65535)
     expect(config.server).to.have.property('masterKey').to.be.a('string').to.have.lengthOf.above(5)
     expect(config.server).to.have.property('https')

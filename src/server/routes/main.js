@@ -7,10 +7,10 @@ import Delogger from 'delogger'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
-import enforce from 'express-sslify'
 import https from 'https'
 import fs from 'fs'
 
+import EnforceHttps from './module/enforceHttps'
 import Config from '../model/config'
 var config = new Config()
 
@@ -25,7 +25,9 @@ export default class Server {
     }))
 
     if (config.server.https) {
-      this.app.use(enforce.HTTPS())
+      this.app.use(EnforceHttps({
+        port: config.server.https
+      }))
     }
 
     require('./auth')(this.app)
@@ -52,7 +54,7 @@ export default class Server {
       })
 
       // ssl server
-      this.server = https.createServer(options, this.app).listen(config.server.https, () => this.log.info(`Server listening at port ${config.server.https}`))
+      this.server = https.createServer(options, this.app).listen(config.server.https, host, () => this.log.info(`Server listening on ${host}:${config.server.https}`))
     }
 
     // http server
