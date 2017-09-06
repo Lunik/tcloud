@@ -4,6 +4,7 @@ import List from '@react-mdc/list'
 import Color from '../../../color'
 import { ArrowIcon, HeartIcon } from '../../image/svg'
 import TorrentToolbox from '../../toolbox/torrent'
+import RadialProgress from '../../progress/radial'
 
 export default class TorrentListItem extends React.Component {
   constructor (props) {
@@ -25,6 +26,10 @@ export default class TorrentListItem extends React.Component {
     return `${Math.round(bits / Math.pow(1024, i), 2)} ${sizes[i]}/s`
   }
 
+  getProgressItem (percent) {
+    return Math.floor(percent * 100) + '%'
+  }
+
   render () {
     const itemStyle = Object.assign({}, style.item, !this.props.color ? style.itemColor : {})
     return (
@@ -44,6 +49,13 @@ export default class TorrentListItem extends React.Component {
         <span className="sup" style={style.sup}>
           {this.getSpeedItem(this.props.peer.metadata.sup)}
           <ArrowIcon.Up style={style.supIcon}/>
+        </span>
+        <span className="progress" style={style.progress}>
+          {this.getProgressItem(this.props.peer.metadata.progress)}
+          <RadialProgress
+            style={style.progressRadial}
+            displayText={false}
+            value={this.props.peer.metadata.progress} />
         </span>
         <List.Item.EndDetail>
           <TorrentToolbox
@@ -122,5 +134,13 @@ const style = {
   size: {
     flex: '1',
     textAlign: 'right'
-  }
+  },
+  progress: {
+    flex: '2',
+    textAlign: 'right'
+  },
+  progressRadial: {
+    marginLeft: '5px',
+    verticalAlign: 'top'
+  },
 }
