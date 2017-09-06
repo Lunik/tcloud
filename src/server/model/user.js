@@ -102,6 +102,8 @@ export default class User extends EventEmitter {
         break
       }
     }
+
+    this.log.info(`${this.username} logout`)
   }
 
   isTokenValid (tokenId) {

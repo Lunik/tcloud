@@ -1,11 +1,15 @@
 import T411Api from 't411api'
+import Delogger from 'delogger'
 
 export default class TorrentSearch {
   constructor () {
     this.api = new T411Api()
+
+    this.log = new Delogger('Search')
   }
 
   search (query) {
+    this.log.info(query)
     return new Promise((resolve, reject) => {
       Promise.all([
         this.api.search(query, {

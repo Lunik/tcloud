@@ -9,6 +9,7 @@ import User from '../model/user'
 
 const config = new Config({sync: true})
 const loginPage = '/login.html'
+
 module.exports = (app) => {
   app.use((req, res, next) => {
     if (req.body.username || req.cookies.username) {
