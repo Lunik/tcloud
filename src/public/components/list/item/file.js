@@ -46,7 +46,7 @@ export default class FileListItem extends React.Component {
   render () {
     const lockStyle = Object.assign({}, style.lock, this.state.locked ? style.locked : {})
     const itemStyle = Object.assign({}, style.item, !this.props.color ? style.itemColor : {})
-
+    const downloadCountStyle = Object.assign({}, style.downloadCount, this.props.file.type === 'folder' ? style.downloadCountHidden : {})
     return (
       <List.Item className="file" type={this.props.file.type} style={itemStyle}>
         <List.Item.StartDetail style={style.startDetail}>
@@ -56,7 +56,7 @@ export default class FileListItem extends React.Component {
           {this.getNameItem()}
         </span>
         <span className="size" style={style.size}>{this.getSizeItem(this.props.file.size)}</span>
-        <span className="download-count" style={style.downloadCount}>
+        <span className="download-count" style={downloadCountStyle}>
           {this.props.file.downloadCount}
           <DownloadIcon style={style.downloadCountIcon}/>
         </span>
@@ -121,6 +121,9 @@ const style = {
   downloadCount: {
     flex: '1',
     textAlign: 'right'
+  },
+  downloadCountHidden:{
+    visibility: 'hidden'
   },
   downloadCountIcon: {
     marginLeft: '5px',
