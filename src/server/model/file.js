@@ -26,7 +26,12 @@ export default class File extends EventEmitter {
   }
   initWatch () {
     if (this.exist) {
-      fs.watch(this.fullPath(), (eventType, filename) => this.watchChange(eventType, filename))
+      fs.watch(
+        this.fullPath(), {
+          recursive: true
+        },
+        (eventType, filename) => this.watchChange(eventType, filename)
+      )
     }
   }
   initMetadata () {
