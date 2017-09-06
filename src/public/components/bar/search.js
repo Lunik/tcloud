@@ -43,6 +43,10 @@ export default class SearchBar extends React.Component {
 
   submit (e) {
     e.preventDefault()
+    this.setState({
+      input: ''
+    })
+
     switch (this.state.status.toLowerCase()) {
       case 'download':
         this.download(this.state.input)
