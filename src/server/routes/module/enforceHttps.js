@@ -16,10 +16,9 @@ function applyOptions (options) {
 }
 
 export default function (options) {
-  options = applyOptions(options)
+  options = (options)
 
   return (req, res, next) => {
-    console.log(req.originalUrl)
     let isSecure = req.secure
 
     if (!isSecure && options.trustProtoHeader) {
@@ -39,7 +38,7 @@ export default function (options) {
         if (options.port === 443) {
           res.redirect(301, 'https://' + host + req.originalUrl)
         } else {
-          res.redirect(301, 'https://' + host + ':' + options.port + req.originalUrl)
+          res.redirect(301, 'https://' + host.replace(/:[0-9]*/g, '') + ':' + options.port + req.originalUrl)
         }
       } else {
         res.status(403).send('Please use HTTPS when submitting data to this server.')
