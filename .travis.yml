@@ -12,9 +12,17 @@ cache:
   directories:
   - $(pwd)/node_modules
 deploy:
-  provider: npm
-  email: guillaume.lunik@gmail.com
-  on:
-    tags: true
-  api_key:
-    secure: AWJKNg4K1Fs7dERXaczPd1qMCAMJuxyGLwLFe6ANQZ3EjFPC3hQpCV9VhJGi2K1bEwCAaWc7jrXby41krDVtTWduN7ecM/DLCmnxGeL9QUAe72Tj4qxN5H7u1AAz5c0UY/bAEucd8zpSDBA4532WEpIOjGsGAvLk2cbEw/Ny3bQgUc4clRZBzXF3rC2swuomRb6+Fdjbyr15yfti8woh9/ZHcIVHCyPAItNdeXYGbqL4vt2eRsI+RSZpm2LhJ9xwNpT+VCgHZfTwZl2IqjUBVkXnYFL7VK+EOGtAL/tpBCj+ndS7q3JKSp1LWErWHHAqtICtmyX54saGCwr2hf5DVh9FpFMkgF/NuI94i38CCvEdlikdMjPl8WSbestO/pQHbTmwK/4WoSJE9tzwsD7wQexFA2ToQXT+rX3SAu90KHbXW2m9GWAhl1c4czFQdbwfcHpBpPvmhBY+pf4miXtMBsjGrjn9CDzxzHYRBil1EPYdSwxc7XwmiyF06kpoeShpiLesTYBBXriNq1/J7cIvSKVdvgGmeXkiPW7Z6VVFvgv863cR3Exm2usSUdS1p2wGe0icAJzuABHw5g+cyziv/VKDmxxsSgpbcQNlr23ejINA5UsYhiuLedkLHScvTvXvIO5GGeIL/zUOzBmvFXrz4nu15jmABwBqHhRR5YQF7dY=
+  - provider: releases
+    api_key:
+      secure: Cy3WggYkznwXWikzLLmrDvUBsMMGqi9mTqTkk/DTiJMqhFSTHI/6pY5v+udhhp4f7SDCE2rbkpTfiJbhLJ4JCj1tSOl6S5RXOOgkVkQvyhro8yB52M0cW2EfncGxg1rf88gl75+nrQe0AeYayobzpRZ+R1aTPAG2BzBfvkCMBF/0as9Bin4RtRrXsnCcYNx7zb9sHru1lUbHbEcnHc+XIIz9q7DY9KHLBwSM47gJFNP1xcTVCbeHI9HmY5DBDBuR2uhSYCLPd9d5LWK64ZRdmxEmBZwxpvyGhGfyBw2Ds8iKHYzCf7Y3Segsw9Egpx3RuxV3EaFSVrr8TBO2NXndQ5hOp76k+rfiMwcehUXbX1/ocSKZaMpOX8FPOV9FSh46+QmcbsB2MobBsS9zLgyypnSVb3Q9sGKjp+HWvMG2Yih3mKka8LJVxUArHen8eFE4UH6iY4FD2vF8eOyZdBlzY/zznfwlmAZ4WpXF+QFt0VdQLMJfCvxyiJo2kVzSWcfxxz+2HN+tE/2zUmfvz8FC/kiFADrDgde4/DvH+Vm15gHU2R8BSTDryL8dEp2lAGKzKAyu/xhJZBqqNLFD6IpVDDVIUQAvGncTZXGEF3wPt0JZMBM7+jcTVbCK3sVNRmo0xZMTD4zUYIjbjyI+3/SaQRJ6CAQzSQ5SkpiuDWBafiw=
+    file: build/
+    on:
+      repo: Lunik/tcloud
+
+  - provider: npm
+    email: guillaume.lunik@gmail.com
+    on:
+      tags: true
+    api_key:
+      secure: AWJKNg4K1Fs7dERXaczPd1qMCAMJuxyGLwLFe6ANQZ3EjFPC3hQpCV9VhJGi2K1bEwCAaWc7jrXby41krDVtTWduN7ecM/DLCmnxGeL9QUAe72Tj4qxN5H7u1AAz5c0UY/bAEucd8zpSDBA4532WEpIOjGsGAvLk2cbEw/Ny3bQgUc4clRZBzXF3rC2swuomRb6+Fdjbyr15yfti8woh9/ZHcIVHCyPAItNdeXYGbqL4vt2eRsI+RSZpm2LhJ9xwNpT+VCgHZfTwZl2IqjUBVkXnYFL7VK+EOGtAL/tpBCj+ndS7q3JKSp1LWErWHHAqtICtmyX54saGCwr2hf5DVh9FpFMkgF/NuI94i38CCvEdlikdMjPl8WSbestO/pQHbTmwK/4WoSJE9tzwsD7wQexFA2ToQXT+rX3SAu90KHbXW2m9GWAhl1c4czFQdbwfcHpBpPvmhBY+pf4miXtMBsjGrjn9CDzxzHYRBil1EPYdSwxc7XwmiyF06kpoeShpiLesTYBBXriNq1/J7cIvSKVdvgGmeXkiPW7Z6VVFvgv863cR3Exm2usSUdS1p2wGe0icAJzuABHw5g+cyziv/VKDmxxsSgpbcQNlr23ejINA5UsYhiuLedkLHScvTvXvIO5GGeIL/zUOzBmvFXrz4nu15jmABwBqHhRR5YQF7dY=
+
