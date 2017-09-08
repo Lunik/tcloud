@@ -57,6 +57,7 @@
     "cookie-parser": "^1.4.3",
     "copy-to-clipboard": "^3.0.8",
     "crypto-js": "^3.1.9-1",
+    "crypto-rand": "0.0.2",
     "delogger": "^0.9.5",
     "express": "^4.15.4",
     "fs-extra": "^3.0.1",
