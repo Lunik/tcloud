@@ -25,8 +25,23 @@ export default class SearchBar extends React.Component {
       searchResults: {
         movie: [],
         tv: []
-      }
+      },
+      mobile: false
     }
+  }
+
+  componentWillMount () {
+    $(window).on('resize', (event) => this.handleWindowResize())
+  }
+
+  componentWillUnmount () {
+    $(window).off('resize', (event) => this.handleWindowResize())
+  }
+
+  handleWindowResize () {
+    this.setState({
+      mobile: window.innerWidth <= 580
+    })
   }
 
   componentWillUpdate (nextProps, nextState) {
@@ -149,8 +164,10 @@ export default class SearchBar extends React.Component {
         onClick={(torrent) => this.selectFromSearch(torrent)}
       />))
 
+    const formStyle = Object.assign({}, this.props.style, style.div, this.state.mobile ? style.divMobile : {})
+
     return (
-      <Form style={this.props.style} onSubmit={(e) => this.submit(e)} className="search-bar">
+      <Form style={formStyle} onSubmit={(e) => this.submit(e)} className="search-bar">
         <Loading hidden={!this.state.loading}/>
         <TextInput style={style.input}
           value={this.state.input}
@@ -174,6 +191,13 @@ export default class SearchBar extends React.Component {
 }
 
 const style = {
+  div: {
+    minWidth: '350px'
+  },
+  divMobile: {
+    float: 'left',
+    margin: '0 16px'
+  },
   input: {
     div: {
       display: 'inline-flex',
@@ -183,7 +207,6 @@ const style = {
   button: {
     lineHeight: '0',
     height: '25px',
-    margin: '0 20px 0 5px',
-    width: '120px'
+    margin: '0 20px 0 5px'
   }
 }

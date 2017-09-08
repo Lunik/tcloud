@@ -18,7 +18,7 @@ export default class FileList extends React.Component {
   }
 
   componentWillMount () {
-    window.onhashchange = () => this.changeDir(window.location.hash.substring(1))
+    $(window).on('hashchange', () => this.handleHashCHange())
     this.update()
     this.setState({
       updateInterval: setInterval(() => this.update(), 30000)
@@ -26,13 +26,16 @@ export default class FileList extends React.Component {
   }
 
   componentWillUnmount () {
-    window.onhashchange = () => {}
+    $(window).off('hashchange', () => this.handleHashCHange())
     clearInterval(this.state.updateInterval)
     this.setState({
       updateInterval: null
     })
   }
 
+  handleHashCHange () {
+    this.changeDir(window.location.hash.substring(1))
+  }
   update () {
     $.ajax({
       method: 'GET',

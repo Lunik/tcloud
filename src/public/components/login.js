@@ -68,7 +68,8 @@ export default class Login extends React.Component {
 const style = {
   div: {
     margin: 'auto',
-    textAlign: 'center'
+    textAlign: 'center',
+    minWidth: '350px'
   },
   links: {
     margin: 'auto 5px'

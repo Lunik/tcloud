@@ -89,7 +89,8 @@ export default class Bar extends React.Component {
 
 const style = {
   div: {
-    height: '60px',
+    //height: '60px',
+    minWidth: '370px',
     backgroundColor: Color.darkGrey
   },
   divFixed: {

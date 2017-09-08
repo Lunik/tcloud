@@ -94,7 +94,8 @@ const style = {
   item: {
     height: '30px',
     paddingLeft: '15px',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+    minWidth: '300px'
   },
   itemColor: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
@@ -121,9 +122,12 @@ const style = {
   },
   downloadCount: {
     flex: '1',
-    textAlign: 'right'
+    textAlign: 'right',
+    minWidth: '50px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
   },
-  downloadCountHidden:{
+  downloadCountHidden: {
     visibility: 'hidden'
   },
   downloadCountIcon: {
@@ -133,6 +137,7 @@ const style = {
   },
   size: {
     flex: '1',
-    textAlign: 'right'
+    textAlign: 'right',
+    minWidth: '70px'
   }
 }

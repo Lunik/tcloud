@@ -1,10 +1,29 @@
 import React from 'react'
+import $ from 'jquery'
 
 import Branch from './branch'
 
 export default class Tree extends React.Component {
   constructor (props) {
     super(props)
+
+    this.state = {
+      mobile: false
+    }
+  }
+
+  componentWillMount () {
+    $(window).on('resize', (event) => this.handleWindowResize())
+  }
+
+  componentWillUnmount () {
+    $(window).off('resize', (event) => this.handleWindowResize())
+  }
+
+  handleWindowResize () {
+    this.setState({
+      mobile: window.innerWidth <= 580
+    })
   }
 
   render () {
@@ -18,6 +37,7 @@ export default class Tree extends React.Component {
       )
     })
     return (
+      !this.state.mobile &&
       <div className="tree">
         <Branch id='files' url="#" text="files"/>
         {JSXBranches}

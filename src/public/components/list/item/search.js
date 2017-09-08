@@ -1,4 +1,5 @@
 import React from 'react'
+import $ from 'jquery'
 import List from '@react-mdc/list'
 import { ArrowIcon } from '../../image/svg'
 
@@ -9,8 +10,23 @@ export default class SearchListItem extends React.Component {
     super(props)
 
     this.state = {
-      hover: false
+      hover: false,
+      mobile: false
     }
+  }
+
+  componentWillMount () {
+    $(window).on('resize', (event) => this.handleWindowResize())
+  }
+
+  componentWillUnmount () {
+    $(window).off('resize', (event) => this.handleWindowResize())
+  }
+
+  handleWindowResize () {
+    this.setState({
+      mobile: window.innerWidth <= 500
+    })
   }
 
   onClick () {
@@ -18,6 +34,8 @@ export default class SearchListItem extends React.Component {
   }
 
   render () {
+    const infoStyle = Object.assign({}, this.props.style, this.state.mobile ? style.infosMobile : {})
+
     return (
       <List.Item style={Object.assign({}, style.div, this.state.hover ? style.divHover : {})}
         onClick={() => this.onClick()}
@@ -29,16 +47,18 @@ export default class SearchListItem extends React.Component {
           title={this.props.torrent.name}>
           {this.props.torrent.name}
         </span>
-        <span style={style.infos} className="infos">
-          <span className="info" id="size"
-            style={style.info.size}>{this.props.torrent.size}</span>
-          <span className="info" id="seeds"
-            style={style.info.seeds}>
-            <ArrowIcon.Up style={style.arrow.up}/>{this.props.torrent.seeds}
-          </span>
-          <span className="info" id="leechs"
-            style={style.info.leechs}>
-            <ArrowIcon.Down style={style.arrow.down}/>{this.props.torrent.leechs}
+        <span className="infos" style={infoStyle}>
+          <span style={style.infos} className="infos">
+            <span className="info" id="size"
+              style={style.info.size}>{this.props.torrent.size}</span>
+            <span className="info" id="seeds"
+              style={style.info.seeds}>
+              <ArrowIcon.Up style={style.arrow.up}/>{this.props.torrent.seeds}
+            </span>
+            <span className="info" id="leechs"
+              style={style.info.leechs}>
+              <ArrowIcon.Down style={style.arrow.down}/>{this.props.torrent.leechs}
+            </span>
           </span>
         </span>
       </List.Item>
@@ -79,16 +99,22 @@ const style = {
     justifyContent: 'space-around',
     flex: '1'
   },
+  infosMobile: {
+    display: 'none'
+  },
   info: {
     size: {
       flex: '4',
-      textAlign: 'right'
+      textAlign: 'right',
+      minWidth: '80px'
     },
     seeds: {
-      flex: '3'
+      flex: '3',
+      minWidth: '60px'
     },
     leechs: {
-      flex: '3'
+      flex: '3',
+      minWidth: '60px'
     }
   },
   arrow: {

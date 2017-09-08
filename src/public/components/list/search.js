@@ -16,7 +16,7 @@ export default class SearchList extends React.Component {
     return (
       <div className="List" id={this.props.id}>
         <h3 style={style.title}>{this.state.title}</h3>
-        <List id={this.props.id}>
+        <List id={this.props.id} style={style.list}>
           {this.props.children}
         </List>
       </div>
@@ -27,5 +27,8 @@ export default class SearchList extends React.Component {
 const style = {
   title: {
     fontSize: '30px'
+  },
+  list: {
+    padding: '0'
   }
 }
