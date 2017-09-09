@@ -23,6 +23,7 @@ deploy:
       secure: Cy3WggYkznwXWikzLLmrDvUBsMMGqi9mTqTkk/DTiJMqhFSTHI/6pY5v+udhhp4f7SDCE2rbkpTfiJbhLJ4JCj1tSOl6S5RXOOgkVkQvyhro8yB52M0cW2EfncGxg1rf88gl75+nrQe0AeYayobzpRZ+R1aTPAG2BzBfvkCMBF/0as9Bin4RtRrXsnCcYNx7zb9sHru1lUbHbEcnHc+XIIz9q7DY9KHLBwSM47gJFNP1xcTVCbeHI9HmY5DBDBuR2uhSYCLPd9d5LWK64ZRdmxEmBZwxpvyGhGfyBw2Ds8iKHYzCf7Y3Segsw9Egpx3RuxV3EaFSVrr8TBO2NXndQ5hOp76k+rfiMwcehUXbX1/ocSKZaMpOX8FPOV9FSh46+QmcbsB2MobBsS9zLgyypnSVb3Q9sGKjp+HWvMG2Yih3mKka8LJVxUArHen8eFE4UH6iY4FD2vF8eOyZdBlzY/zznfwlmAZ4WpXF+QFt0VdQLMJfCvxyiJo2kVzSWcfxxz+2HN+tE/2zUmfvz8FC/kiFADrDgde4/DvH+Vm15gHU2R8BSTDryL8dEp2lAGKzKAyu/xhJZBqqNLFD6IpVDDVIUQAvGncTZXGEF3wPt0JZMBM7+jcTVbCK3sVNRmo0xZMTD4zUYIjbjyI+3/SaQRJ6CAQzSQ5SkpiuDWBafiw=
     file_glob: true
     file: build/*
+    skip_cleanup: true
     on:
       tags: true
 
