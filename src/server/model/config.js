@@ -12,7 +12,7 @@ export default class Config extends EventEmitter {
   constructor (props) {
     super()
     props = props || {}
-    this.location = props.configLocation || ConfigLocation
+    this.location = process.env.CONFIG_PATH || ConfigLocation
     this.log = new Delogger('Config')
 
     if (props.sync) {
