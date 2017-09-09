@@ -16,6 +16,7 @@ script:
 
 after_success:
 - git reset --hard
+- cp package.json ./build
 - mv ./build tcloud-${TRAVIS_TAG}/
 - tar zcf tcloud-${TRAVIS_TAG}.tgz tcloud-${TRAVIS_TAG}/
 
