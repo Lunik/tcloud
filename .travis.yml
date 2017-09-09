@@ -14,7 +14,7 @@ script:
 - npm run build
 - npm test
 
-before_deploy:
+after_success:
 - git reset --hard
 - mv ./build tcloud-${TRAVIS_TAG}/
 - tar zcf tcloud-${TRAVIS_TAG}.tgz tcloud-${TRAVIS_TAG}/
