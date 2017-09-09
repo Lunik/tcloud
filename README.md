@@ -41,9 +41,9 @@ $ node server.js
 ```
 $ docker pull lunik/tcloud
 $ docker run -d \
-	-p 5000:5000 \
-	-v /some/path/:/usr/src/app/
-	lunik/tcloud
+    -v /some/folder/files:/usr/src/app/files \
+    -v /some/folder/config:/usr/config
+    lunik/tcloud:latest
 ```
 
 ## ===== Configuration =====

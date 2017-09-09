@@ -16,7 +16,14 @@ RUN npm install && \
     mv /tmp/build/* . && \
     rm -r /tmp/*
 
+RUN mkdir /usr/config
+
+ENV CONFIG_PATH=/usr/config/config.json
+
 EXPOSE 80
 EXPOSE 443
+
+VOLUME ["/usr/src/app/files"]
+VOLUME ["/usr/config"]
 
 CMD ["/usr/local/bin/node", "./server.js"]
