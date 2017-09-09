@@ -1,4 +1,6 @@
 # Tcloud
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Lunik/tcloud.svg)](https://greenkeeper.io/)
 [![npm](https://img.shields.io/npm/v/tcloud.svg)](https://www.npmjs.com/package/tcloud)
 [![Travis branch](https://img.shields.io/travis/Lunik/tcloud/master.svg)](https://travis-ci.org/Lunik/tcloud)
 [![Dependency Status](https://gemnasium.com/badges/github.com/Lunik/tcloud.svg)](https://gemnasium.com/github.com/Lunik/tcloud)
