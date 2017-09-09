@@ -1,5 +1,6 @@
 import React from 'react'
 import List from '@react-mdc/list'
+import $ from 'jquery'
 
 import Color from '../../../color'
 import { ArrowIcon, HeartIcon } from '../../image/svg'
@@ -9,6 +10,24 @@ import RadialProgress from '../../progress/radial'
 export default class TorrentListItem extends React.Component {
   constructor (props) {
     super(props)
+
+    this.state = {
+      mobile: false
+    }
+  }
+
+  componentWillMount () {
+    $(window).on('resize', (event) => this.handleWindowResize())
+  }
+
+  componentWillUnmount () {
+    $(window).off('resize', (event) => this.handleWindowResize())
+  }
+
+  handleWindowResize () {
+    this.setState({
+      mobile: window.innerWidth <= 650
+    })
   }
 
   getSizeItem (bytes) {
@@ -32,23 +51,27 @@ export default class TorrentListItem extends React.Component {
 
   render () {
     const itemStyle = Object.assign({}, style.item, !this.props.color ? style.itemColor : {})
+    const metadataStyle = Object.assign({}, style.metadata, this.state.mobile ? style.metadataMobile : {})
+
     return (
       <List.Item className="peer" style={itemStyle}>
         <span className="name" style={style.name}>
           {this.props.peer.metadata.name}
         </span>
-        <span className="size" style={style.size}>{this.getSizeItem(this.props.peer.metadata.size)}</span>
-        <span className="seed" style={style.seed}>
-          {this.props.peer.metadata.seed}
-          <HeartIcon style={style.seedIcon}/>
-        </span>
-        <span className="sdown" style={style.sdown}>
-          {this.getSpeedItem(this.props.peer.metadata.sdown)}
-          <ArrowIcon.Down style={style.sdownIcon}/>
-        </span>
-        <span className="sup" style={style.sup}>
-          {this.getSpeedItem(this.props.peer.metadata.sup)}
-          <ArrowIcon.Up style={style.supIcon}/>
+        <span className="metadata" style={metadataStyle}>
+          <span className="size" style={style.size}>{this.getSizeItem(this.props.peer.metadata.size)}</span>
+          <span className="seed" style={style.seed}>
+            {this.props.peer.metadata.seed}
+            <HeartIcon style={style.seedIcon}/>
+          </span>
+          <span className="sdown" style={style.sdown}>
+            {this.getSpeedItem(this.props.peer.metadata.sdown)}
+            <ArrowIcon.Down style={style.sdownIcon}/>
+          </span>
+          <span className="sup" style={style.sup}>
+            {this.getSpeedItem(this.props.peer.metadata.sup)}
+            <ArrowIcon.Up style={style.supIcon}/>
+          </span>
         </span>
         <span className="progress" style={style.progress}>
           {this.getProgressItem(this.props.peer.metadata.progress)}
@@ -93,20 +116,30 @@ const style = {
   item: {
     height: '30px',
     paddingLeft: '15px',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+    minWidth: '400px',
+    display: 'flex'
   },
   itemColor: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
     borderBottom: 'none'
   },
   name: {
-    flex: '10',
+    flex: '5',
     overflow: 'hidden',
     textOverflow: 'ellipsis'
   },
+  metadata: {
+    display: 'flex',
+    flex: '2'
+  },
+  metadataMobile: {
+    display: 'none'
+  },
   seed: {
-    flex: '1',
-    textAlign: 'right'
+    flex: '2',
+    textAlign: 'right',
+    minWidth: '50px'
   },
   seedIcon: {
     marginLeft: '5px',
@@ -115,7 +148,8 @@ const style = {
   },
   sdown: {
     flex: '2',
-    textAlign: 'right'
+    textAlign: 'right',
+    minWidth: '100px'
   },
   sdownIcon: {
     marginLeft: '5px',
@@ -124,7 +158,8 @@ const style = {
   },
   sup: {
     flex: '2',
-    textAlign: 'right'
+    textAlign: 'right',
+    minWidth: '100px'
   },
   supIcon: {
     marginLeft: '5px',
@@ -132,15 +167,17 @@ const style = {
     verticalAlign: 'top'
   },
   size: {
-    flex: '1',
-    textAlign: 'right'
+    flex: '2',
+    textAlign: 'right',
+    minWidth: '60px'
   },
   progress: {
-    flex: '2',
-    textAlign: 'right'
+    flex: '1',
+    textAlign: 'right',
+    minWidth: '60px'
   },
   progressRadial: {
     marginLeft: '5px',
     verticalAlign: 'top'
-  },
+  }
 }

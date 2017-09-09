@@ -95,7 +95,8 @@ const style = {
     height: '30px',
     paddingLeft: '15px',
     borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-    minWidth: '300px'
+    minWidth: '400px',
+    display: 'flex'
   },
   itemColor: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
@@ -105,7 +106,7 @@ const style = {
     marginRight: '10px'
   },
   name: {
-    flex: '10',
+    flex: '5',
     overflow: 'hidden',
     textOverflow: 'ellipsis'
   },
