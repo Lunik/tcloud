@@ -6,6 +6,7 @@ import Peer from './peer'
 import Config from './config'
 import Folder from '../model/folder'
 import fs from 'fs-extra'
+import mv from 'mv'
 
 const config = new Config({sync: true})
 
@@ -35,7 +36,7 @@ export default class Torrent {
     if (childs.indexOf(peer.metadata.name) === -1) {
       fs.renameSync(oldPath, newPath)
     } else {
-      fs.removeSync(oldPath)
+      mv(oldPath)
     }
     delete this.peers[peer.uid]
   }
