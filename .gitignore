@@ -11,3 +11,5 @@ database/
 .DS_Store
 
 config.json
+
+tcloud-*
