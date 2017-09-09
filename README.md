@@ -44,7 +44,8 @@ $ node server.js
 $ docker pull lunik/tcloud
 $ docker run -d \
     -v /some/folder/files:/usr/src/app/files \
-    -v /some/folder/config:/usr/config
+    -v /some/folder/config:/usr/config \
+    -v /some/folder/database:/usr/src/app/database \
     lunik/tcloud:latest
 ```
 

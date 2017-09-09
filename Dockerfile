@@ -24,6 +24,7 @@ EXPOSE 80
 EXPOSE 443
 
 VOLUME ["/usr/src/app/files"]
+VOLUME ["/usr/src/app/database"]
 VOLUME ["/usr/config"]
 
 CMD ["/usr/local/bin/node", "./server.js"]
