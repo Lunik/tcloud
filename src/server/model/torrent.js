@@ -34,9 +34,9 @@ export default class Torrent {
     var childs = fs.readdirSync(`${__dirname}/${config.files.path}`)
 
     if (childs.indexOf(peer.metadata.name) === -1) {
-      fs.renameSync(oldPath, newPath)
+      mv(oldPath, newPath)
     } else {
-      mv(oldPath)
+      fs.removeSync(oldPath)
     }
     delete this.peers[peer.uid]
   }
