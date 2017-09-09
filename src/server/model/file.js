@@ -129,7 +129,6 @@ export default class File extends EventEmitter {
   download (res) {
     return new Promise((resolve, reject) => {
       this.addDownloader()
-      console.log(this.toJSON())
       res.download(this.fullPath(), (err) => {
         if (err) this.log.error(err)
 

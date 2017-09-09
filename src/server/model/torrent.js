@@ -35,7 +35,6 @@ export default class Torrent {
     if (childs.indexOf(peer.metadata.name) === -1) {
       fs.renameSync(oldPath, newPath)
     } else {
-      console.log(oldPath)
       fs.removeSync(oldPath)
     }
     delete this.peers[peer.uid]
