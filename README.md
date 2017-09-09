@@ -33,7 +33,7 @@ $ npm install --production
 $ node server.js
 ```
 
-## With Docker
+## Docker
 [![Docker Stars](https://img.shields.io/docker/stars/lunik/tcloud.svg)](https://hub.docker.com/r/lunik/tcloud/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/lunik/tcloud.svg)](https://hub.docker.com/r/lunik/tcloud/)
 [![](https://images.microbadger.com/badges/image/lunik/tcloud.svg)](https://microbadger.com/images/lunik/tcloud "Get your own image badge on microbadger.com")
