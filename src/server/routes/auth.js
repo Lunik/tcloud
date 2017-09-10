@@ -111,24 +111,31 @@ module.exports = (app) => {
       password: req.body.password
     }
     if (formData.username && formData.password) {
-      var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-      user.exist((exist) => {
-        if (!exist) {
-          user.set({password: Crypto.SHA256(formData.password).toString(), username: formData.username})
-          var token = user.login(ip, false)
-          res.cookie('token', token.id, {expires: token.expirationDate, httpOnly: true, encode: String})
-          res.cookie('username', user.username, {expires: token.expirationDate, httpOnly: true, encode: String})
-          res.json({
-            err: false,
-            token: token.id
-          })
-        } else {
-          res.status(409)
-          res.json({
-            err: 'User already exist.'
-          })
-        }
-      })
+      if(config.registration) {
+        var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+        user.exist((exist) => {
+          if (!exist) {
+            user.set({password: Crypto.SHA256(formData.password).toString(), username: formData.username})
+            var token = user.login(ip, false)
+            res.cookie('token', token.id, {expires: token.expirationDate, httpOnly: true, encode: String})
+            res.cookie('username', user.username, {expires: token.expirationDate, httpOnly: true, encode: String})
+            res.json({
+              err: false,
+              token: token.id
+            })
+          } else {
+            res.status(409)
+            res.json({
+              err: 'User already exist.'
+            })
+          }
+        })
+      } else {
+        res.status(403)
+        res.json({
+          err: 'Registration is disabled.'
+        })
+      }
     } else {
       res.status(400)
       res.json({

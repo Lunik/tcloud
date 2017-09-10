@@ -58,6 +58,7 @@ export default class Config extends EventEmitter {
         'path': 'database/'
       },
       'authentification': false,
+      'registration': true,
       'files': {
         'path': 'files/'
       }
@@ -100,6 +101,7 @@ export default class Config extends EventEmitter {
     expect(config.database).to.have.property('path').to.be.a('string').not.empty
 
     expect(config).to.have.property('authentification').to.be.a('boolean')
+    expect(config).to.have.property('registration').to.be.a('boolean')
 
     expect(config).to.have.property('files').to.be.a('object')
     expect(config.files).to.have.property('path').to.be.a('string').not.empty
