@@ -7,15 +7,17 @@ export default class RenameToolboxItem extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
-      disabled: this.props.file.locked
+      disabled: props.file.locked
     }
   }
 
   componentWillReceiveProps (props) {
-    this.setState({
-      disabled: props.file.locked
-    })
+    this.initState(props)
   }
 
   handleClick () {

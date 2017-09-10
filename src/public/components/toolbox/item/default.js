@@ -8,9 +8,17 @@ export default class ToolboxItem extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
       hover: false
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
   }
 
   handleMouseLeave () {

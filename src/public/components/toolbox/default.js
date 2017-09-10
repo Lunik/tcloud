@@ -10,10 +10,18 @@ export default class Toolbox extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
       hover: false,
       hidden: true
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
   }
 
   open () {

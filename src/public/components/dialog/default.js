@@ -7,9 +7,17 @@ export default class DialogWindow extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
-      open: this.props.open
+      open: props.open
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
   }
 
   componentWillReceiveProps (props) {

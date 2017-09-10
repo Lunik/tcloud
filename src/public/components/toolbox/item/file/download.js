@@ -6,15 +6,17 @@ export default class DownloadToolboxItem extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
-      disabled: this.props.file.download === null
+      disabled: props.file.download === null
     }
   }
 
   componentWillReceiveProps (props) {
-    this.setState({
-      disabled: props.file.download === null
-    })
+    this.initState(props)
   }
 
   handleClick () {

@@ -27,7 +27,7 @@ module.exports = (app) => {
   // Check authentification
   app.use((req, res, next) => {
     var user = req.user
-    if (req.url.match(/\/(auth|src|dl)\/.*/g) ||
+    if (req.url.match(/\/(auth|src|dl|app)\/.*/g) ||
       !config.authentification) {
       next()
     } else {

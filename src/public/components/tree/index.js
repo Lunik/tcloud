@@ -10,6 +10,15 @@ export default class Tree extends React.Component {
     this.state = {
       mobile: false
     }
+    this.initState(props)
+  }
+
+  initState(props){
+
+  }
+
+  componentWillReceiveProps(props){
+    this.initState(props)
   }
 
   componentWillMount () {

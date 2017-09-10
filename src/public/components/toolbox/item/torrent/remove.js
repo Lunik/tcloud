@@ -12,10 +12,18 @@ export default class RemoveToolboxItem extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
       dialogOpen: false,
       loading: false
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
   }
 
   handleClick () {

@@ -13,6 +13,10 @@ export default class LoginForm extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
       username: '',
       password: '',
@@ -20,6 +24,11 @@ export default class LoginForm extends React.Component {
       staylogged: false
     }
   }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
+  }
+
   submit (e) {
     e.preventDefault()
     this.setState({

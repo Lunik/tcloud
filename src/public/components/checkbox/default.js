@@ -7,9 +7,17 @@ export default class CheckboxInput extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
       checked: false
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
   }
 
   onChange (e) {

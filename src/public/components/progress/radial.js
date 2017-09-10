@@ -9,9 +9,17 @@ export default class MyRadialProgress extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
       value: props.value < 1 ? props.value * 100 : props.value
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
   }
 
   generatePath (degrees) {

@@ -20,7 +20,18 @@ export default class RegisterForm extends React.Component {
       passwordLength: false,
       samePassword: true
     }
+
+    this.initState(props)
   }
+
+  initState(props){
+
+  }
+
+  componentWillReceiveProps(props){
+    this.initState(props)
+  }
+
   submit (e) {
     e.preventDefault()
 

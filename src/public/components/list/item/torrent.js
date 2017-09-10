@@ -11,9 +11,17 @@ export default class TorrentListItem extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
       mobile: false
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
   }
 
   componentWillMount () {

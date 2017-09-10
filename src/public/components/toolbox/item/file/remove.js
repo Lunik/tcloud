@@ -12,17 +12,19 @@ export default class RemoveToolboxItem extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
-      disabled: this.props.file.locked,
+      disabled: props.file.locked,
       dialogOpen: false,
       loading: false
     }
   }
 
   componentWillReceiveProps (props) {
-    this.setState({
-      disabled: props.file.locked
-    })
+    this.initState(props)
   }
 
   handleClick () {
@@ -47,7 +49,7 @@ export default class RemoveToolboxItem extends React.Component {
 
         Notify({
           type: 'info',
-          title: `The ${this.props.file.type} have been deleted`,
+          title: `The ${this.props.file.type} have been deleted`
         })
       }
     }).fail((response) => {
