@@ -34,6 +34,7 @@ export default class Server {
     this.baseFolder = require('./folder')(this.app)
     require('./file')(this.app, this.baseFolder)
     require('./torrent')(this.app, this.baseFolder)
+    require('./app')(this.app, this.baseFolder)
 
     this.app.use(Express.static(__dirname + '/public'))
 

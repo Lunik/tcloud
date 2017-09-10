@@ -7,6 +7,7 @@ import React from 'react'
 import NotificationContainer from './notification/container'
 import Main from './main'
 import Login from './login'
+import Footer from './bar/footer'
 
 export default class App extends React.Component {
   constructor (props) {
@@ -27,6 +28,7 @@ export default class App extends React.Component {
     return (
       <div style={style.app} className="app">
         {Route}
+        <Footer />
         <NotificationContainer position='topRight'></NotificationContainer>
       </div>
     )
