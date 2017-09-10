@@ -17,6 +17,10 @@ export default class SearchBar extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
       input: '',
       status: 'Search', // search or download,
@@ -28,6 +32,10 @@ export default class SearchBar extends React.Component {
       },
       mobile: false
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
   }
 
   componentWillMount () {

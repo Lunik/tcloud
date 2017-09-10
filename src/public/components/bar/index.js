@@ -13,10 +13,18 @@ export default class Bar extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
       loading: false,
       fixed: false
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
   }
 
   componentDidMount () {
@@ -89,7 +97,7 @@ export default class Bar extends React.Component {
 
 const style = {
   div: {
-    //height: '60px',
+    // height: '60px',
     minWidth: '370px',
     backgroundColor: Color.darkGrey
   },

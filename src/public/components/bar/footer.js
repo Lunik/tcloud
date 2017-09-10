@@ -7,9 +7,17 @@ export default class MaClass extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
       version: '0.0.0'
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
   }
 
   componentWillMount () {

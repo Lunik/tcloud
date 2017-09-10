@@ -7,9 +7,17 @@ export default class CopyToolboxItem extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
-      disabled: this.props.file.download === null
+      disabled: props.file.download === null
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
   }
 
   componentWillReceiveProps (props) {

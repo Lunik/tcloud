@@ -9,16 +9,26 @@ import { InfoIcon, WarningIcon, ErrorIcon } from '../../image/svg'
 export default class Notification extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      type: this.parseType(this.props.type),
-      timeout: this.props.timeout || this.getDefaultTimeout(this.props.type),
-      onRemove: this.props.onRemove || function () {}
-    }
+
+    this.initState(props)
 
     if (this.state.timeout) {
       this.timeout = setTimeout(() => this.remove(), this.state.timeout)
     }
   }
+
+  initState (props) {
+    this.state = {
+      type: this.parseType(props.type),
+      timeout: props.timeout || this.getDefaultTimeout(props.type),
+      onRemove: props.onRemove || function () {}
+    }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
+  }
+
   remove () {
     clearTimeout(this.timeout)
 

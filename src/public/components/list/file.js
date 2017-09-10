@@ -10,11 +10,19 @@ export default class FileList extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
       files: [],
       location: window.location.hash.substring(1),
       updateInterval: null
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
   }
 
   componentWillMount () {

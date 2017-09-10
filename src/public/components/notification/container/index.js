@@ -8,12 +8,20 @@ import classNames from 'classname'
 export default class NotificationContainer extends React.Component {
   constructor (props) {
     super(props)
-    this.props = props
 
+    this.initState(props)
+  }
+
+  initState (props) {
     this.state = {
-      position: this.parsePostion(this.props.position)
+      position: this.parsePostion(props.position)
     }
   }
+
+  componentWillReceiveProps (props) {
+    this.initState(props)
+  }
+
   parsePostion (position) {
     const positions = ['topRight', 'topLeft', 'bottomLeft', 'bottomRight']
     if (positions.indexOf(position) !== -1) {
