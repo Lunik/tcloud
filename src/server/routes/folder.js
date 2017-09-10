@@ -19,7 +19,7 @@ module.exports = (app) => {
     res.json(baseFolder)
   })
 
-  app.get('/folder/:path((\\w*)/?*)', (req, res) => {
+  app.get('/folder/:path((*)/?*)', (req, res) => {
     var path = req.params.path
     var element = follow(path, baseFolder)
 
@@ -33,7 +33,7 @@ module.exports = (app) => {
     }
   })
 
-  app.put('/folder/:path((\\w*)/?*)', (req, res) => {
+  app.put('/folder/:path((*)/?*)', (req, res) => {
     var path = req.params.path
     var type = req.body.type || 'folder'
 
@@ -78,7 +78,7 @@ module.exports = (app) => {
     }
   })
 
-  app.delete('/folder/:path((\\w*)/?*)', (req, res) => {
+  app.delete('/folder/:path((*)/?*)', (req, res) => {
     var path = req.params.path
 
     var element = follow(path, baseFolder)

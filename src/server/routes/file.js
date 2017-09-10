@@ -10,7 +10,7 @@ import File, { parsePath } from '../model/file'
 const config = new Config({sync: true})
 
 module.exports = (app, baseFolder) => {
-  app.get('/file/:path((\\w*)/?*)', (req, res) => {
+  app.get('/file/:path((*)/?*)', (req, res) => {
     var path = req.params.path
     var element = follow(path, baseFolder)
 
