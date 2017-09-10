@@ -7,6 +7,7 @@ import Config from './config'
 import Folder from '../model/folder'
 import fs from 'fs-extra'
 import mv from 'mv'
+import Delogger from 'delogger'
 
 const config = new Config({sync: true})
 
@@ -15,6 +16,7 @@ export default class Torrent {
     props = props || {}
     this.baseFolder = props.baseFolder || new Folder(`/${__dirname}/${config.files.path}`, '')
     this.peers = {}
+    this.log = new Delogger('Torrent')
   }
   download (magnet) {
     var peer = new Peer({
@@ -34,7 +36,9 @@ export default class Torrent {
     var childs = fs.readdirSync(`${__dirname}/${config.files.path}`)
 
     if (childs.indexOf(peer.metadata.name) === -1) {
-      mv(oldPath, newPath)
+      mv(oldPath, newPath, {}, (err) => {
+        if (err) this.log.error(err)
+      })
     } else {
       fs.removeSync(oldPath)
     }
