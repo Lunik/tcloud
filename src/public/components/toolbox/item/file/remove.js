@@ -19,6 +19,12 @@ export default class RemoveToolboxItem extends React.Component {
     }
   }
 
+  componentWillReceiveProps (props) {
+    this.setState({
+      disabled: props.file.locked
+    })
+  }
+
   handleClick () {
     this.setState({dialogOpen: true})
   }
