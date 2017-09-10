@@ -108,7 +108,8 @@ const style = {
   name: {
     flex: '5',
     overflow: 'hidden',
-    textOverflow: 'ellipsis'
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap'
   },
   lock: {
     visibility: 'hidden',

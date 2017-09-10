@@ -127,7 +127,8 @@ const style = {
   name: {
     flex: '5',
     overflow: 'hidden',
-    textOverflow: 'ellipsis'
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap'
   },
   metadata: {
     display: 'flex',
