@@ -1,6 +1,6 @@
 {
   "name": "tcloud",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Filesharing and torrent downloading",
   "main": "index.js",
   "scripts": {
