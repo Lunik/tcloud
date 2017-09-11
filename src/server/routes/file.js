@@ -6,21 +6,28 @@ import Crypto from 'crypto-js'
 import Config from '../model/config'
 import Folder, { follow } from '../model/folder'
 import File, { parsePath } from '../model/file'
+import Delogger from 'delogger'
 
 const config = new Config({sync: true})
 
+var log = new Delogger('File')
+
 module.exports = (app, baseFolder) => {
   app.get('/file/:path((*)/?*)', (req, res) => {
+    var user = req.user
     var path = req.params.path
     var element = follow(path, baseFolder)
 
+    log.info(`${req.user.username} download ${path}`)
     Download(req, res, path)
   })
 
   app.get('/dl/:file(*)', (req, res) => {
+    var user = req.user
     var encryptedFile = req.params.file
     var path = Crypto.AES.decrypt(encryptedFile, '').toString(Crypto.enc.Utf8)
 
+    log.info(`${req.user.username} download ${path}`)
     Download(req, res, path)
   })
 
