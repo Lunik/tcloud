@@ -72,7 +72,7 @@ export default class FileListItem extends React.Component {
         <span className="locked" style={lockStyle}>
           <LockIcon style={style.lockIcon}/>
         </span>
-        <List.Item.EndDetail>
+        <List.Item.EndDetail style={style.endDetail}>
           <FileToolbox
             onRemove={ () => this.props.onRemove() }
             onRename={(newName) => { this.props.file.name = newName }}
@@ -103,8 +103,8 @@ const style = {
     height: '30px',
     paddingLeft: '15px',
     borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-    minWidth: '400px',
-    display: 'flex'
+    display: 'flex',
+    minWidth: '300px'
   },
   itemColor: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
@@ -149,5 +149,8 @@ const style = {
     flex: '1',
     textAlign: 'right',
     minWidth: '70px'
+  },
+  endDetail: {
+    marginRight: '10px'
   }
 }

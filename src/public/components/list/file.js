@@ -1,6 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
 import Notify from '../notification'
+import Loading from '../loading'
 
 import List from '@react-mdc/list'
 import FileListItem from './item/file'
@@ -16,6 +17,7 @@ export default class FileList extends React.Component {
   initState (props) {
     this.state = {
       files: [],
+      loading: false,
       location: window.location.hash.substring(1),
       updateInterval: null
     }
@@ -45,16 +47,25 @@ export default class FileList extends React.Component {
     this.changeDir(window.location.hash.substring(1))
   }
   update () {
+    this.setState({
+      loading: true
+    })
+
     $.ajax({
       method: 'GET',
       url: `/folder/${this.state.location}`,
       success: (response) => {
         this.setState({
-          files: response.childs
+          files: response.childs,
+          loading: false
         })
       }
     }).fail((response) => {
       let text = response.responseJSON.err
+
+      this.setState({
+        loading: false
+      })
 
       Notify({
         type: 'error',
@@ -77,6 +88,7 @@ export default class FileList extends React.Component {
     const files = this.state.files.map((file, key) => <FileListItem key={key} color={key % 2} file={file} onRemove={() => this.update()}/>)
     return (
       <List className="list" id="file">
+        <Loading hidden={!this.state.loading}/>
         <Tree path={this.state.location} />
         {files}
       </List>

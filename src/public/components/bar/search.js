@@ -30,7 +30,7 @@ export default class SearchBar extends React.Component {
         movie: [],
         tv: []
       },
-      mobile: false
+      mobile: window.innerWidth <= 620
     }
   }
 
@@ -48,7 +48,7 @@ export default class SearchBar extends React.Component {
 
   handleWindowResize () {
     this.setState({
-      mobile: window.innerWidth <= 580
+      mobile: window.innerWidth <= 620
     })
   }
 
@@ -204,12 +204,14 @@ const style = {
   },
   divMobile: {
     float: 'left',
-    margin: '0 16px'
+    margin: '0 16px',
+    width: 'calc(100% - 16px)'
   },
   input: {
     div: {
       display: 'inline-flex',
-      height: '60%'
+      height: '60%',
+      minWidth: '250px'
     }
   },
   button: {

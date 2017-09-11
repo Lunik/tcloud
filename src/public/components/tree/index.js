@@ -7,17 +7,16 @@ export default class Tree extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      mobile: false
-    }
     this.initState(props)
   }
 
-  initState(props){
-
+  initState (props) {
+    this.state = {
+      mobile: window.innerWidth <= 620
+    }
   }
 
-  componentWillReceiveProps(props){
+  componentWillReceiveProps (props) {
     this.initState(props)
   }
 
@@ -31,7 +30,7 @@ export default class Tree extends React.Component {
 
   handleWindowResize () {
     this.setState({
-      mobile: window.innerWidth <= 580
+      mobile: window.innerWidth <= 620
     })
   }
 

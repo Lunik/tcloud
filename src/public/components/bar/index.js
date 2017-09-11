@@ -18,27 +18,12 @@ export default class Bar extends React.Component {
 
   initState (props) {
     this.state = {
-      loading: false,
-      fixed: false
+      loading: false
     }
   }
 
   componentWillReceiveProps (props) {
     this.initState(props)
-  }
-
-  componentDidMount () {
-    $(window).scroll(() => {
-      let navHeight = this.refs.userBar.offsetHeight
-
-      this.setState({
-        fixed: $(window).scrollTop() > navHeight
-      })
-    })
-  }
-
-  componentWillUnmount () {
-    $(window).unbind()
   }
 
   logout () {
@@ -82,7 +67,7 @@ export default class Bar extends React.Component {
   render () {
     return (
       <div ref='userBar' id="user"
-        style={this.state.fixed ? style.divFixed : style.div}
+        style={style.div}
         className={classNames('nav', this.state.fixed ? 'fixed' : '')}>
         <Loading hidden={!this.state.loading}/>
         <Logo style={style.logo} />
@@ -100,12 +85,6 @@ const style = {
     // height: '60px',
     minWidth: '370px',
     backgroundColor: Color.darkGrey
-  },
-  divFixed: {
-    position: 'fixed',
-    height: '60px',
-    backgroundColor: Color.darkGrey,
-    width: '100%'
   },
   logo: {
     height: '50px',

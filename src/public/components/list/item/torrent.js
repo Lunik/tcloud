@@ -16,7 +16,7 @@ export default class TorrentListItem extends React.Component {
 
   initState (props) {
     this.state = {
-      mobile: false
+      mobile: window.innerWidth <= 650
     }
   }
 
@@ -88,7 +88,7 @@ export default class TorrentListItem extends React.Component {
             displayText={false}
             value={this.props.peer.metadata.progress} />
         </span>
-        <List.Item.EndDetail>
+        <List.Item.EndDetail style={style.endDetail}>
           <TorrentToolbox
             onRemove={ () => this.props.onRemove() }
             peer={this.props.peer}/>
@@ -125,8 +125,8 @@ const style = {
     height: '30px',
     paddingLeft: '15px',
     borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-    minWidth: '400px',
-    display: 'flex'
+    display: 'flex',
+    minWidth: 'Z00px'
   },
   itemColor: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
@@ -188,5 +188,8 @@ const style = {
   progressRadial: {
     marginLeft: '5px',
     verticalAlign: 'top'
+  },
+  endDetail: {
+    marginRight: '10px'
   }
 }

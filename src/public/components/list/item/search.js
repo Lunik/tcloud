@@ -15,7 +15,7 @@ export default class SearchListItem extends React.Component {
   initState (props) {
     this.state = {
       hover: false,
-      mobile: false
+      mobile: window.innerWidth <= 500
     }
   }
 
