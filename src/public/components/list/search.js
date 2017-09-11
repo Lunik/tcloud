@@ -7,13 +7,14 @@ export default class SearchList extends React.Component {
   constructor (props) {
     super(props)
 
+    this.state = {}
     this.initState(props)
   }
 
   initState (props) {
-    this.state = {
+    Object.assign(this.state, {
       title: props.id.charAt(0).toUpperCase() + props.id.slice(1)
-    }
+    })
   }
 
   componentWillReceiveProps (props) {

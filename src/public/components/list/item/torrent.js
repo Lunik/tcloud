@@ -11,13 +11,14 @@ export default class TorrentListItem extends React.Component {
   constructor (props) {
     super(props)
 
+    this.state = {}
     this.initState(props)
   }
 
   initState (props) {
-    this.state = {
+    Object.assign(this.state, {
       mobile: window.innerWidth <= 650
-    }
+    })
   }
 
   componentWillReceiveProps (props) {

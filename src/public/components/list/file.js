@@ -11,16 +11,20 @@ export default class FileList extends React.Component {
   constructor (props) {
     super(props)
 
-    this.initState(props)
-  }
-
-  initState (props) {
     this.state = {
       files: [],
       loading: false,
       location: window.location.hash.substring(1),
       updateInterval: null
     }
+
+    this.initState(props)
+  }
+
+  initState (props) {
+    Object.assign(this.state, {
+      location: window.location.hash.substring(1)
+    })
   }
 
   componentWillReceiveProps (props) {
@@ -31,7 +35,7 @@ export default class FileList extends React.Component {
     $(window).on('hashchange', () => this.handleHashCHange())
     this.update()
     this.setState({
-      updateInterval: setInterval(() => this.update(), 30000)
+      updateInterval: setInterval(() => this.update(), 2000)
     })
   }
 

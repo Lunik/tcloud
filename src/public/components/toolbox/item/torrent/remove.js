@@ -12,14 +12,16 @@ export default class RemoveToolboxItem extends React.Component {
   constructor (props) {
     super(props)
 
-    this.initState(props)
-  }
-
-  initState (props) {
     this.state = {
       dialogOpen: false,
       loading: false
     }
+
+    this.initState(props)
+  }
+
+  initState (props) {
+    Object.assign(this.state, {})
   }
 
   componentWillReceiveProps (props) {
@@ -68,6 +70,12 @@ export default class RemoveToolboxItem extends React.Component {
     })
   }
 
+  handleClose(){
+    this.setState({
+      dialogOpen: false
+    })
+  }
+
   render () {
     return (
       <ListItem
@@ -79,6 +87,7 @@ export default class RemoveToolboxItem extends React.Component {
           open={this.state.dialogOpen}
           title={`Deleting ${this.props.peer.metadata.name}`}
           onAccept={() => this.handleAccept()}
+          onClose={() => this.handleClose()}
           footer={true}>
           <p><b>"{this.props.peer.metadata.name}"</b> will be removed <b>forever</b>.</p>
           <h2>Are you sure ?</h2>

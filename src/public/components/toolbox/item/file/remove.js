@@ -12,15 +12,18 @@ export default class RemoveToolboxItem extends React.Component {
   constructor (props) {
     super(props)
 
+    this.state = {
+      dialogOpen: false,
+      loading: false
+    }
+
     this.initState(props)
   }
 
   initState (props) {
-    this.state = {
-      disabled: props.file.locked,
-      dialogOpen: false,
-      loading: false
-    }
+    Object.assign(this.state, {
+      disabled: props.file.locked
+    })
   }
 
   componentWillReceiveProps (props) {
@@ -69,6 +72,12 @@ export default class RemoveToolboxItem extends React.Component {
     })
   }
 
+  handleClose(){
+    this.setState({
+      dialogOpen: false
+    })
+  }
+
   render () {
     return (
       <ListItem
@@ -81,6 +90,7 @@ export default class RemoveToolboxItem extends React.Component {
           open={this.state.dialogOpen}
           title={`Deleting ${this.props.file.type}`}
           onAccept={() => this.handleAccept()}
+          onClose={() => this.handleClose()}
           footer={true}>
           <p><b>"{this.props.file.name}"</b> will be removed <b>forever</b>.</p>
           <h2>Are you sure ?</h2>

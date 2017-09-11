@@ -10,6 +10,7 @@ export default class Notification extends React.Component {
   constructor (props) {
     super(props)
 
+    this.state = {}
     this.initState(props)
 
     if (this.state.timeout) {
@@ -18,11 +19,11 @@ export default class Notification extends React.Component {
   }
 
   initState (props) {
-    this.state = {
+    Object.assign(this.state, {
       type: this.parseType(props.type),
       timeout: props.timeout || this.getDefaultTimeout(props.type),
       onRemove: props.onRemove || function () {}
-    }
+    })
   }
 
   componentWillReceiveProps (props) {

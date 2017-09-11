@@ -9,14 +9,16 @@ export default class SearchListItem extends React.Component {
   constructor (props) {
     super(props)
 
+    this.state = {
+      hover: false
+    }
     this.initState(props)
   }
 
   initState (props) {
-    this.state = {
-      hover: false,
+    Object.assign(this.state, {
       mobile: window.innerWidth <= 500
-    }
+    })
   }
 
   componentWillReceiveProps (props) {

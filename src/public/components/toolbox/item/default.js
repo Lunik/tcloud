@@ -8,13 +8,15 @@ export default class ToolboxItem extends React.Component {
   constructor (props) {
     super(props)
 
+    this.state = {
+      hover: false
+    }
+
     this.initState(props)
   }
 
   initState (props) {
-    this.state = {
-      hover: false
-    }
+    Object.assign(this.state, {})
   }
 
   componentWillReceiveProps (props) {

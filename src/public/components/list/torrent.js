@@ -9,14 +9,16 @@ export default class TorrentList extends React.Component {
   constructor (props) {
     super(props)
 
-    this.initState(props)
-  }
-
-  initState (props) {
     this.state = {
       peers: [],
       updateInterval: null
     }
+
+    this.initState(props)
+  }
+
+  initState (props) {
+    Object.assign(this.state, {})
   }
 
   componentWillReceiveProps (props) {

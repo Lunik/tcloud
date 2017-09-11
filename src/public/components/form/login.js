@@ -13,16 +13,17 @@ export default class LoginForm extends React.Component {
   constructor (props) {
     super(props)
 
-    this.initState(props)
-  }
-
-  initState (props) {
     this.state = {
       username: '',
       password: '',
       loading: false,
       staylogged: false
     }
+    this.initState(props)
+  }
+
+  initState (props) {
+    Object.assign(this.state, {})
   }
 
   componentWillReceiveProps (props) {

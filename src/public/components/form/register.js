@@ -24,11 +24,11 @@ export default class RegisterForm extends React.Component {
     this.initState(props)
   }
 
-  initState(props){
-
+  initState (props) {
+    Object.assign(this.state, {})
   }
 
-  componentWillReceiveProps(props){
+  componentWillReceiveProps (props) {
     this.initState(props)
   }
 

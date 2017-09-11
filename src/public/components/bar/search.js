@@ -17,21 +17,24 @@ export default class SearchBar extends React.Component {
   constructor (props) {
     super(props)
 
+    this.state = {
+      loading: false,
+      dialogOpen: false,
+      input: '',
+      status: 'Search', // search or download,
+      searchResults: {
+        movie: [],
+        tv: []
+      }
+    }
+
     this.initState(props)
   }
 
   initState (props) {
-    this.state = {
-      input: '',
-      status: 'Search', // search or download,
-      loading: false,
-      dialogOpen: false,
-      searchResults: {
-        movie: [],
-        tv: []
-      },
+    Object.assign(this.state, {
       mobile: window.innerWidth <= 620
-    }
+    })
   }
 
   componentWillReceiveProps (props) {
@@ -157,6 +160,12 @@ export default class SearchBar extends React.Component {
     })
   }
 
+  handleClose () {
+    this.setState({
+      dialogOpen: false
+    })
+  }
+
   render () {
     var searchItemsMovie = this.state.searchResults.movie.map((torrent, key) => (
       <SearchListItem
@@ -185,7 +194,7 @@ export default class SearchBar extends React.Component {
         <DialogWindow
           open={this.state.dialogOpen}
           title="Search results"
-          onClose={() => this.setState({dialogOpen: false})}>
+          onClose={() => this.handleClose()}>
           <SearchList id="movie">
             {searchItemsMovie}
           </SearchList>

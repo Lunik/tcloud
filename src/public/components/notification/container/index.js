@@ -9,13 +9,14 @@ export default class NotificationContainer extends React.Component {
   constructor (props) {
     super(props)
 
+    this.state = {}
     this.initState(props)
   }
 
   initState (props) {
-    this.state = {
+    Object.assign(this.state, {
       position: this.parsePostion(props.position)
-    }
+    })
   }
 
   componentWillReceiveProps (props) {

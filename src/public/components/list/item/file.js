@@ -9,16 +9,17 @@ export default class FileListItem extends React.Component {
   constructor (props) {
     super(props)
 
+    this.state = {}
     this.initState(props)
   }
 
   initState (props) {
     let ext = props.file.type === 'file' ? props.file.name.split('.').slice(-1)[0] : 'folder'
-    this.state = {
+    Object.assign(this.state, {
       locked: props.file.locked,
       extension: ext,
       fileIcon: FileIcon.getFromExtension(ext)
-    }
+    })
   }
 
   componentWillReceiveProps (props) {

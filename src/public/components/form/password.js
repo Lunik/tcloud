@@ -13,10 +13,6 @@ export default class PasswordForm extends React.Component {
 
     this.minPassLength = 8
 
-    this.initState(props)
-  }
-
-  initState (props) {
     this.state = {
       username: '',
       newpassword: '',
@@ -24,6 +20,12 @@ export default class PasswordForm extends React.Component {
       passwordLength: false,
       samePassword: true
     }
+
+    this.initState(props)
+  }
+
+  initState (props) {
+    Object.assign(this.state, {})
   }
 
   componentWillReceiveProps (props) {

@@ -13,13 +13,15 @@ export default class Bar extends React.Component {
   constructor (props) {
     super(props)
 
+    this.state = {
+      loading: false
+    }
+
     this.initState(props)
   }
 
   initState (props) {
-    this.state = {
-      loading: false
-    }
+    Object.assign(this.state, {})
   }
 
   componentWillReceiveProps (props) {
