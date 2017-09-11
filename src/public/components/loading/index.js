@@ -1,5 +1,5 @@
 import React from 'react'
-import Spinner from 'react-spinkit'
+import { DoubleBounce } from 'better-react-spinkit'
 import Color from '../../color'
 
 export default class Loading extends React.Component {
@@ -13,7 +13,7 @@ export default class Loading extends React.Component {
     } else {
       return (
         <div style={style} className="Loading">
-          <Spinner style={spinnerStyle} name="double-bounce" color={Color.orange}/>
+          <DoubleBounce style={spinnerStyle} size={100} color={Color.orange}/>
         </div>
       )
     }
@@ -32,9 +32,10 @@ const style = {
 }
 
 const spinnerStyle = {
+  position: 'absolute',
   left: '50%',
   top: '50%',
   transform: 'translateX(-50%) translateY(-50%)',
-  width: '80px',
-  height: '80px'
+  width: '100px',
+  height: '100px'
 }

@@ -9,6 +9,6 @@ export default {
   darkGrey: '#3C3C3C',
   black: '#1C1C1C',
   white: '#FFFFFF',
-  transparentGrey: 'rgba(103, 95, 95, 0.5)',
+  transparentGrey: 'rgba(95, 95, 95, 0.5)',
   lightGrey: '#BBBBBB'
 }
