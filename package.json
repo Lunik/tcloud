@@ -69,7 +69,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-material-components-web": "^0.1.18",
-    "t411api": "^1.0.3",
+    "torrent-search-api": "^1.0.16",
     "webtorrent": "^0.98.19"
   }
 }

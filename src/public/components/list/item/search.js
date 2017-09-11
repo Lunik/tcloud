@@ -52,8 +52,8 @@ export default class SearchListItem extends React.Component {
         <span
           style={style.name}
           className="name"
-          title={this.props.torrent.name}>
-          {this.props.torrent.name}
+          title={this.props.torrent.title}>
+          {this.props.torrent.title}
         </span>
         <span className="infos" style={infoStyle}>
           <span style={style.infos} className="infos">
@@ -76,7 +76,7 @@ export default class SearchListItem extends React.Component {
 
 SearchListItem.defaultProps = {
   torrent: {
-    name: 'torrent',
+    title: 'torrent',
     size: '0ko',
     seeds: '0',
     leechs: '0'

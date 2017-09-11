@@ -61,6 +61,9 @@ export default class Config extends EventEmitter {
       'registration': true,
       'files': {
         'path': 'files/'
+      },
+      'torrent': {
+        'providers': []
       }
     }
 
@@ -105,6 +108,9 @@ export default class Config extends EventEmitter {
 
     expect(config).to.have.property('files').to.be.a('object')
     expect(config.files).to.have.property('path').to.be.a('string').not.empty
+
+    expect(config).to.have.property('torrent').to.be.a('object')
+    expect(config.torrent).to.have.property('providers').to.be.a('array')
 
     Object.assign(this, config)
 

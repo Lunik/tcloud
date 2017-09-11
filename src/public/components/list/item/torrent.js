@@ -148,7 +148,8 @@ const style = {
   seed: {
     flex: '2',
     textAlign: 'right',
-    minWidth: '50px'
+    minWidth: '50px',
+    marginRight: '10px'
   },
   seedIcon: {
     marginLeft: '5px',
@@ -158,7 +159,8 @@ const style = {
   sdown: {
     flex: '2',
     textAlign: 'right',
-    minWidth: '100px'
+    minWidth: '100px',
+    marginRight: '10px'
   },
   sdownIcon: {
     marginLeft: '5px',
@@ -168,7 +170,8 @@ const style = {
   sup: {
     flex: '2',
     textAlign: 'right',
-    minWidth: '100px'
+    minWidth: '100px',
+    marginRight: '10px'
   },
   supIcon: {
     marginLeft: '5px',
@@ -178,7 +181,8 @@ const style = {
   size: {
     flex: '2',
     textAlign: 'right',
-    minWidth: '60px'
+    minWidth: '60px',
+    marginRight: '10px'
   },
   progress: {
     flex: '1',

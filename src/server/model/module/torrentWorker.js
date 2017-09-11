@@ -7,6 +7,7 @@ import Delogger from 'delogger'
 
 class Worker {
   constructor (magnet) {
+
     this.magnet = magnet
     this.client = new WebTorrent()
 
