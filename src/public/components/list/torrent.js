@@ -26,7 +26,7 @@ export default class TorrentList extends React.Component {
   componentWillMount () {
     this.update()
     this.setState({
-      updateInterval: setInterval(() => this.update(), 3000)
+      updateInterval: setInterval(() => this.update(), 5000)
     })
   }
 
