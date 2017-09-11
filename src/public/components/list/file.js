@@ -47,10 +47,6 @@ export default class FileList extends React.Component {
     this.changeDir(window.location.hash.substring(1))
   }
   update () {
-    this.setState({
-      loading: true
-    })
-
     $.ajax({
       method: 'GET',
       url: `/folder/${this.state.location}`,
@@ -79,7 +75,8 @@ export default class FileList extends React.Component {
 
   changeDir (dir) {
     this.setState({
-      location: dir
+      location: dir,
+      loading: true
     })
     this.update()
   }
