@@ -18,6 +18,7 @@ export default class Torrent {
     this.peers = {}
     this.log = new Delogger('Torrent')
   }
+
   download (magnet) {
     var peer = new Peer({
       magnet: magnet
@@ -26,9 +27,17 @@ export default class Torrent {
     this.peers[peer.uid] = peer
 
     this.peers[peer.uid].on('done', (peer) => this.handlePeerDone(peer))
-    this.peers[peer.uid].on('stop', (peer) => delete this.peers[peer.uid])
+    this.peers[peer.uid].on('stop', (peer) => this.handlePeerStop(peer))
     return this.peers[peer.uid]
   }
+
+  handlePeerStop (peer) {
+    if (peer.metadata.path) {
+      fs.removeSync(peer.metadata.path)
+    }
+    delete this.peers[peer.uid]
+  }
+
   handlePeerDone (peer) {
     var oldPath = peer.metadata.fullPath
     var newPath = `${__dirname}/${config.files.path}/${peer.metadata.name}`
