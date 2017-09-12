@@ -6,8 +6,11 @@ import Crypto from 'crypto-js'
 import Config from '../model/config'
 import Folder, { follow } from '../model/folder'
 import File, { parsePath } from '../model/file'
+import Delogger from 'delogger'
 
 const config = new Config({sync: true})
+
+var log = new Delogger('File')
 
 module.exports = (app, baseFolder) => {
   app.get('/file/:path((*)/?*)', (req, res) => {
@@ -18,6 +21,7 @@ module.exports = (app, baseFolder) => {
   })
 
   app.get('/dl/:file(*)', (req, res) => {
+
     var encryptedFile = req.params.file
     var path = Crypto.AES.decrypt(encryptedFile, '').toString(Crypto.enc.Utf8)
 
@@ -25,10 +29,13 @@ module.exports = (app, baseFolder) => {
   })
 
   function Download (req, res, path) {
+    var user = req.user
     var element = follow(path, baseFolder)
 
     if (element) {
       if (element instanceof File) {
+        log.info(`${req.user.username} download ${element.name}`)
+
         element.download(res).then((err) => {
           if (err) {
             res.status(500)
