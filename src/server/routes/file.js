@@ -14,28 +14,28 @@ var log = new Delogger('File')
 
 module.exports = (app, baseFolder) => {
   app.get('/file/:path((*)/?*)', (req, res) => {
-    var user = req.user
     var path = req.params.path
     var element = follow(path, baseFolder)
 
-    log.info(`${req.user.username} download ${path}`)
     Download(req, res, path)
   })
 
   app.get('/dl/:file(*)', (req, res) => {
-    var user = req.user
+
     var encryptedFile = req.params.file
     var path = Crypto.AES.decrypt(encryptedFile, '').toString(Crypto.enc.Utf8)
 
-    log.info(`${req.user.username} download ${path}`)
     Download(req, res, path)
   })
 
   function Download (req, res, path) {
+    var user = req.user
     var element = follow(path, baseFolder)
 
     if (element) {
       if (element instanceof File) {
+        log.info(`${req.user.username} download ${element.name}`)
+
         element.download(res).then((err) => {
           if (err) {
             res.status(500)
