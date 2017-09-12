@@ -5,6 +5,7 @@ import fs from 'fs'
 import Delogger from 'delogger'
 import EventEmitter from 'events'
 import { expect } from 'chai'
+import template from './config.template'
 
 export const ConfigLocation = `config.json`
 
@@ -39,37 +40,9 @@ export default class Config extends EventEmitter {
     }
   }
   generateConfig () {
-    let config = {
-      'log': {
-        'path': 'logs/'
-      },
-      'server': {
-        'port': 5000,
-        'masterKey': 'mymasterkey',
-        'https': false,
-        'hostname': '',
-        'certs': {
-          'privatekey': '',
-          'certificate': '',
-          'chain': ''
-        }
-      },
-      'database': {
-        'path': 'database/'
-      },
-      'authentification': false,
-      'registration': true,
-      'files': {
-        'path': 'files/'
-      },
-      'torrent': {
-        'providers': []
-      }
-    }
+    Object.assign(this, template)
 
-    Object.assign(this, config)
-
-    fs.writeFile(this.location, JSON.stringify(config, 'undefined', 2), (err) => {
+    fs.writeFile(this.location, JSON.stringify(template, 'undefined', 2), (err) => {
       if (err) {
         this.log.error(err)
       }
