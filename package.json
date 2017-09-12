@@ -8,7 +8,8 @@
     "start": "node build/server.js",
     "dev": "webpack --config dev/webpack.server.config.js",
     "clean": "rm -r build",
-    "debug": "babel-node src/server/index.js"
+    "debug": "babel-node src/server/index.js",
+    "config": "node src/server/model/config.template.js > config.json"
   },
   "repository": {
     "type": "git",
