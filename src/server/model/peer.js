@@ -5,6 +5,7 @@ import ChildProcess from 'child_process'
 import EventEmitter from 'events'
 import Crypto from 'crypto-js'
 import Rand from 'crypto-rand'
+import fs from 'fs'
 
 export default class Peer extends EventEmitter {
   constructor (props) {
@@ -25,6 +26,7 @@ export default class Peer extends EventEmitter {
       })
     }
   }
+
   stop () {
     if (this.child) {
       this.child.send(JSON.stringify({
@@ -32,6 +34,7 @@ export default class Peer extends EventEmitter {
       }))
     }
   }
+
   handleMessage (message) {
     this.metadata = message.metadata
     switch (message.type) {
@@ -63,6 +66,7 @@ export default class Peer extends EventEmitter {
     let longUid = Crypto.SHA256(seed).toString()
     return longUid.substr(0, 10)
   }
+
   toJSON () {
     var metadata = Object.assign({}, this.metadata)
     delete metadata.path
@@ -74,5 +78,11 @@ export default class Peer extends EventEmitter {
       uid: this.uid,
       url: `/peer/${this.uid}`
     }
+  }
+
+  cleanup () {
+    try {
+      fs.unlinkSync(this.magnet)
+    } catch (err) {}
   }
 }

@@ -35,7 +35,7 @@ export default class FileList extends React.Component {
     $(window).on('hashchange', () => this.handleHashCHange())
     this.update()
     this.setState({
-      updateInterval: setInterval(() => this.update(), 2000)
+      updateInterval: setInterval(() => this.update(), 30000)
     })
   }
 

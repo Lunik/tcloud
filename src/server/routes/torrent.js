@@ -42,7 +42,6 @@ module.exports = (app, baseFolder) => {
     if (specialMagnet.test(magnet)) {
       magnet = magnet.replace(/tcloud:/, '')
       searchEngine.getTorrent({ magnet }).then(() => {
-
         var peer = torrent.download('/tmp/' + magnet.slice(0, 20))
         res.json(peer)
       }).catch((err) => { console.log(err) })

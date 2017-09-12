@@ -50,31 +50,5 @@ $ docker run -d \
 ```
 
 ## ===== Configuration =====
-Modify `config.json`
-On first installation, this file could be missing. Run the app once and it will appear.
-The default config is:
-```
-{
-  "log": {
-    "path": "logs/"
-  },
-  "server": {
-    "port": 5000,
-    "masterKey": "mymasterkey",
-    "https": false,
-    "hostname": "",
-    "certs": {
-      "privatekey": "",
-      "certificate": "",
-      "chain": ""
-    }
-  },
-  "database": {
-    "path": "database/"
-  },
-  "authentification": false,
-  "files": {
-    "path": "files/"
-  }
-}
-```
+Modify `config.json`.
+On the first installation, this file could be missing, run `npm run build` to generate a default one.
