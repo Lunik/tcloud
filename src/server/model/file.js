@@ -112,6 +112,7 @@ export default class File extends EventEmitter {
     let cleanBase = this.base.split('/').slice(2).join('/')
     let url = '/' + removeBlank(`/folder/${cleanBase}/${this.name}`.split('/')).join('/')
     let download = '/' + removeBlank(`/file/${cleanBase}/${this.name}`.split('/')).join('/')
+    let copy = '/dl/' + Buffer.from(removeBlank(`${cleanBase}/${this.name}`.split('/'), '').join('/')).toString('base64')
     let path = removeBlank(`${cleanBase}/${this.name}`.split('/')).join('/')
     return {
       name: this.name,
@@ -122,6 +123,7 @@ export default class File extends EventEmitter {
       childs: this.childs,
       url,
       download: this instanceof Folder ? null : download,
+      copy: this instanceof Folder ? null : copy,
       path: this instanceof Folder ? path : null
     }
   }

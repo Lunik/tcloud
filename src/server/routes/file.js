@@ -15,15 +15,13 @@ var log = new Delogger('File')
 module.exports = (app, baseFolder) => {
   app.get('/file/:path((*)/?*)', (req, res) => {
     var path = req.params.path
-    var element = follow(path, baseFolder)
 
     Download(req, res, path)
   })
 
   app.get('/dl/:file(*)', (req, res) => {
-
-    var encryptedFile = req.params.file
-    var path = Crypto.AES.decrypt(encryptedFile, '').toString(Crypto.enc.Utf8)
+    var base64File = req.params.file
+    var path = Buffer.from(base64File, 'base64').toString()
 
     Download(req, res, path)
   })
@@ -34,7 +32,7 @@ module.exports = (app, baseFolder) => {
 
     if (element) {
       if (element instanceof File) {
-        log.info(`${req.user.username} download ${element.name}`)
+        log.info(`${user.username} download ${element.name}`)
 
         element.download(res).then((err) => {
           if (err) {

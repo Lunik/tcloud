@@ -21,14 +21,8 @@ export default class CopyToolboxItem extends React.Component {
     this.initState(props)
   }
 
-  componentWillReceiveProps (props) {
-    this.setState({
-      disabled: props.file.download === null
-    })
-  }
-
   handleClick () {
-    copy(window.location.origin + this.props.file.download)
+    copy(window.location.origin + this.props.file.copy)
   }
 
   render () {
