@@ -12,7 +12,7 @@ import fs from 'fs'
 
 import EnforceHttps from './module/enforceHttps'
 import Config from '../model/config'
-var config = new Config()
+var config = new Config({sync: true})
 
 export default class Server {
   constructor () {

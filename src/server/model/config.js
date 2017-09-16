@@ -39,6 +39,7 @@ export default class Config extends EventEmitter {
       })
     }
   }
+
   generateConfig () {
     Object.assign(this, template)
 
