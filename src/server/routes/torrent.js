@@ -1,13 +1,8 @@
-/**
- * Created by lunik on 12/07/2017.
- */
-import Config from '../model/config'
-import Folder, { follow } from '../model/folder'
-import File, { parsePath } from '../model/file'
+import Path from 'path'
+
 import Torrent from '../model/torrent'
 import TorrentSearch from '../model/search/torrent'
-import Path from 'path'
-const config = new Config({sync: true})
+
 const searchEngine = new TorrentSearch()
 
 module.exports = (app, baseFolder) => {

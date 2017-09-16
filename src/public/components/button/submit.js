@@ -1,7 +1,5 @@
 import React from 'react'
 import classNames from 'classname'
-
-import Color from '../../color'
 import Button from '@react-mdc/button'
 
 export default class SubmitButton extends React.Component {

@@ -1,14 +1,7 @@
-/**
- * Created by lunik on 11/07/2017.
- */
-import Crypto from 'crypto-js'
-
-import Config from '../model/config'
-import Folder, { follow } from '../model/folder'
-import File, { parsePath } from '../model/file'
 import Delogger from 'delogger'
 
-const config = new Config({sync: true})
+import { follow } from '../model/folder'
+import File from '../model/file'
 
 var log = new Delogger('File')
 

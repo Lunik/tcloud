@@ -18,6 +18,8 @@ function applyOptions (options) {
 }
 
 export default function (options) {
+  options = applyOptions(options)
+
   return (req, res, next) => {
     let isSecure = req.secure
 

@@ -1,7 +1,9 @@
 import React from 'react'
+
+import Color from '../../../../color'
+
 import ListItem from '../default'
 import { PencilIcon } from '../../../image/svg'
-import Color from '../../../../color'
 
 export default class RenameToolboxItem extends React.Component {
   constructor (props) {

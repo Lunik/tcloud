@@ -1,7 +1,3 @@
-/**
- * Created by lunik on 04/07/2017.
- */
-
 import Express from 'express'
 import Delogger from 'delogger'
 import compression from 'compression'

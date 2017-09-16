@@ -1,4 +1,5 @@
 import React from 'react'
+
 import Color from '../../color'
 
 function clamp (n, min, max) {

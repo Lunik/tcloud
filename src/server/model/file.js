@@ -1,11 +1,8 @@
-/**
- * Created by lunik on 10/07/2017.
- */
-
 import fs from 'fs'
 import Path from 'path'
 import EventEmitter from 'events'
 import Delogger from 'delogger'
+
 import Folder from './folder'
 
 export default class File extends EventEmitter {

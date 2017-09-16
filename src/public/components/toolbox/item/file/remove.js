@@ -1,11 +1,12 @@
 import React from 'react'
 import $ from 'jquery'
 
+import Notify from '../../../notification'
+import Color from '../../../../color'
+
 import ListItem from '../default'
 import { CrossIcon } from '../../../image/svg'
-import Color from '../../../../color'
 import DialogWindow from '../../../dialog/default'
-import Notify from '../../../notification'
 import Loading from '../../../loading'
 
 export default class RemoveToolboxItem extends React.Component {

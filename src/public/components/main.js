@@ -1,7 +1,3 @@
-/**
- * Created by lunik on 13/07/2017.
- */
-
 import React from 'react'
 
 import Bar from './bar'

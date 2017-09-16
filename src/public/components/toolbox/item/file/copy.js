@@ -1,6 +1,7 @@
 import React from 'react'
-import ListItem from '../default'
 import copy from 'copy-to-clipboard'
+
+import ListItem from '../default'
 import { CopyIcon } from '../../../image/svg'
 
 export default class CopyToolboxItem extends React.Component {

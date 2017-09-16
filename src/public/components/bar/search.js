@@ -1,5 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
+
 import Notify from '../notification'
 
 import Loading from '../loading'
@@ -9,9 +10,6 @@ import Form from '../form/default'
 import DialogWindow from '../dialog/default'
 import SearchList from '../list/search'
 import SearchListItem from '../list/item/search'
-
-import { SearchIcon } from '../image/svg'
-import Color from '../../color.js'
 
 export default class SearchBar extends React.Component {
   constructor (props) {

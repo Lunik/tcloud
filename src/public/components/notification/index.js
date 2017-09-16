@@ -1,9 +1,6 @@
-/**
- * Created by lunik on 07/06/2017.
- */
-
 import React from 'react'
 import ReactDOM from 'react-dom'
+
 import Notification from './default'
 
 export default function notify (options) {

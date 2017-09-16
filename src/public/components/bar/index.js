@@ -1,11 +1,12 @@
 import React from 'react'
 import $ from 'jquery'
-import Notify from '../notification'
 import classNames from 'classname'
+
+import Notify from '../notification'
+import Color from '../../color'
 
 import Loading from '../loading'
 import Logo from '../image/logo'
-import Color from '../../color'
 import { GhostIcon, ExitIcon } from '../image/svg'
 import SearchBar from './search'
 

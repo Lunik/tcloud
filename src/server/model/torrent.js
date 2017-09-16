@@ -1,13 +1,10 @@
-/**
- * Created by lunik on 12/07/2017.
- */
+import fs from 'fs-extra'
+import { spawn } from 'child_process'
+import Delogger from 'delogger'
 
 import Peer from './peer'
 import Config from './config'
 import Folder from '../model/folder'
-import fs from 'fs-extra'
-import { spawn } from 'child_process'
-import Delogger from 'delogger'
 
 const config = new Config({sync: true})
 

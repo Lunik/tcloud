@@ -1,6 +1,6 @@
 import React from 'react'
+
 import Toolbox from './default'
-import { ThreeDotsIcon } from '../image/svg'
 import * as TorrentItem from './item/torrent'
 
 export default class TorrentToolbox extends React.Component {

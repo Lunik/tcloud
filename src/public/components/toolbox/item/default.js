@@ -1,8 +1,10 @@
 import React from 'react'
 import List from '@react-mdc/list'
 import classnames from 'classnames'
-import { CrossIcon } from '../../image/svg'
+
 import Color from '../../../color'
+
+import { CrossIcon } from '../../image/svg'
 
 export default class ToolboxItem extends React.Component {
   constructor (props) {
