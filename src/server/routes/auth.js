@@ -1,7 +1,3 @@
-/**
- * Created by lunik on 04/07/2017.
- */
-
 import Crypto from 'crypto-js'
 
 import Config from '../model/config'

@@ -1,3 +1,5 @@
+import Path from 'path'
+
 var defaults = {
   trustProtoHeader: false,
   trustAzureHeader: false,
@@ -16,7 +18,7 @@ function applyOptions (options) {
 }
 
 export default function (options) {
-  options = (options)
+  options = applyOptions(options)
 
   return (req, res, next) => {
     let isSecure = req.secure
@@ -36,9 +38,9 @@ export default function (options) {
         var host = options.trustXForwardedHostHeader ? (req.headers['x-forwarded-host'] || req.headers.host) : req.headers.host
 
         if (options.port === 443) {
-          res.redirect(301, 'https://' + host + req.originalUrl)
+          res.redirect(301, 'https://' + Path.join(host, req.originalUrl))
         } else {
-          res.redirect(301, 'https://' + host.replace(/:[0-9]*/g, '') + ':' + options.port + req.originalUrl)
+          res.redirect(301, 'https://' + Path.join(host.replace(/:[0-9]*/g, '') + ':' + options.port, req.originalUrl))
         }
       } else {
         res.status(403).send('Please use HTTPS when submitting data to this server.')

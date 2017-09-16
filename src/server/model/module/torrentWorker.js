@@ -1,7 +1,3 @@
-/**
- * Created by lunik on 12/07/2017.
- */
-
 import WebTorrent from 'webtorrent'
 import Delogger from 'delogger'
 

@@ -1,10 +1,8 @@
-/**
- * Created by lunik on 04/07/2017.
- */
 import fs from 'fs'
 import Delogger from 'delogger'
 import EventEmitter from 'events'
 import { expect } from 'chai'
+
 import template from './config.template'
 
 export const ConfigLocation = `config.json`
@@ -39,6 +37,7 @@ export default class Config extends EventEmitter {
       })
     }
   }
+
   generateConfig () {
     Object.assign(this, template)
 

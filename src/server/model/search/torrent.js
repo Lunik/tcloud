@@ -1,5 +1,6 @@
 import Delogger from 'delogger'
 import TorrentSearchApi from 'torrent-search-api'
+import Path from 'path'
 
 import Config from '../config'
 
@@ -47,6 +48,6 @@ export default class TorrentSearch {
       }
     }
 
-    return this.api.downloadTorrent(parsedTorrent, '/tmp/' + torrent.magnet.slice(0, 20))
+    return this.api.downloadTorrent(parsedTorrent, Path.join('/tmp', torrent.magnet.slice(0, 20)))
   }
 }

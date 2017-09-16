@@ -1,6 +1,6 @@
 import React from 'react'
-
 import List from '@react-mdc/list'
+
 import SearchListItem from './item/search'
 
 export default class SearchList extends React.Component {

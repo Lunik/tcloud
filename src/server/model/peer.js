@@ -1,6 +1,3 @@
-/**
- * Created by lunik on 12/07/2017.
- */
 import ChildProcess from 'child_process'
 import EventEmitter from 'events'
 import Crypto from 'crypto-js'

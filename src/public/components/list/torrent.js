@@ -1,8 +1,9 @@
 import React from 'react'
 import $ from 'jquery'
+import List from '@react-mdc/list'
+
 import Notify from '../notification'
 
-import List from '@react-mdc/list'
 import TorrentListItem from './item/torrent'
 
 export default class TorrentList extends React.Component {

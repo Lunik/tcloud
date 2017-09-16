@@ -1,17 +1,15 @@
-/**
- * Created by lunik on 10/07/2017.
- */
-
 import fs from 'fs'
+import Path from 'path'
 import EventEmitter from 'events'
 import Delogger from 'delogger'
+
 import Folder from './folder'
 
 export default class File extends EventEmitter {
-  constructor (path, base) {
+  constructor (_path, base) {
     super()
 
-    let parsedPath = parsePath(path)
+    let parsedPath = parsePath(_path)
     this.base = base
     this._path = parsedPath.path
     this.type = 'file'
@@ -110,9 +108,10 @@ export default class File extends EventEmitter {
 
   toJSON () {
     let cleanBase = this.base.split('/').slice(2).join('/')
-    let url = '/' + removeBlank(`/folder/${cleanBase}/${this.name}`.split('/')).join('/')
-    let download = '/' + removeBlank(`/file/${cleanBase}/${this.name}`.split('/')).join('/')
-    let path = removeBlank(`${cleanBase}/${this.name}`.split('/')).join('/')
+    let url = Path.join('/folder', cleanBase, this.name)
+    let download = Path.join('/file', cleanBase, this.name)
+    let copy = Path.join('/dl', Buffer.from(Path.join(cleanBase, this.name)).toString('base64'))
+    let path = Path.join(cleanBase, this.name)
     return {
       name: this.name,
       type: this.type,
@@ -122,6 +121,7 @@ export default class File extends EventEmitter {
       childs: this.childs,
       url,
       download: this instanceof Folder ? null : download,
+      copy: this instanceof Folder ? null : copy,
       path: this instanceof Folder ? path : null
     }
   }

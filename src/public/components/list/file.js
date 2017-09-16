@@ -1,9 +1,10 @@
 import React from 'react'
 import $ from 'jquery'
-import Notify from '../notification'
-import Loading from '../loading'
-
 import List from '@react-mdc/list'
+
+import Notify from '../notification'
+
+import Loading from '../loading'
 import FileListItem from './item/file'
 import Tree from '../tree'
 

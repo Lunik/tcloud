@@ -1,7 +1,3 @@
-/**
- * Created by lunik on 10/07/2017.
- */
-
 import Config from '../model/config'
 import Folder, { follow } from '../model/folder'
 import File, { parsePath } from '../model/file'

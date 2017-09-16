@@ -1,10 +1,8 @@
 import React from 'react'
 import List from '@react-mdc/list'
-import Toolbox from './default'
 
+import Toolbox from './default'
 import * as FileItem from './item/file'
-import { ThreeDotsIcon } from '../image/svg'
-import Color from '../../color'
 
 export default class FileToolbox extends React.Component {
   constructor (props) {

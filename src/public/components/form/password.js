@@ -1,6 +1,7 @@
 
 import React from 'react'
 import $ from 'jquery'
+
 import Notify from '../notification'
 
 import TextInput from '../input/text'

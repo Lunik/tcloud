@@ -1,6 +1,7 @@
 
 import React from 'react'
 import $ from 'jquery'
+
 import Notify from '../notification'
 
 import Loading from '../loading'

@@ -1,7 +1,3 @@
-/**
- * Created by lunik on 04/07/2017.
- */
-
 var config = require('../webpack.config')
 
 var WebpackShellPlugin = require('webpack-shell-plugin')

@@ -1,6 +1,7 @@
 import React from 'react'
-import ListItem from '../default'
 import copy from 'copy-to-clipboard'
+
+import ListItem from '../default'
 import { CopyIcon } from '../../../image/svg'
 
 export default class CopyToolboxItem extends React.Component {
@@ -21,14 +22,8 @@ export default class CopyToolboxItem extends React.Component {
     this.initState(props)
   }
 
-  componentWillReceiveProps (props) {
-    this.setState({
-      disabled: props.file.download === null
-    })
-  }
-
   handleClick () {
-    copy(window.location.origin + this.props.file.download)
+    copy(window.location.origin + this.props.file.copy)
   }
 
   render () {

@@ -1,8 +1,6 @@
-/**
- * Created by lunik on 10/07/2017.
- */
-import File, { removeBlank } from './file'
 import fs from 'fs-extra'
+
+import File, { removeBlank } from './file'
 
 export default class Folder extends File {
   constructor (path, base) {

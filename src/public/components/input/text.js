@@ -1,8 +1,8 @@
 import React from 'react'
 import classNames from 'classname'
+import Textfield from '@react-mdc/textfield'
 
 import Color from '../../color'
-import Textfield from '@react-mdc/textfield'
 
 export default class TextInput extends React.Component {
   constructor (props) {

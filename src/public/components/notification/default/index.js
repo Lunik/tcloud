@@ -1,9 +1,6 @@
-/**
- * Created by lunik on 06/06/2017.
- */
-
 import React from 'react'
 import classNames from 'classname'
+
 import { InfoIcon, WarningIcon, ErrorIcon } from '../../image/svg'
 
 export default class Notification extends React.Component {

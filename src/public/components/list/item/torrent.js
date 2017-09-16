@@ -3,6 +3,7 @@ import List from '@react-mdc/list'
 import $ from 'jquery'
 
 import Color from '../../../color'
+
 import { ArrowIcon, HeartIcon } from '../../image/svg'
 import TorrentToolbox from '../../toolbox/torrent'
 import RadialProgress from '../../progress/radial'

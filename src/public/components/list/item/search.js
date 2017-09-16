@@ -1,9 +1,10 @@
 import React from 'react'
 import $ from 'jquery'
 import List from '@react-mdc/list'
-import { ArrowIcon } from '../../image/svg'
 
 import Color from '../../../color'
+
+import { ArrowIcon } from '../../image/svg'
 
 export default class SearchListItem extends React.Component {
   constructor (props) {

@@ -1,7 +1,3 @@
-/**
- * Created by lunik on 06/06/2017.
- */
-
 import GoogleIcon from './google.svg'
 import PlusIcon from './plus.svg'
 import ExitIcon from './exit.svg'

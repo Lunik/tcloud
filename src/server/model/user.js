@@ -1,13 +1,10 @@
-/**
- * Created by lunik on 04/07/2017.
- */
-
 import Delogger from 'delogger'
 import Crypto from 'crypto-js'
 import Rand from 'crypto-rand'
 import EventEmitter from 'events'
-import Config from './config'
 import Datastore from 'nedb'
+
+import Config from './config'
 
 const config = new Config({sync: true})
 const DB = new Datastore({ filename: `${config.database.path}/user.json`, autoload: true, timestampData: true })
