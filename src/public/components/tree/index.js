@@ -1,5 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
+import Path from 'path'
 
 import Branch from './branch'
 
@@ -40,7 +41,7 @@ export default class Tree extends React.Component {
 
     let currentPath = ''
     var JSXBranches = branches.map((branch, key) => {
-      currentPath += branch + '/'
+      currentPath = Path.join(currentPath, branch)
       return (
         <Branch id={branch} key={key} url={`#${currentPath.slice(0, -1)}`} text={branch}/>
       )

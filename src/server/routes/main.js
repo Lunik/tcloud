@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import https from 'https'
 import fs from 'fs'
+import Path from 'path'
 
 import EnforceHttps from './module/enforceHttps'
 import Config from '../model/config'
@@ -36,7 +37,7 @@ export default class Server {
     require('./torrent')(this.app, this.baseFolder)
     require('./app')(this.app, this.baseFolder)
 
-    this.app.use(Express.static(__dirname + '/public'))
+    this.app.use(Express.static(Path.join(__dirname, '/public')))
 
     this.log = new Delogger('Server')
   }

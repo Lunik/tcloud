@@ -6,7 +6,7 @@ import Folder, { follow } from '../model/folder'
 import File, { parsePath } from '../model/file'
 import Torrent from '../model/torrent'
 import TorrentSearch from '../model/search/torrent'
-
+import Path from 'path'
 const config = new Config({sync: true})
 const searchEngine = new TorrentSearch()
 
@@ -42,7 +42,7 @@ module.exports = (app, baseFolder) => {
     if (specialMagnet.test(magnet)) {
       magnet = magnet.replace(/tcloud:/, '')
       searchEngine.getTorrent({ magnet }).then(() => {
-        var peer = torrent.download('/tmp/' + magnet.slice(0, 20))
+        var peer = torrent.download(Path.join('/tmp', magnet.slice(0, 20)))
         res.json(peer)
       }).catch((err) => { console.log(err) })
     } else if (magnet) {
