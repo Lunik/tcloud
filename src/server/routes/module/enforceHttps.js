@@ -48,6 +48,7 @@ export default function (options) {
           }
         } catch (err) {
           log.error(err)
+          log.error(JSON.stringify(req))
           next()
         }
       } else {
