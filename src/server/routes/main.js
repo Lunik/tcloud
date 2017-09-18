@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import https from 'https'
 import fs from 'fs'
 import Path from 'path'
+import morgan from 'morgan'
 
 import EnforceHttps from './module/enforceHttps'
 import Config from '../model/config'
@@ -20,6 +21,7 @@ export default class Server {
     this.app.use(bodyParser.urlencoded({
       extended: true
     }))
+    this.app.use(morgan('[:date[web]] :remote-addr - :method :url - :status response-time[digits]'))
 
     if (config.server.https) {
       this.app.use(EnforceHttps({

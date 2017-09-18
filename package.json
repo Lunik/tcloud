@@ -1,6 +1,6 @@
 {
   "name": "tcloud",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Filesharing and torrent downloading",
   "main": "index.js",
   "scripts": {
@@ -65,6 +65,7 @@
     "fs-extra": "^4.0.1",
     "jquery": "^3.2.1",
     "material-components-web": "^0.21.0",
+    "morgan": "^1.8.2",
     "nedb": "^1.8.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
