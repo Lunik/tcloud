@@ -21,7 +21,7 @@ export default class Server {
     this.app.use(bodyParser.urlencoded({
       extended: true
     }))
-    this.app.use(morgan('[:date[web]] :remote-addr - :method :url - :status response-time[digits]'))
+    this.app.use(morgan('[:date[web]] :remote-addr - :method :url - :status :response-time[digits]'))
 
     if (config.server.https) {
       this.app.use(EnforceHttps({
