@@ -43,7 +43,7 @@ export default class Tree extends React.Component {
     var JSXBranches = branches.map((branch, key) => {
       currentPath = Path.join(currentPath, branch)
       return (
-        <Branch id={branch} key={key} url={`#${currentPath.slice(0, -1)}`} text={branch}/>
+        <Branch id={branch} key={key} url={`#${currentPath}`} text={branch}/>
       )
     })
     return (

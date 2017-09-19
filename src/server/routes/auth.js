@@ -107,7 +107,7 @@ module.exports = (app) => {
       password: req.body.password
     }
     if (formData.username && formData.password) {
-      if(config.registration) {
+      if (config.registration) {
         var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
         user.exist((exist) => {
           if (!exist) {
