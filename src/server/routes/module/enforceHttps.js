@@ -39,29 +39,12 @@ export default function (options) {
     } else {
       if (req.method === 'GET' || req.method === 'HEAD') {
         var host = options.trustXForwardedHostHeader ? (req.headers['x-forwarded-host'] || req.headers.host) : req.headers.host
+        host = host || ''
 
-        try {
-          if (options.port === 443) {
-            res.redirect(301, 'https://' + Path.join(host, req.originalUrl))
-          } else {
-            res.redirect(301, 'https://' + Path.join(host.replace(/:[0-9]*/g, '') + ':' + options.port, req.originalUrl))
-          }
-        } catch (err) {
-          log.error(err)
-          var cache = []
-          log.error(JSON.stringify(req, function (key, value) {
-            if (typeof value === 'object' && value !== null) {
-              if (cache.indexOf(value) !== -1) {
-                // Circular reference found, discard key
-                return
-              }
-              // Store value in our collection
-              cache.push(value)
-            }
-            return value
-          }))
-          cache = null
-          next()
+        if (options.port === 443) {
+          res.redirect(301, 'https://' + Path.join(host, req.originalUrl))
+        } else {
+          res.redirect(301, 'https://' + Path.join(host.replace(/:[0-9]*/g, '') + ':' + options.port, req.originalUrl))
         }
       } else {
         res.status(403).send('Please use HTTPS when submitting data to this server.')
