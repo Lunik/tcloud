@@ -4,8 +4,15 @@ export default class Logo extends React.Component {
   constructor (props) {
     super(props)
   }
+
+  handleClick () {
+    window.location.hash = ''
+    window.location.pathname = '/'
+  }
+
   render () {
     return (<img src='logo.png'
+      onClick={() => this.handleClick()}
       style={this.props.style}
       alt="logo"
       srcSet="src/image/logo/512x512.png 512w,
