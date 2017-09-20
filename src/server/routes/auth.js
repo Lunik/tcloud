@@ -24,6 +24,7 @@ module.exports = (app) => {
   app.use((req, res, next) => {
     var user = req.user
     if (req.url.match(/\/(auth|src|dl|app)\/.*/g) ||
+        req.url.match(/manifest\.json/g) ||
       !config.authentification) {
       next()
     } else {
