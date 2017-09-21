@@ -218,7 +218,9 @@ const style = {
     div: {
       display: 'inline-flex',
       height: '60%',
-      minWidth: '250px'
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     }
   },
   button: {

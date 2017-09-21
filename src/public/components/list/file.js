@@ -87,7 +87,12 @@ export default class FileList extends React.Component {
   }
 
   render () {
-    const files = this.state.files.map((file, key) => <FileListItem key={key} color={key % 2} file={file} onRemove={() => this.update()}/>)
+    const files = this.state.files.map((file, key) => <FileListItem
+      key={key}
+      color={key % 2}
+      file={file}
+      onRemove={() => this.update()}
+      onRename={() => this.update()}/>)
     return (
       <List className="list" id="file">
         <Loading hidden={!this.state.loading}/>
