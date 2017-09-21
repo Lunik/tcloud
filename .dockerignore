@@ -1,0 +1,15 @@
+.DS_Store
+
+.git
+
+.*
+
+node_modules/
+
+build/
+
+database/
+
+config.json
+
+tcloud-*
