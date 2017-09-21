@@ -27,22 +27,15 @@ export default class FileListItem extends React.Component {
     this.initState(props)
   }
 
-  componentWillReceiveProps (props) {
-    let ext = props.file.type === 'file' ? props.file.name.split('.').slice(-1)[0] : 'folder'
-
-    this.setState({
-      extension: ext,
-      fileIcon: FileIcon.getFromExtension(ext)
-    })
-  }
-
   getNameItem () {
     if (this.props.file.type === 'file') {
       return this.props.file.name
     } else {
-      return (<a href={`#${this.props.file.path}`}>
-        {this.props.file.name}
-      </a>)
+      return (
+        <a href={`#${this.props.file.path}`}>
+          {this.props.file.name}
+        </a>
+      )
     }
   }
 
@@ -77,7 +70,7 @@ export default class FileListItem extends React.Component {
         <List.Item.EndDetail style={style.endDetail}>
           <FileToolbox
             onRemove={ () => this.props.onRemove() }
-            onRename={(newName) => { this.props.file.name = newName }}
+            onRename={() => this.props.onRename()}
             file={this.props.file}/>
         </List.Item.EndDetail>
       </List.Item>

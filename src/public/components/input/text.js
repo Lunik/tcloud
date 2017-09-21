@@ -9,9 +9,10 @@ export default class TextInput extends React.Component {
     super(props)
   }
   render () {
+    const divStyle = Object.assign({}, style.div, this.props.style.div)
     return (
       <Textfield
-        style={Object.assign(style.div, this.props.style.div)}
+        style={divStyle}
         className={classNames('input', this.props.className, this.props.valid ? '' : 'invalid')} >
         <Textfield.Input
           value={this.props.value}
