@@ -74,6 +74,29 @@ module.exports = (app) => {
     }
   })
 
+  app.post('/folder/:path((*)/?*)/rename', (req, res) => {
+    var path = req.params.path
+    var newName = req.body.new.replace(/[^\w\s._-]/gi, '-')
+    var element = follow(path, baseFolder)
+
+    if (element) {
+      if (newName) {
+        element.rename(newName)
+        res.json(element)
+      } else {
+        res.status(400)
+        res.json({
+          err: 'Missing new name.'
+        })
+      }
+    } else {
+      res.status(404)
+      res.json({
+        err: `${path} do not exist.`
+      })
+    }
+  })
+
   app.delete('/folder/:path((*)/?*)', (req, res) => {
     var path = req.params.path
 
