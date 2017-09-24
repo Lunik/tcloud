@@ -1,0 +1,26 @@
+{
+  "name": "Tcloud",
+  "description": "File sharing and torrent downloading",
+  "repository": "https://github.com/Lunik/tcloud",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": [
+    "torrent",
+    "webtorrent",
+    "cloud"
+  ],
+  "env": {
+    "MASTER_KEY": {
+      "description": "The key to administrate the app.",
+      "required": true
+    },
+    "TORRENT_PROVIDERS": {
+      "description": "Torrent providers for search engine, see \"https://github.com/JimmyLaurent/torrent-search-api#supported-providers\" for a list of supported provides.",
+      "required": false
+    },
+    "HEROKU": {
+      "description": "DON'T TOUCH TO THIS VALUE.",
+      "required": true,
+      "value": "heroku"
+    }
+  }
+}
