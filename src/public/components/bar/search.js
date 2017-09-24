@@ -162,6 +162,8 @@ export default class SearchBar extends React.Component {
     this.setState({
       dialogOpen: false
     })
+
+    $('.nav > .search-bar > .input > input').focus().click()
   }
 
   render () {
@@ -185,6 +187,7 @@ export default class SearchBar extends React.Component {
       <Form style={formStyle} onSubmit={(e) => this.submit(e)} className="search-bar">
         <Loading hidden={!this.state.loading}/>
         <TextInput style={style.input}
+          ref="input"
           value={this.state.input}
           onChange={ (e) => this.setState({input: e.target.value}) }
           placeholder="Search, Torrent or Magnet"/>
@@ -219,7 +222,6 @@ const style = {
       display: 'inline-flex',
       height: '60%',
       whiteSpace: 'nowrap',
-      overflow: 'hidden',
       textOverflow: 'ellipsis'
     }
   },
