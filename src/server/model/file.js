@@ -33,6 +33,7 @@ export default class File extends EventEmitter {
       )
     }
   }
+
   initMetadata () {
     try {
       let stats = fs.statSync(this.fullPath())
