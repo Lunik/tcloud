@@ -18,6 +18,8 @@ after_success:
 - git reset --hard
 - cp package.json ./build
 - mv ./build tcloud-${TRAVIS_TAG}/
+- mkdir tcloud-${TRAVIS_TAG}/scripts
+- cp ./scripts/heroku tcloud-${TRAVIS_TAG}/scripts/
 - tar zcf tcloud-${TRAVIS_TAG}.tgz tcloud-${TRAVIS_TAG}/
 
 deploy:

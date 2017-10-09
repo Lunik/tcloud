@@ -58,6 +58,7 @@ export default class FileList extends React.Component {
       success: (response) => {
         this.setState({
           files: response.childs,
+          size: response.size,
           loading: false
         })
       }
@@ -86,6 +87,13 @@ export default class FileList extends React.Component {
     this.update()
   }
 
+  getSizeItem (bytes) {
+    var sizes = ['o', 'ko', 'mo', 'go', 'to']
+    if (bytes === 0) { return '0 b' }
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10)
+    return `${Math.round(bytes / Math.pow(1024, i), 2)} ${sizes[i]}`
+  }
+
   render () {
     const files = this.state.files.map((file, key) => <FileListItem
       key={key}
@@ -96,6 +104,7 @@ export default class FileList extends React.Component {
     return (
       <List className="list" id="file">
         <Loading hidden={!this.state.loading}/>
+        {this.getSizeItem(this.state.size)}
         <Tree path={this.state.location} />
         {files}
       </List>

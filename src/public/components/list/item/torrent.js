@@ -2,6 +2,7 @@ import React from 'react'
 import List from '@react-mdc/list'
 import $ from 'jquery'
 
+import Notify from '../../notification'
 import Color from '../../../color'
 
 import { ArrowIcon, HeartIcon } from '../../image/svg'
@@ -12,13 +13,16 @@ export default class TorrentListItem extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      updateInterval: null
+    }
     this.initState(props)
   }
 
   initState (props) {
     Object.assign(this.state, {
-      mobile: window.innerWidth <= 650
+      mobile: window.innerWidth <= 650,
+      peer: props.peer
     })
   }
 
@@ -28,15 +32,45 @@ export default class TorrentListItem extends React.Component {
 
   componentWillMount () {
     $(window).on('resize', (event) => this.handleWindowResize())
+    this.update()
+    this.setState({
+      updateInterval: setInterval(() => this.update(), 2000)
+    })
   }
 
   componentWillUnmount () {
     $(window).off('resize', (event) => this.handleWindowResize())
+    clearInterval(this.state.updateInterval)
+    this.setState({
+      updateInterval: null
+    })
   }
 
   handleWindowResize () {
     this.setState({
       mobile: window.innerWidth <= 650
+    })
+  }
+
+  update () {
+    $.ajax({
+      method: 'GET',
+      url: this.state.peer.url,
+      success: (response) => {
+        this.setState({
+          peer: response
+        })
+      }
+    }).fail((response) => {
+      let text = response.responseJSON.err
+
+      Notify({
+        type: 'error',
+        title: `Failed to fetch peer ${this.peer.uid}`,
+        content: (
+          <p>{text}</p>
+        )
+      })
     })
   }
 
@@ -59,6 +93,22 @@ export default class TorrentListItem extends React.Component {
     return Math.floor(percent * 100) + '%'
   }
 
+  getSeedNum (seed) {
+    if (seed >= 100) {
+      return '99+'
+    }
+
+    return seed
+  }
+
+  handleRemove () {
+    this.props.onRemove()
+    clearInterval(this.state.updateInterval)
+    this.setState({
+      updateInterval: null
+    })
+  }
+
   render () {
     const itemStyle = Object.assign({}, style.item, !this.props.color ? style.itemColor : {})
     const metadataStyle = Object.assign({}, style.metadata, this.state.mobile ? style.metadataMobile : {})
@@ -66,34 +116,34 @@ export default class TorrentListItem extends React.Component {
     return (
       <List.Item className="peer" style={itemStyle}>
         <span className="name" style={style.name}>
-          {this.props.peer.metadata.name}
+          {this.state.peer.metadata.name}
         </span>
         <span className="metadata" style={metadataStyle}>
-          <span className="size" style={style.size}>{this.getSizeItem(this.props.peer.metadata.size)}</span>
+          <span className="size" style={style.size}>{this.getSizeItem(this.state.peer.metadata.size)}</span>
           <span className="seed" style={style.seed}>
-            {this.props.peer.metadata.seed}
+            {this.getSeedNum(this.state.peer.metadata.seed)}
             <HeartIcon style={style.seedIcon}/>
           </span>
           <span className="sdown" style={style.sdown}>
-            {this.getSpeedItem(this.props.peer.metadata.sdown)}
+            {this.getSpeedItem(this.state.peer.metadata.sdown)}
             <ArrowIcon.Down style={style.sdownIcon}/>
           </span>
           <span className="sup" style={style.sup}>
-            {this.getSpeedItem(this.props.peer.metadata.sup)}
+            {this.getSpeedItem(this.state.peer.metadata.sup)}
             <ArrowIcon.Up style={style.supIcon}/>
           </span>
         </span>
         <span className="progress" style={style.progress}>
-          {this.getProgressItem(this.props.peer.metadata.progress)}
+          {this.getProgressItem(this.state.peer.metadata.progress)}
           <RadialProgress
             style={style.progressRadial}
             displayText={false}
-            value={this.props.peer.metadata.progress} />
+            value={this.state.peer.metadata.progress} />
         </span>
         <List.Item.EndDetail style={style.endDetail}>
           <TorrentToolbox
-            onRemove={ () => this.props.onRemove() }
-            peer={this.props.peer}/>
+            onRemove={ () => this.handleRemove() }
+            peer={this.state.peer}/>
         </List.Item.EndDetail>
       </List.Item>
     )
@@ -112,7 +162,7 @@ TorrentListItem.defaultProps = {
       sup: 250,
       down: 402557,
       up: 4028557,
-      seed: 17,
+      seed: 1700,
       progress: 0.5458,
       timeRemaining: 1404705
     },
@@ -150,7 +200,7 @@ const style = {
   seed: {
     flex: '2',
     textAlign: 'right',
-    minWidth: '50px',
+    minWidth: '55px',
     marginRight: '10px'
   },
   seedIcon: {

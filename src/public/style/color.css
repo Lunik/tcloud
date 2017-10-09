@@ -17,3 +17,22 @@
     --mdc-theme-text-primary-on-background: var(--white) !important;
     --mdc-theme-background: var(--grey) !important;
 }
+
+.mdc-textfield__input{
+    border-bottom: 1px solid var(--lightGrey);
+}
+
+.mdc-textfield__input:hover{
+    border-bottom: 1px solid var(--lightGrey);
+}
+
+.mdc-textfield--focused > .mdc-textfield__input{
+    border-bottom: 1px solid var(--mdc-theme-primary);
+}
+
+.mdc-textfield__label{
+    color: var(--lightGrey);
+}
+.mdc-textfield__label--float-above{
+    color: var(--mdc-theme-primary);
+}

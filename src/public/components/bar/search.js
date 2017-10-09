@@ -167,14 +167,14 @@ export default class SearchBar extends React.Component {
   }
 
   render () {
-    var searchItemsMovie = this.state.searchResults.movie.map((torrent, key) => (
+    var searchItemsMovie = this.state.searchResults.movie.sort((a, b) => a.title.localeCompare(b.title)).map((torrent, key) => (
       <SearchListItem
         key={key}
         torrent={torrent}
         onClick={(torrent) => this.selectFromSearch(torrent)}
       />))
 
-    var searchItemsTV = this.state.searchResults.tv.map((torrent, key) => (
+    var searchItemsTV = this.state.searchResults.tv.sort((a, b) => b.title.localeCompare(a.title)).map((torrent, key) => (
       <SearchListItem
         key={key}
         torrent={torrent}

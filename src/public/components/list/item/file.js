@@ -1,5 +1,6 @@
 import React from 'react'
 import List from '@react-mdc/list'
+import $ from 'jquery'
 
 import Color from '../../../color'
 
@@ -19,7 +20,22 @@ export default class FileListItem extends React.Component {
     Object.assign(this.state, {
       locked: props.file.locked,
       extension: ext,
-      fileIcon: FileIcon.getFromExtension(ext)
+      fileIcon: FileIcon.getFromExtension(ext),
+      mobile: window.innerWidth <= 700
+    })
+  }
+
+  componentWillMount () {
+    $(window).on('resize', (event) => this.handleWindowResize())
+  }
+
+  componentWillUnmount () {
+    $(window).off('resize', (event) => this.handleWindowResize())
+  }
+
+  handleWindowResize () {
+    this.setState({
+      mobile: window.innerWidth <= 700
     })
   }
 
@@ -46,10 +62,16 @@ export default class FileListItem extends React.Component {
     return `${Math.round(bytes / Math.pow(1024, i), 2)} ${sizes[i]}`
   }
 
+  getDateItem (mtime) {
+    let d = new Date(mtime)
+    return d.toLocaleDateString() + ' ' + d.toLocaleTimeString()
+  }
+
   render () {
     const lockStyle = Object.assign({}, style.lock, this.state.locked ? style.locked : {})
     const itemStyle = Object.assign({}, style.item, !this.props.color ? style.itemColor : {})
     const downloadCountStyle = Object.assign({}, style.downloadCount, this.props.file.type === 'folder' ? style.downloadCountHidden : {})
+    const dateStyle = Object.assign({}, style.date, this.state.mobile ? style.dateMobile : {})
 
     return (
       <List.Item className="file" type={this.props.file.type} style={itemStyle}>
@@ -58,6 +80,9 @@ export default class FileListItem extends React.Component {
         </List.Item.StartDetail>
         <span className="name" style={style.name}>
           {this.getNameItem()}
+        </span>
+        <span className="date" style={dateStyle}>
+          {this.getDateItem(this.props.file.mtime)}
         </span>
         <span className="size" style={style.size}>{this.getSizeItem(this.props.file.size)}</span>
         <span className="download-count" style={downloadCountStyle}>
@@ -82,6 +107,7 @@ FileListItem.defaultProps = {
   color: 1,
   file: {
     name: 'file',
+    mtime: null,
     type: 'file',
     locked: true,
     downloadCount: 0,
@@ -113,6 +139,12 @@ const style = {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap'
+  },
+  date: {
+    flex: '3'
+  },
+  dateMobile: {
+    display: 'none'
   },
   lock: {
     visibility: 'hidden',

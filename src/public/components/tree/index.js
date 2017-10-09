@@ -48,7 +48,7 @@ export default class Tree extends React.Component {
     })
     return (
       !this.state.mobile &&
-      <div className="tree">
+      <div className="tree" style={style.div}>
         <Branch id='files' url="#" text="files"/>
         {JSXBranches}
       </div>
@@ -58,4 +58,10 @@ export default class Tree extends React.Component {
 
 Tree.defaultProps = {
   path: ''
+}
+
+const style = {
+  div: {
+    display: 'inline-block'
+  }
 }

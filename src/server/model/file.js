@@ -14,6 +14,7 @@ export default class File extends EventEmitter {
     this._path = parsedPath.path
     this.type = 'file'
     this.name = parsedPath.fileName
+    this.mtime = null
     this.locked = false
     this.downloadCount = 0
     this.downloading = 0
@@ -37,9 +38,11 @@ export default class File extends EventEmitter {
   initMetadata () {
     try {
       let stats = fs.statSync(this.fullPath())
+      this.mtime = stats.mtime
       this._size = stats.size // Bytes
       this.exist = true
     } catch (err) {
+      this.mtime = null
       this._size = 0
       this.exist = false
     }
@@ -47,6 +50,7 @@ export default class File extends EventEmitter {
 
   watchChange (eventType, filename) {
     this.initMetadata()
+    this.emit('change')
   }
 
   fullPath () {
@@ -116,6 +120,7 @@ export default class File extends EventEmitter {
     return {
       name: this.name,
       type: this.type,
+      mtime: this.mtime,
       locked: this.locked,
       downloadCount: this.downloadCount,
       size: this.size(),

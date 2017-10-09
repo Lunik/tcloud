@@ -14,13 +14,13 @@ export default class Folder extends File {
 
   initManualWatch (timeout) {
     setInterval(() => {
-      this.initMetadata()
-      this.initFolder()
+      this.watchChange(null, null)
     }, timeout)
   }
 
   initFolder () {
-    this.childs = []
+    var oldChilds = this.childs
+    var newChilds = []
     var childs = []
     try {
       childs = fs.readdirSync(this.fullPath())
@@ -39,13 +39,22 @@ export default class Folder extends File {
         continue
       }
 
-      this.addChild(child)
+      let index = oldChilds.findIndex((oldchild) => { console.log(oldchild.name, child.name); return oldchild.name === child.name})
+      if (index !== -1) {
+        oldChilds[index]._size = child._size
+        newChilds.push(oldChilds[index])
+      } else {
+        newChilds.push(child)
+      }
     }
+
+    this.childs = newChilds
   }
 
   watchChange (eventType, filename) {
     this.initMetadata()
     this.initFolder()
+    this.emit('change')
   }
 
   handleChildRemove (child) {
@@ -77,6 +86,7 @@ export default class Folder extends File {
     this.log.info(`Creating ${this.fullPath()}`)
 
     fs.mkdirSync(this.fullPath())
+    this.exist = true
 
     this.initWatch()
   }

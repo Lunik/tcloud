@@ -11,11 +11,15 @@ export default class Peer extends EventEmitter {
     this.uid = this.generateUid()
     this.magnet = props.magnet || props.link
     this.metadata = {}
+    this.started = true
 
     if (this.magnet) {
       this.child = ChildProcess.fork(`${__dirname}/module/torrentWorker`, [this.magnet])
 
       this.child.on('message', (message) => this.handleMessage(JSON.parse(message)))
+      this.child.on('close', (code) => this.handleMessage({
+        type: code === 0 ? 'done' : 'error'
+      }))
     } else {
       this.emit('err', {
         code: 404,
@@ -33,6 +37,9 @@ export default class Peer extends EventEmitter {
   }
 
   handleMessage (message) {
+    if (!this.started) {
+      return
+    }
     this.metadata = message.metadata
     switch (message.type) {
       case 'metadata':
@@ -42,15 +49,18 @@ export default class Peer extends EventEmitter {
         this.emit('download', this)
         break
       case 'done':
+        this.started = false
         this.emit('done', this)
         break
       case 'stop':
+        this.started = false
         this.emit('stop', this)
         break
       case 'noPeers':
         this.emit('noPeers', this)
         break
       case 'error':
+        this.started = false
         this.emit('error', this)
         break
       default:

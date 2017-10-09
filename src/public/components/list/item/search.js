@@ -44,6 +44,14 @@ export default class SearchListItem extends React.Component {
     this.props.onClick(this.props.torrent)
   }
 
+  getSeedNum (seed) {
+    if (seed >= 100) {
+      return '99+'
+    }
+
+    return seed
+  }
+
   render () {
     const infoStyle = Object.assign({}, this.props.style, this.state.mobile ? style.infosMobile : {})
 
@@ -64,11 +72,11 @@ export default class SearchListItem extends React.Component {
               style={style.info.size}>{this.props.torrent.size}</span>
             <span className="info" id="seeds"
               style={style.info.seeds}>
-              <ArrowIcon.Up style={style.arrow.up}/>{this.props.torrent.seeds}
+              <ArrowIcon.Up style={style.arrow.up}/>{this.getSeedNum(this.props.torrent.seeds)}
             </span>
-            <span className="info" id="leechs"
-              style={style.info.leechs}>
-              <ArrowIcon.Down style={style.arrow.down}/>{this.props.torrent.leechs}
+            <span className="info" id="peers"
+              style={style.info.peers}>
+              <ArrowIcon.Down style={style.arrow.down}/>{this.getSeedNum(this.props.torrent.peers)}
             </span>
           </span>
         </span>
@@ -123,7 +131,7 @@ const style = {
       flex: '3',
       minWidth: '60px'
     },
-    leechs: {
+    peers: {
       flex: '3',
       minWidth: '60px'
     }

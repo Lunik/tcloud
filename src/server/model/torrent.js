@@ -1,6 +1,7 @@
 import fs from 'fs-extra'
 import { spawn } from 'child_process'
 import Delogger from 'delogger'
+import EventEmitter from 'events'
 
 import Peer from './peer'
 import Config from './config'
@@ -8,8 +9,10 @@ import Folder from '../model/folder'
 
 const config = new Config({sync: true})
 
-export default class Torrent {
+export default class Torrent extends EventEmitter {
   constructor (props) {
+    super(props)
+
     props = props || {}
     this.baseFolder = props.baseFolder || new Folder(`/${__dirname}/${config.files.path}`, '')
     this.peers = {}
@@ -25,6 +28,8 @@ export default class Torrent {
 
     this.peers[peer.uid].on('done', (peer) => this.handlePeerDone(peer))
     this.peers[peer.uid].on('stop', (peer) => this.handlePeerStop(peer))
+    this.peers[peer.uid].on('error', (peer) => this.handlePeerError(peer))
+    this.peers[peer.uid].on('download', (peer) => this.emit('download', peer))
     return this.peers[peer.uid]
   }
 
@@ -50,6 +55,11 @@ export default class Torrent {
         this.cleanup(peer)
       })
     }
+  }
+
+  handlePeerError (peer) {
+    this.log.error(`Unable to download ${peer.magnet}`)
+    delete this.peers[peer.uid]
   }
 
   cleanup (peer) {
