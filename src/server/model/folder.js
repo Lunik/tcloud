@@ -39,7 +39,7 @@ export default class Folder extends File {
         continue
       }
 
-      let index = oldChilds.findIndex((oldchild) => { console.log(oldchild.name, child.name); return oldchild.name === child.name})
+      let index = oldChilds.findIndex((oldchild) => oldchild.name === child.name)
       if (index !== -1) {
         oldChilds[index]._size = child._size
         newChilds.push(oldChilds[index])
