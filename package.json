@@ -4,7 +4,6 @@
   "description": "Filesharing and torrent downloading",
   "main": "index.js",
   "scripts": {
-    "postinstall": "bash ./scripts/heroku",
     "build": "NODE_ENV=production webpack -p",
     "start": "node build/server.js",
     "dev": "webpack --config dev/webpack.server.config.js",
@@ -71,6 +70,8 @@
     "react": "~15.6.2",
     "react-dom": "~15.6.2",
     "react-material-components-web": "^0.1.18",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3",
     "torrent-search-api": "^1.0.16",
     "webtorrent": "^0.98.19"
   }

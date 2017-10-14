@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if [ "$HEROKU" = "heroku" ]
-then
-    HEROKU=false
-    npm install --only=dev
-    npm run build
-fi
