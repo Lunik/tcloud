@@ -183,7 +183,8 @@ const style = {
     paddingLeft: '15px',
     borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
     display: 'flex',
-    minWidth: 'Z00px'
+    minWidth: 'Z00px',
+    overflow: 'visible'
   },
   itemColor: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
