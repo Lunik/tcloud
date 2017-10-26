@@ -16,6 +16,7 @@ var config = new Config({sync: true})
 export default class Server {
   constructor () {
     this.app = Express()
+    this.app.disable('x-powered-by')
     this.app.use(compression())
     this.app.use(cookieParser())
     this.app.use(bodyParser.json())
