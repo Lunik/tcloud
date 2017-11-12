@@ -23,6 +23,11 @@ export default class File extends EventEmitter {
     this.downloadCount = 0
     this.downloading = 0
 
+    this.idle = {
+      date: new Date(),
+      timeout: 1000
+    }
+
     this.initMetadata()
     this.initWatch()
 
@@ -34,7 +39,12 @@ export default class File extends EventEmitter {
         this.fullPath(), {
           recursive: true
         },
-        (eventType, filename) => this.watchChange(eventType, filename)
+        (eventType, filename) => {
+          if (new Date() - this.idle.date >= this.idle.timeout) {
+            this.idle.date = new Date()
+            this.watchChange(eventType, filename)
+          }
+        }
       )
     }
   }

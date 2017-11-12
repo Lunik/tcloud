@@ -14,7 +14,7 @@ export default class Peer extends EventEmitter {
     this.started = true
     this.idle = {
       date: new Date(),
-      timeout: 500
+      timeout: 1000
     }
 
     if (this.magnet) {
