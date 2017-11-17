@@ -90,8 +90,7 @@ export default class File extends EventEmitter {
     }
     this.log.info(`Removing ${this.fullPath()}`)
 
-    fs.unlinkSync(this.fullPath())
-    this.emit('remove', this)
+    fs.unlink(this.fullPath(), () => this.emit('remove', this))
   }
 
   addDownloader () {
@@ -116,15 +115,13 @@ export default class File extends EventEmitter {
     }
     this.log.info(`Renaming ${this.fullPath()} into ${this._path}/${name}`)
 
-    fs.renameSync(this.fullPath(), `${this._path}/${name}`)
-    this.emit('rename', this)
+    fs.rename(this.fullPath(), `${this._path}/${name}`, () => this.emit('rename', this))
   }
 
   create () {
     this.log.info(`Creating ${this.fullPath()}`)
 
-    fs.writeFileSync(this.fullPath(), '')
-    this.initWatch()
+    fs.writeFile(this.fullPath(), '', () => this.initWatch())
   }
 
   toJSON () {

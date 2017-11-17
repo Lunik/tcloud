@@ -74,8 +74,7 @@ export default class Folder extends File {
   remove () {
     this.log.info(`Removing ${this.fullPath()}`)
 
-    fs.removeSync(this.fullPath())
-    this.emit('remove', this)
+    fs.remove(this.fullPath(), () => this.emit('remove', this))
   }
 
   size () {

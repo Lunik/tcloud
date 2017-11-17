@@ -30,6 +30,7 @@ export default class Torrent extends EventEmitter {
     this.peers[peer.uid].on('stop', (peer) => this.handlePeerStop(peer))
     this.peers[peer.uid].on('error', (peer) => this.handlePeerError(peer))
     this.peers[peer.uid].on('download', (peer) => this.emit('download', peer))
+    this.peers[peer.uid].on('metadata', (peer) => this.emit('metadata', peer))
 
     this.emit('new', peer)
     return this.peers[peer.uid]
@@ -69,8 +70,9 @@ export default class Torrent extends EventEmitter {
 
   cleanup (peer) {
     if (peer.metadata.path) {
-      fs.removeSync(peer.metadata.path)
+      fs.remove(peer.metadata.path, () => delete this.peers[peer.uid])
+    } else {
+      delete this.peers[peer.uid]
     }
-    delete this.peers[peer.uid]
   }
 }

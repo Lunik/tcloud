@@ -95,8 +95,6 @@ export default class Peer extends EventEmitter {
   }
 
   cleanup () {
-    try {
-      fs.unlinkSync(this.magnet)
-    } catch (err) {}
+    fs.unlink(this.magnet, () => {})
   }
 }
