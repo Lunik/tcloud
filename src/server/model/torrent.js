@@ -30,7 +30,8 @@ export default class Torrent extends EventEmitter {
     this.peers[peer.uid].on('stop', (peer) => this.handlePeerStop(peer))
     this.peers[peer.uid].on('error', (peer) => this.handlePeerError(peer))
     this.peers[peer.uid].on('download', (peer) => this.emit('download', peer))
-    this.peers[peer.uid].on('metadata', (peer) => this.emit('metadata', peer))
+    this.peers[peer.uid].on('metadata', (peer) => this.emit('metadata' +
+      '', peer))
 
     this.emit('new', peer)
     return this.peers[peer.uid]
@@ -42,23 +43,34 @@ export default class Torrent extends EventEmitter {
   }
 
   handlePeerDone (peer) {
-    var oldPath = peer.metadata.fullPath
     // var newPath = `${__dirname}/${config.files.path}/${peer.metadata.name}`
-    var newPath = `${__dirname}/${config.files.path}`
 
-    var childs = fs.readdirSync(newPath)
+    var oldPath = peer.metadata.fullPath
+    var mainFolder = `${__dirname}/${config.files.path}`
+    var temp = `${mainFolder}/${peer.metadata.name}.hide`
+    var newPath = `${mainFolder}/${peer.metadata.name}`
+
+    var childs = fs.readdirSync(mainFolder)
 
     if (childs.indexOf(peer.metadata.name) === -1) {
-      const mv = spawn('mv', [oldPath, newPath])
+      const mv = spawn('mv', [oldPath, temp])
       mv.stderr.on('data', (data) => {
         this.log.error(data)
       })
 
       mv.on('close', (code) => {
-        this.log.info(`Copied ${oldPath} to ${newPath} successfully`)
-        this.cleanup(peer)
+        fs.rename(temp, newPath, (err) => {
+          console.log('ok')
+          if (err) this.log.error(err)
+          else this.log.info(`Copied ${oldPath} to ${mainFolder} successfully`)
+
+          this.cleanup(peer)
+        })
       })
+    } else {
+      this.cleanup(peer)
     }
+
     this.emit('done', peer)
   }
 
