@@ -39,12 +39,7 @@ export default class File extends EventEmitter {
         this.fullPath(), {
           recursive: true
         },
-        (eventType, filename) => {
-          if (new Date() - this.idle.date >= this.idle.timeout) {
-            this.idle.date = new Date()
-            this.watchChange(eventType, filename)
-          }
-        }
+        (eventType, filename) => this.watchChange(eventType, filename)
       )
     }
   }
@@ -62,9 +57,26 @@ export default class File extends EventEmitter {
     }
   }
 
+  updateMetadata () {
+    fs.stat(this.fullPath(), (err, stats) => {
+      if (err) {
+        this.mtime = null
+        this._size = 0
+        this.exist = false
+      } else {
+        this.mtime = stats.mtime
+        this._size = stats.size // Bytes
+        this.exist = true
+      }
+    })
+  }
+
   watchChange (eventType, filename) {
-    this.initMetadata()
-    this.emit('change')
+    this.updateMetadata()
+    if (new Date() - this.idle.date >= this.idle.timeout) {
+      this.idle.date = new Date()
+      this.emit('change')
+    }
   }
 
   fullPath () {
