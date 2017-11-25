@@ -28,11 +28,11 @@ export default class TorrentSearch {
         }
 
         torrents.movie.forEach((torrent) => {
-          torrent.magnet = torrent.link ? torrent.link : 'tcloud:' + Buffer.from(JSON.stringify(torrent)).toString('base64')
+          torrent.magnet = 'tcloud:' + Buffer.from(JSON.stringify(torrent)).toString('base64')
         })
 
         torrents.tv.forEach((torrent) => {
-          torrent.magnet = torrent.link ? torrent.link : 'tcloud:' + Buffer.from(JSON.stringify(torrent)).toString('base64')
+          torrent.magnet = 'tcloud:' + Buffer.from(JSON.stringify(torrent)).toString('base64')
         })
 
         resolve(torrents)
@@ -48,6 +48,6 @@ export default class TorrentSearch {
       }
     }
 
-    return this.api.downloadTorrent(parsedTorrent, Path.join('/tmp', torrent.magnet.slice(0, 20)))
+    return this.api.getMagnet(parsedTorrent)
   }
 }
