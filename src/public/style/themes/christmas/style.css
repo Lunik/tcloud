@@ -1,6 +1,6 @@
 
 body{
-    background-color: var(--black);
+    background-color: var(--darkGreen);
     margin: 0;
 }
 
@@ -9,7 +9,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-    color: var(--orange);
+    color: var(--red);
 }
 
 .mdc-textfield--upgraded:not(.mdc-textfield--fullwidth):not(.mdc-textfield--box):not(.mdc-textfield--multiline)::after{

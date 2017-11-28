@@ -1,0 +1,39 @@
+:root {
+    --orange: #f7a253;
+    --red: #f75353;
+    --green: #27AE60;
+    --darkGreen: #203320;
+    --blue: #5264AE;
+    --lightBlue: #7082C2;
+    --grey: #5f5f5f;
+    --black: #1C1C1C;
+    --transparentGrey: rgba(95, 95, 95, 0.5);
+    --lightGrey: #BBBBBB;
+    --darkGrey: #70AE6E;
+    --white: #FFFFFF;
+    --mdc-theme-primary: var(--red) !important;
+    --mdc-theme-accent: var(--red) !important;
+    --mdc-theme-text-primary-on-light: var(--white) !important;
+    --mdc-theme-text-hint-on-light: var(--lightGrey) !important;
+    --mdc-theme-text-primary-on-background: var(--white) !important;
+    --mdc-theme-background: var(--grey) !important;
+}
+
+.mdc-textfield__input{
+    border-bottom: 1px solid var(--white);
+}
+
+.mdc-textfield__input:hover{
+    border-bottom: 1px solid var(--white);
+}
+
+.mdc-textfield--focused > .mdc-textfield__input{
+    border-bottom: 1px solid var(--white);
+}
+
+.mdc-textfield__label{
+    color: var(--white);
+}
+.mdc-textfield__label--float-above{
+    color: var(--white);
+}
