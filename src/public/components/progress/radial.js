@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Color from '../../color'
+import Color from '../../style/theme'
 
 function clamp (n, min, max) {
   return Math.max(min, Math.min(max, n))

@@ -2,7 +2,7 @@ import React from 'react'
 import $ from 'jquery'
 
 import Notify from '../../../notification'
-import Color from '../../../../color'
+import Color from '../../../../style/theme'
 
 import ListItem from '../default'
 import { CrossIcon } from '../../../image/svg'

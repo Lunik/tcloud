@@ -2,7 +2,7 @@ import React from 'react'
 import $ from 'jquery'
 import List from '@react-mdc/list'
 
-import Color from '../../../color'
+import Color from '../../../style/theme'
 
 import { ArrowIcon } from '../../image/svg'
 

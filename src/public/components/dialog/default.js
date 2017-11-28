@@ -1,7 +1,7 @@
 import React from 'react'
 import Dialog from '@react-mdc/dialog'
 
-import Color from '../../color'
+import Color from '../../style/theme'
 
 export default class DialogWindow extends React.Component {
   constructor (props) {

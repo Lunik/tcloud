@@ -3,7 +3,7 @@ import Path from 'path'
 import $ from 'jquery'
 
 import Notify from '../../../notification'
-import Color from '../../../../color'
+import Color from '../../../../style/theme'
 
 import TextInput from '../../../input/text'
 import ListItem from '../default'

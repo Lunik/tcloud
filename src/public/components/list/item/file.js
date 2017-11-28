@@ -2,7 +2,7 @@ import React from 'react'
 import List from '@react-mdc/list'
 import $ from 'jquery'
 
-import Color from '../../../color'
+import Color from '../../../style/theme'
 
 import { LockIcon, FileIcon, DownloadIcon } from '../../image/svg'
 import FileToolbox from '../../toolbox/file'

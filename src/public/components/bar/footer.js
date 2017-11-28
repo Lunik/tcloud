@@ -1,7 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
 
-import Color from '../../color'
+import Color from '../../style/theme'
 
 export default class MaClass extends React.Component {
   constructor (props) {

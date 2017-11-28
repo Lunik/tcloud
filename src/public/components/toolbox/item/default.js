@@ -2,7 +2,7 @@ import React from 'react'
 import List from '@react-mdc/list'
 import classnames from 'classnames'
 
-import Color from '../../../color'
+import Color from '../../../style/theme'
 
 import { CrossIcon } from '../../image/svg'
 

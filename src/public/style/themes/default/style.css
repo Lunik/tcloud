@@ -1,0 +1,17 @@
+
+body{
+    background-color: var(--black);
+    margin: 0;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    color: var(--white);
+}
+
+a {
+    color: var(--orange);
+}
+
+.mdc-textfield--upgraded:not(.mdc-textfield--fullwidth):not(.mdc-textfield--box):not(.mdc-textfield--multiline)::after{
+    background-color: var(--lightGrey);
+}

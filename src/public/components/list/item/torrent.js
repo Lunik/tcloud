@@ -4,7 +4,7 @@ import $ from 'jquery'
 import io from 'socket.io-client'
 
 import Notify from '../../notification'
-import Color from '../../../color'
+import Color from '../../../style/theme'
 
 import { ArrowIcon, HeartIcon } from '../../image/svg'
 import TorrentToolbox from '../../toolbox/torrent'

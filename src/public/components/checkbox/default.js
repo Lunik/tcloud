@@ -1,7 +1,7 @@
 import React from 'react'
 import Checkbox from '@react-mdc/checkbox'
 
-import Color from '../../color'
+import Color from '../../style/theme'
 
 export default class CheckboxInput extends React.Component {
   constructor (props) {

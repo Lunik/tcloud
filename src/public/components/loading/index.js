@@ -1,7 +1,7 @@
 import React from 'react'
 import { DoubleBounce } from 'better-react-spinkit'
 
-import Color from '../../color'
+import Color from '../../style/theme'
 
 export default class Loading extends React.Component {
   constructor (props) {

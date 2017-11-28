@@ -3,7 +3,7 @@ import $ from 'jquery'
 import classNames from 'classname'
 
 import Notify from '../notification'
-import Color from '../../color'
+import Color from '../../style/theme'
 
 import Loading from '../loading'
 import Logo from '../image/logo'
