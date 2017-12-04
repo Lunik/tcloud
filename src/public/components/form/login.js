@@ -3,8 +3,8 @@ import React from 'react'
 import $ from 'jquery'
 
 import Notify from '../notification'
-
 import Loading from '../loading'
+
 import TextInput from '../input/text'
 import SubmitButton from '../button/submit'
 import CheckboxInput from '../checkbox/default'
@@ -17,7 +17,6 @@ export default class LoginForm extends React.Component {
     this.state = {
       username: '',
       password: '',
-      loading: false,
       staylogged: false
     }
     this.initState(props)
@@ -33,17 +32,14 @@ export default class LoginForm extends React.Component {
 
   submit (e) {
     e.preventDefault()
-    this.setState({
-      loading: true
-    })
+    Loading.start()
+
     $.ajax({
       url: '/auth/login',
       method: 'POST',
       data: this.state,
       success: (response) => {
-        this.setState({
-          loading: false
-        })
+        Loading.done()
 
         Notify({
           type: 'info',
@@ -56,9 +52,7 @@ export default class LoginForm extends React.Component {
     }).fail((response) => {
       let text = response.responseJSON.err
 
-      this.setState({
-        loading: false
-      })
+      Loading.done()
 
       Notify({
         type: 'error',
@@ -73,7 +67,6 @@ export default class LoginForm extends React.Component {
   render () {
     return (
       <Form onSubmit={(e) => this.submit(e)} className="login">
-        <Loading hidden={!this.state.loading}/>
         <TextInput name="username" type="text" id="login-username" placeholder="Username"
           value={this.state.username}
           valid={this.state.username.length > 0}

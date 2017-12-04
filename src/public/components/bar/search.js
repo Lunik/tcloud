@@ -2,8 +2,8 @@ import React from 'react'
 import $ from 'jquery'
 
 import Notify from '../notification'
-
 import Loading from '../loading'
+
 import TextInput from '../input/text'
 import Button from '../button/submit'
 import Form from '../form/default'
@@ -17,7 +17,6 @@ export default class SearchBar extends React.Component {
     super(props)
 
     this.state = {
-      loading: false,
       dialogOpen: false,
       input: '',
       status: 'Search', // search or download,
@@ -86,17 +85,16 @@ export default class SearchBar extends React.Component {
   search (query) {
     this.refs.datalist.addItem(query)
 
-    this.setState({
-      loading: true
-    })
+    Loading.start()
 
     $.ajax({
       method: 'POST',
       url: '/search/torrent',
       data: { query },
       success: (response) => {
+        Loading.done()
+
         this.setState({
-          loading: false,
           dialogOpen: true,
           searchResults: response
         })
@@ -104,9 +102,7 @@ export default class SearchBar extends React.Component {
     }).fail((response) => {
       let text = response.responseJSON.err
 
-      this.setState({
-        loading: false
-      })
+      Loading.done()
 
       Notify({
         type: 'error',
@@ -119,24 +115,18 @@ export default class SearchBar extends React.Component {
   }
 
   download (magnet) {
-    this.setState({
-      loading: true
-    })
+    Loading.start()
     $.ajax({
       method: 'PUT',
       url: '/torrent',
       data: { magnet },
       success: (response) => {
-        this.setState({
-          loading: false
-        })
+        Loading.done()
       }
     }).fail((response) => {
       let text = response.responseJSON.err
 
-      this.setState({
-        loading: false
-      })
+      Loading.done()
     })
   }
 
@@ -174,7 +164,6 @@ export default class SearchBar extends React.Component {
 
     return (
       <Form style={formStyle} onSubmit={(e) => this.submit(e)} className="search-bar">
-        <Loading hidden={!this.state.loading}/>
         <TextInput style={style.input}
           ref="input"
           value={this.state.input}

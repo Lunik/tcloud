@@ -14,8 +14,7 @@ export default class RemoveToolboxItem extends React.Component {
     super(props)
 
     this.state = {
-      dialogOpen: false,
-      loading: false
+      dialogOpen: false
     }
 
     this.initState(props)
@@ -35,26 +34,23 @@ export default class RemoveToolboxItem extends React.Component {
 
   handleAccept () {
     this.setState({
-      dialogOpen: false,
-      loading: true
+      dialogOpen: false
     })
+
+    Loading.start()
 
     $.ajax({
       method: 'DELETE',
       url: this.props.peer.url,
       success: (response) => {
-        this.setState({
-          loading: false
-        })
+        Loading.done()
 
         this.props.onRemove()
       }
     }).fail((response) => {
       let text = response.responseJSON.err
 
-      this.setState({
-        loading: false
-      })
+      Loading.done()
 
       Notify({
         type: 'error',
@@ -78,7 +74,6 @@ export default class RemoveToolboxItem extends React.Component {
         id="remove" text="Remove"
         icon={CrossIcon}
         onClick={() => this.handleClick()} >
-        <Loading hidden={!this.state.loading}/>
         <DialogWindow
           open={this.state.dialogOpen}
           title={`Deleting ${this.props.peer.metadata.name}`}

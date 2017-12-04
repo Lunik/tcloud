@@ -15,3 +15,12 @@ a {
 .mdc-textfield--upgraded:not(.mdc-textfield--fullwidth):not(.mdc-textfield--box):not(.mdc-textfield--multiline)::after{
     background-color: var(--lightGrey);
 }
+
+#nprogress .bar {
+    background: var(--orange) !important;
+    height: 3px !important;
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 10px var(--orange), 0 0 5px var(--orange) !important;;
+}

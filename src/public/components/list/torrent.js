@@ -4,6 +4,7 @@ import List from '@react-mdc/list'
 import io from 'socket.io-client'
 
 import Notify from '../notification'
+import Loading from '../loading'
 
 import TorrentListItem from './item/torrent'
 
@@ -108,16 +109,22 @@ export default class TorrentList extends React.Component {
   }
 
   update () {
+    Loading.start()
+
     $.ajax({
       method: 'GET',
       url: `/torrent`,
       success: (response) => {
+        Loading.done()
+
         this.setState({
           peers: response
         })
       }
     }).fail((response) => {
       let text = response.responseJSON.err
+
+      Loading.done()
 
       Notify({
         type: 'error',

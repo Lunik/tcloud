@@ -4,8 +4,8 @@ import List from '@react-mdc/list'
 import io from 'socket.io-client'
 
 import Notify from '../notification'
-
 import Loading from '../loading'
+
 import FileListItem from './item/file'
 import Tree from '../tree'
 
@@ -19,7 +19,6 @@ export default class FileList extends React.Component {
     this.state = {
       files: fromCache.childs || [],
       size: fromCache.size || 0,
-      loading: false,
       updateInterval: null
     }
 
@@ -76,14 +75,17 @@ export default class FileList extends React.Component {
   }
 
   update () {
+    Loading.start()
+
     $.ajax({
       method: 'GET',
       url: `/folder/${this.state.location}`,
       success: (response) => {
+        Loading.done()
+
         this.setState({
           files: response.childs,
           size: response.size,
-          loading: false
         })
 
         this.saveCache(response)
@@ -91,9 +93,7 @@ export default class FileList extends React.Component {
     }).fail((response) => {
       let text = response.responseJSON.err
 
-      this.setState({
-        loading: false
-      })
+      Loading.done()
 
       Notify({
         type: 'error',
@@ -107,9 +107,11 @@ export default class FileList extends React.Component {
 
   changeDir (dir) {
     let fromCache = this.loadCache() || {}
+
+    Loading.start()
+
     this.setState({
       location: dir,
-      loading: true,
       files: fromCache.childs || [],
       size: fromCache.size || 0
     })
@@ -144,7 +146,6 @@ export default class FileList extends React.Component {
       onRename={() => this.update()}/>)
     return (
       <List className="list" id="file">
-        <Loading hidden={!this.state.loading}/>
         {this.getSizeItem(this.state.size)}
         <Tree path={this.state.location} />
         {files}

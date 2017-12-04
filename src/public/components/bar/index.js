@@ -4,8 +4,8 @@ import classNames from 'classname'
 
 import Notify from '../notification'
 import Color from '../../style/theme'
-
 import Loading from '../loading'
+
 import Logo from '../image/logo'
 import { GhostIcon, ExitIcon } from '../image/svg'
 import SearchBar from './search'
@@ -14,9 +14,7 @@ export default class Bar extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      loading: false
-    }
+    this.state = {}
 
     this.initState(props)
   }
@@ -30,17 +28,13 @@ export default class Bar extends React.Component {
   }
 
   logout () {
-    this.setState({
-      loading: true
-    })
+    Loading.start()
 
     $.ajax({
       url: '/auth/logout',
       method: 'POST',
       success: (response) => {
-        this.setState({
-          loading: false
-        })
+        Loading.done()
 
         Notify({
           type: 'info',
@@ -53,9 +47,7 @@ export default class Bar extends React.Component {
     }).fail((response) => {
       let text = response.responseJSON.err
 
-      this.setState({
-        loading: false
-      })
+      Loading.done()
 
       Notify({
         type: 'error',
@@ -72,7 +64,6 @@ export default class Bar extends React.Component {
       <div ref='userBar' id="user"
         style={style.div}
         className={classNames('nav', this.state.fixed ? 'fixed' : '')}>
-        <Loading hidden={!this.state.loading}/>
         <Logo style={style.logo} />
         <h1 style={style.title}>TCloud</h1>
         <ExitIcon style={style.exitIcon} onClick={(e) => this.logout()}/>

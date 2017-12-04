@@ -16,8 +16,7 @@ export default class RenameToolboxItem extends React.Component {
     super(props)
 
     this.state = {
-      dialogOpen: false,
-      loading: false
+      dialogOpen: false
     }
     this.initState(props)
   }
@@ -47,9 +46,10 @@ export default class RenameToolboxItem extends React.Component {
 
   handleAccept () {
     this.setState({
-      dialogOpen: false,
-      loading: true
+      dialogOpen: false
     })
+
+    Loading.start()
 
     let newName = this.state.extension ? [this.state.filename, this.state.extension].join('.') : this.state.filename
     $.ajax({
@@ -59,9 +59,7 @@ export default class RenameToolboxItem extends React.Component {
         new: newName
       },
       success: (response) => {
-        this.setState({
-          loading: false
-        })
+        Loading.done()
 
         this.props.onRename(newName)
 
@@ -73,9 +71,7 @@ export default class RenameToolboxItem extends React.Component {
     }).fail((response) => {
       let text = response.responseJSON.err
 
-      this.setState({
-        loading: false
-      })
+      Loading.done()
 
       Notify({
         type: 'error',
@@ -112,7 +108,6 @@ export default class RenameToolboxItem extends React.Component {
         id="rename" text="Rename"
         icon={PencilIcon}
         onClick={() => this.handleClick()}>
-        <Loading hidden={!this.state.loading}/>
         <DialogWindow
           open={this.state.dialogOpen}
           title={`Renaming ${this.props.file.name}`}
