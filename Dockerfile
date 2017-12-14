@@ -36,6 +36,7 @@ EXPOSE 443
 
 # expose volumes
 VOLUME ["/usr/src/app/files"]
+VOLUME ["/usr/src/app/logs"]
 VOLUME ["/usr/src/app/database"]
 VOLUME ["/usr/config"]
 

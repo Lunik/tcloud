@@ -9,8 +9,9 @@ const config = new Config({sync: true})
 var baseFolder = new Folder(`/${__dirname}/${config.files.path}`, '')
 try {
   fs.mkdirSync(`/${__dirname}/${config.files.tmp}`)
-} catch (e){
-  if (e.code != 'EEXIST'){
+  fs.mkdirSync(`/${__dirname}/${config.log.path}`)
+} catch (e) {
+  if (e.code != 'EEXIST') {
     console.error(e)
   }
 }
