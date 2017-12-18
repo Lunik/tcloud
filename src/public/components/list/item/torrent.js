@@ -42,6 +42,7 @@ export default class TorrentListItem extends React.Component {
   }
 
   handleWindowResize () {
+    console.log('ok')
     this.setState({
       mobile: window.innerWidth <= 650
     })
@@ -81,29 +82,45 @@ export default class TorrentListItem extends React.Component {
 
   getSizeItem (bytes) {
     var sizes = ['o', 'ko', 'mo', 'go', 'to']
-    if (bytes === 0) { return '0 b' }
-    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10)
-    return `${Math.round(bytes / Math.pow(1024, i), 2)} ${sizes[i]}`
+    if (bytes) {
+      if (bytes === 0) { return '0 b' }
+      var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10)
+      return `${Math.round(bytes / Math.pow(1024, i), 2)} ${sizes[i]}`
+    } else {
+      return `0 ${sizes[0]}`
+    }
   }
 
   getSpeedItem (bytes) {
-    var bits = bytes * 8
     var sizes = ['b', 'kb', 'mb', 'gb', 'tb']
-    if (bits === 0) { return '0 b' }
-    var i = parseInt(Math.floor(Math.log(bits) / Math.log(1024)), 10)
-    return `${Math.round(bits / Math.pow(1024, i), 2)} ${sizes[i]}/s`
+    if (bytes) {
+      var bits = bytes * 8
+      if (bits === 0) { return '0 b' }
+      var i = parseInt(Math.floor(Math.log(bits) / Math.log(1024)), 10)
+      return `${Math.round(bits / Math.pow(1024, i), 2)} ${sizes[i]}/s`
+    } else {
+      return `0 ${sizes[0]}/s`
+    }
   }
 
   getProgressItem (percent) {
-    return Math.floor(percent * 100) + '%'
+    if (percent) {
+      return Math.floor(percent * 100) + '%'
+    } else {
+      return 0 + '%'
+    }
   }
 
   getSeedNum (seed) {
-    if (seed >= 100) {
-      return '99+'
-    }
+    if (seed) {
+      if (seed >= 100) {
+        return '99+'
+      }
 
-    return seed
+      return seed
+    } else {
+      return 0
+    }
   }
 
   handleRemove () {
@@ -172,7 +189,7 @@ TorrentListItem.defaultProps = {
       timeRemaining: 1404705
     },
     uid: '000',
-    url: '/folder'
+    url: '/peer/000'
   },
   onRemove: () => {}
 }
