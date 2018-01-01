@@ -6,7 +6,7 @@ const year = currentDate.getFullYear()
 
 const christmasDates = {
   begin: new Date(`12/15/${year}`),
-  end: new Date(`01/15/${year + 1}`)
+  end: new Date(`01/15/${year}`)
 }
 
 let Color
