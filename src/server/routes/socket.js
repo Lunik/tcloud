@@ -7,14 +7,18 @@ import User from '../model/user'
 var config = new Config({sync: true})
 
 function authorization (data, accept) {
-  var cookies = Cookie.parse(data.headers.cookie)
-  let user = new User({ username: cookies.username || '' })
+  if (config.authentification) {
+    var cookies = Cookie.parse(data.headers.cookie || '')
+    let user = new User({ username: cookies.username })
 
-  user.on('ready', () => {
-    let valid = user.isTokenValid(cookies.token || '')
+    user.on('ready', () => {
+      let valid = user.isTokenValid(cookies.token)
 
-    accept(valid ? null : 'Token not valid', valid)
-  })
+      accept(valid ? null : 'Token not valid', valid)
+    })
+  } else {
+    accept(true)
+  }
 }
 
 module.exports = (app, server) => {
