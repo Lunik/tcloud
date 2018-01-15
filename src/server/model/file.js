@@ -57,7 +57,7 @@ export default class File extends EventEmitter {
     }
   }
 
-  updateMetadata () {
+  updateMetadata (callback) {
     fs.stat(this.fullPath(), (err, stats) => {
       if (err) {
         this.mtime = null
@@ -68,12 +68,13 @@ export default class File extends EventEmitter {
         this._size = stats.size // Bytes
         this.exist = true
       }
+
+      if (callback instanceof Function) callback()
     })
   }
 
   watchChange (eventType, filename) {
-    this.updateMetadata()
-    this.emitChange()
+    this.updateMetadata(() => this.emitChange())
   }
 
   emitChange () {
@@ -92,7 +93,11 @@ export default class File extends EventEmitter {
 
   relativePath () {
     let cleanBase = this.base.split('/').slice(2).join('/')
-    return Path.join(cleanBase, this.name)
+    if (this.base.split('/').length === 1) {
+      return ''
+    } else {
+      return Path.join(cleanBase, this.name)
+    }
   }
 
   size () {

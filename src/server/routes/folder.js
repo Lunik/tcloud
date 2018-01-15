@@ -26,9 +26,9 @@ function broadcastChange (io, folder) {
 }
 
 module.exports = (app) => {
-  baseFolder.on('change', (folder) => broadcastChange(app.io, folder.relativePath()))
+  baseFolder.on('change', (folder) => broadcastChange(app.io, folder))
   if (app.ioSSL) {
-    baseFolder.on('change', (folder) => broadcastChange(app.ioSSL, folder.relativePath()))
+    baseFolder.on('change', (folder) => broadcastChange(app.ioSSL, folder))
   }
 
   app.get('/folder', (req, res) => {

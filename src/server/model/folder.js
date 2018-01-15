@@ -23,7 +23,7 @@ export default class Folder extends File {
     }, timeout)
   }
 
-  initFolder () {
+  initFolder (callback) {
     var oldChilds = this.childs
     var newChilds = []
     var childs = []
@@ -63,12 +63,12 @@ export default class Folder extends File {
     }
 
     this.childs = newChilds
+    if (callback instanceof Function) callback()
   }
 
   watchChange (eventType, filename) {
-    this.updateMetadata()
-    this.emitChange().then(() => {
-      this.initFolder()
+    this.updateMetadata(() => {
+      this.initFolder(() => this.emit('change', this))
     })
   }
 
