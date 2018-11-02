@@ -114,11 +114,16 @@ export default class File extends EventEmitter {
     this.emit('unlocked', this)
   }
 
-  remove () {
-    if (this.locked) {
+  remove (forced) {
+    if (this.locked && !forced) {
       return false
     }
-    this.log.info(`Removing ${this.fullPath()}`)
+
+    if (forced) {
+      this.log.warning(`Forced remove ${this.fullPath()}`)
+    } else {
+      this.log.info(`Removing ${this.fullPath()}`)
+    }
 
     fs.unlink(this.fullPath(), () => this.emit('remove', this))
   }

@@ -24,7 +24,8 @@ const template = {
   },
   'torrent': {
     'providers': []
-  }
+  },
+  "adminUser": "admin"
 }
 
 module.exports = template

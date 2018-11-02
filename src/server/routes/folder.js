@@ -121,11 +121,12 @@ module.exports = (app) => {
 
   app.delete('/folder/:path((*)/?*)', (req, res) => {
     var path = req.params.path
+    let user = req.user
 
     var element = follow(path, baseFolder)
 
     if (element) {
-      element.remove()
+      element.remove(user.username === config.adminUser)
       res.json(element)
     } else {
       res.status(404)

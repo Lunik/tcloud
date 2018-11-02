@@ -86,6 +86,8 @@ export default class Config extends EventEmitter {
     expect(config).to.have.property('torrent').to.be.a('object')
     expect(config.torrent).to.have.property('providers').to.be.a('array')
 
+    expect(config).to.have.property('adminUser').to.be.a('string')
+
     return config
   }
 
