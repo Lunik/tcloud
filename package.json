@@ -60,9 +60,11 @@
     "react": "~15.6.2",
     "react-dom": "~15.6.2",
     "react-material-components-web": "^0.1.18",
+    "request-promise": "^4.2.2",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
     "torrent-search-api": "^1.1.7",
-    "webtorrent": "^0.102.4"
+    "webtorrent": "^0.102.4",
+    "xml2js": "^0.4.19"
   }
 }

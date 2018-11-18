@@ -23,7 +23,11 @@ const template = {
     'tmp': '.tmp/'
   },
   'torrent': {
-    'providers': []
+    'providers': [],
+    'jackett': {
+      'endpoint': '',
+      'apiKey': ''
+    }
   },
   "adminUser": "admin"
 }

@@ -3,16 +3,22 @@ import TorrentSearchApi from 'torrent-search-api'
 import Path from 'path'
 
 import Config from '../config'
+import JackettAPI from './jackett.js'
 
 const config = new Config({sync: true})
 
 export default class TorrentSearch {
   constructor () {
-    this.api = new TorrentSearchApi()
 
     this.log = new Delogger('Search')
 
-    config.torrent.providers.forEach((provider) => this.api.enableProvider(provider))
+    if (config.torrent.providers.includes('jackett') || config.torrent.providers.includes('Jackett')) {
+      this.api = new JackettAPI(config.torrent.jackett)
+    } else {
+      this.api = new TorrentSearchApi()
+
+      config.torrent.providers.forEach((provider) => this.api.enableProvider(provider))
+    }
   }
 
   search (query) {
@@ -41,6 +47,7 @@ export default class TorrentSearch {
   }
 
   getTorrent (torrent) {
+    console.log(torrent)
     let parsedTorrent
     if (!torrent.hasOwnProperty('url')) {
       if (torrent.hasOwnProperty('magnet')) {
