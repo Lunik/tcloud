@@ -22,12 +22,19 @@ export default class JackettAPI {
     }
   }
 
+  _getSizeItem (bytes) {
+    var sizes = ['o', 'ko', 'mo', 'go', 'to']
+    if (bytes === 0) { return '0 b' }
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10)
+    return `${Math.round(bytes / Math.pow(1024, i), 2)} ${sizes[i]}`
+  }
+
   _formatItem (item) {
     return {
       title: item.title[0],
       seeds: item['torznab:attr'].filter((attr) => attr['$'].name === 'seeders')[0]['$'].value,
       peers: item['torznab:attr'].filter((attr) => attr['$'].name === 'peers')[0]['$'].value,
-      size: item.size[0],
+      size: this._getSizeItem(item.size[0]),
       link: item.link[0]
     }
   }
