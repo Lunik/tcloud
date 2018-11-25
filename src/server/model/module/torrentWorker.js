@@ -8,7 +8,15 @@ const config = new Config({sync: true})
 class Worker {
   constructor (magnet) {
     this.magnet = magnet
-    this.client = new WebTorrent()
+    this.client = new WebTorrent({
+      tracker: {
+        getAnnounceOpts: () => {
+          return {
+            downloaded: 0
+          }
+        }
+      }
+    })
 
     this.log = new Delogger(`Peer(${process.pid})`)
 
