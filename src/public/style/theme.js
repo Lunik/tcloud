@@ -11,7 +11,7 @@ const christmasDates = {
 
 let Color
 
-if (currentDate > christmasDates.begin && currentDate < christmasDates.end) {
+if (currentDate > christmasDates.begin || currentDate < christmasDates.end) {
   require('./themes/christmas/color.css')
   require('./themes/christmas/style.css')
   Color = ChristmasColor
