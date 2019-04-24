@@ -57,7 +57,7 @@ export default class Peer extends EventEmitter {
         break
       case 'done':
         this.started = false
-        this.emit('done', this)
+        setTimeout(() => this.emit('done', this), 30000)
         break
       case 'stop':
         this.started = false
